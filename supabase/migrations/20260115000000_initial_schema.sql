@@ -3,14 +3,11 @@
 -- Created: 2026-01-15
 -- ============================================
 
--- Enable UUID extension
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
 -- ============================================
 -- LABELS TABLE
 -- ============================================
 CREATE TABLE labels (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL,
   color TEXT NOT NULL DEFAULT '#6366F1',
   user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -26,7 +23,7 @@ CREATE TABLE labels (
 -- Main Kanban board tasks
 -- ============================================
 CREATE TABLE tasks (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   title TEXT NOT NULL,
   description TEXT,
   status TEXT NOT NULL DEFAULT 'todo' CHECK (status IN ('todo', 'in_progress', 'complete')),
@@ -46,7 +43,7 @@ CREATE TABLE tasks (
 -- Subtasks linked to main tasks
 -- ============================================
 CREATE TABLE subtasks (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   task_id UUID NOT NULL REFERENCES tasks(id) ON DELETE CASCADE,
   text TEXT NOT NULL,
   completed BOOLEAN DEFAULT FALSE,
@@ -59,7 +56,7 @@ CREATE TABLE subtasks (
 -- Quick lightweight tasks
 -- ============================================
 CREATE TABLE todos (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   text TEXT NOT NULL,
   completed BOOLEAN DEFAULT FALSE,
   priority TEXT DEFAULT 'p2' CHECK (priority IN ('p0', 'p1', 'p2', 'p3')),
@@ -72,7 +69,7 @@ CREATE TABLE todos (
 -- Documentation and notes
 -- ============================================
 CREATE TABLE notes (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   title TEXT,
   content TEXT NOT NULL DEFAULT '',
   pinned BOOLEAN DEFAULT FALSE,
@@ -86,7 +83,7 @@ CREATE TABLE notes (
 -- Track completed steps in workflow guides
 -- ============================================
 CREATE TABLE workflow_progress (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
   flow_id TEXT NOT NULL,
   step_number INTEGER NOT NULL,
