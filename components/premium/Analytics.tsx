@@ -10,6 +10,7 @@ import { useKanbanStore } from "../../stores/kanbanStore";
 import { useTodoStore } from "../../stores/todoStore";
 import { usePomodoroStore } from "../../stores/pomodoroStore";
 import { FadeIn } from "../animated";
+import { Modal } from "../ui/Modal";
 
 interface AnalyticsProps {
   compact?: boolean;
@@ -24,7 +25,6 @@ export function Analytics({
 }: AnalyticsProps) {
   // If used as modal, wrap in Modal component
   if (visible !== undefined && onClose) {
-    const { Modal } = require("../ui/Modal");
     return (
       <Modal visible={visible} onClose={onClose} title="סטטיסטיקות">
         <AnalyticsContent compact={compact} />

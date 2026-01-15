@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
 import DraggableFlatList, {
   RenderItemParams,
   ScaleDecorator,
@@ -28,6 +28,17 @@ export function Column({
   onDeleteTask,
   onReorder,
 }: ColumnProps) {
+  const { width } = useWindowDimensions();
+
+  // Responsive column width
+  const isDesktop = width >= 1200;
+  const isTablet = width >= 768;
+  const columnWidth = isDesktop
+    ? (width - 400) / 3 - 24 // Desktop: 3 columns, minus sidebar
+    : isTablet
+      ? (width - 350) / 3 - 16 // Tablet: 3 columns, smaller sidebar
+      : 280; // Mobile: fixed width for horizontal scroll
+
   const renderItem = useCallback(
     ({ item, drag, isActive }: RenderItemParams<Task>) => (
       <ScaleDecorator>
@@ -46,7 +57,16 @@ export function Column({
   const keyExtractor = useCallback((item: Task) => item.id, []);
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          width: columnWidth,
+          minWidth: isTablet ? columnWidth : 280,
+          maxWidth: isTablet ? columnWidth : 320,
+        },
+      ]}
+    >
       <View style={styles.header}>
         <View style={styles.titleRow}>
           <View style={[styles.indicator, { backgroundColor: column.color }]} />
@@ -92,8 +112,6 @@ const styles = StyleSheet.create({
     borderRadius: radius.lg,
     padding: spacing.md,
     marginHorizontal: spacing.sm,
-    minWidth: 280,
-    maxWidth: 320,
   },
   header: {
     flexDirection: "row-reverse",

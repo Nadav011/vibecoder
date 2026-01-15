@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { colors, spacing, radius, typography } from "../theme";
@@ -12,13 +12,19 @@ import { strings } from "../utils/strings";
 
 type Panel = "kanban" | "todos" | "notes";
 
-const { width } = Dimensions.get("window");
-const isTablet = width >= 768;
-
 export default function HomeScreen() {
   const [activePanel, setActivePanel] = useState<Panel>("kanban");
+  const { width } = useWindowDimensions();
 
-  // On tablet, show all panels. On phone, show one at a time
+  // Responsive breakpoints
+  const isTablet = width >= 768;
+  const isDesktop = width >= 1024;
+  const isLargeDesktop = width >= 1400;
+
+  // Calculate sidebar width based on screen size
+  const sidebarWidth = isLargeDesktop ? 400 : isDesktop ? 350 : 300;
+
+  // On tablet/desktop, show all panels. On phone, show one at a time
   if (isTablet) {
     return (
       <SafeAreaView style={styles.container}>
@@ -38,12 +44,19 @@ export default function HomeScreen() {
           <FadeIn delay={100} direction="right" style={styles.mainPanel}>
             <Board />
           </FadeIn>
-          <FadeIn delay={200} direction="left" style={styles.sidebar}>
-            <View style={styles.sidebarSection}>
-              <TodoList />
-            </View>
-            <View style={styles.sidebarSection}>
-              <NotesArea />
+          <FadeIn delay={200} direction="left">
+            <View
+              style={[
+                styles.sidebar,
+                { width: sidebarWidth, minWidth: sidebarWidth },
+              ]}
+            >
+              <View style={styles.sidebarSection}>
+                <TodoList />
+              </View>
+              <View style={styles.sidebarSection}>
+                <NotesArea />
+              </View>
             </View>
           </FadeIn>
         </View>
@@ -241,10 +254,9 @@ const styles = StyleSheet.create({
     flexDirection: "row-reverse",
   },
   mainPanel: {
-    flex: 2,
+    flex: 1,
   },
   sidebar: {
-    flex: 1,
     borderStartWidth: 1,
     borderStartColor: colors.border.subtle,
     padding: spacing.lg,
