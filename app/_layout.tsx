@@ -2,7 +2,14 @@ import React, { useEffect, useState, useCallback } from "react";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { StyleSheet, I18nManager, Platform, View } from "react-native";
+import {
+  StyleSheet,
+  I18nManager,
+  Platform,
+  View,
+  Text,
+  Animated,
+} from "react-native";
 import {
   initKanbanStore,
   initTodoStore,
@@ -47,23 +54,46 @@ if (Platform.OS === "web" && typeof document !== "undefined") {
 }
 
 // Register service worker for PWA (web only)
-function registerServiceWorker() {
+function registerServiceWorker(onUpdate: (version: string) => void) {
   if (
     Platform.OS === "web" &&
     typeof window !== "undefined" &&
     "serviceWorker" in navigator
   ) {
+    // Listen for update messages from service worker
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data && event.data.type === "SW_UPDATED") {
+        console.log("PWA Update available:", event.data.version);
+        onUpdate(event.data.version);
+      }
+    };
+
+    navigator.serviceWorker.addEventListener("message", handleMessage);
+
     window.addEventListener("load", () => {
       navigator.serviceWorker
         .register("/sw.js")
         .then((registration) => {
           console.log("SW registered:", registration.scope);
+
+          // Check for updates periodically (every 30 minutes)
+          setInterval(
+            () => {
+              registration.update();
+            },
+            30 * 60 * 1000,
+          );
         })
         .catch((error) => {
           console.log("SW registration failed:", error);
         });
     });
+
+    return () => {
+      navigator.serviceWorker.removeEventListener("message", handleMessage);
+    };
   }
+  return undefined;
 }
 
 function AppContent() {
@@ -263,7 +293,83 @@ function AppContent() {
   );
 }
 
+// Update Banner Component
+function UpdateBanner({
+  visible,
+  version,
+  onUpdate,
+  onDismiss,
+}: {
+  visible: boolean;
+  version: string;
+  onUpdate: () => void;
+  onDismiss: () => void;
+}) {
+  const slideAnim = React.useRef(new Animated.Value(-100)).current;
+
+  useEffect(() => {
+    Animated.spring(slideAnim, {
+      toValue: visible ? 0 : -100,
+      useNativeDriver: true,
+      tension: 50,
+      friction: 8,
+    }).start();
+  }, [visible, slideAnim]);
+
+  if (!visible) return null;
+
+  return (
+    <Animated.View
+      style={[styles.updateBanner, { transform: [{ translateY: slideAnim }] }]}
+    >
+      <View style={styles.updateContent}>
+        <Ionicons
+          name="refresh-circle"
+          size={24}
+          color={colors.accent.primary}
+        />
+        <View style={styles.updateTextContainer}>
+          <Text style={styles.updateTitle}>עדכון חדש זמין!</Text>
+          <Text style={styles.updateVersion}>גרסה {version}</Text>
+        </View>
+      </View>
+      <View style={styles.updateButtons}>
+        <ScalePress
+          onPress={onDismiss}
+          style={styles.updateDismissButton}
+          haptic="light"
+        >
+          <Text style={styles.updateDismissText}>אחר כך</Text>
+        </ScalePress>
+        <ScalePress
+          onPress={onUpdate}
+          style={styles.updateButton}
+          haptic="medium"
+        >
+          <Text style={styles.updateButtonText}>עדכן עכשיו</Text>
+        </ScalePress>
+      </View>
+    </Animated.View>
+  );
+}
+
 export default function RootLayout() {
+  const [updateAvailable, setUpdateAvailable] = useState(false);
+  const [updateVersion, setUpdateVersion] = useState("");
+
+  const handleUpdate = useCallback(() => {
+    // Send message to SW to skip waiting and activate new version
+    if ("serviceWorker" in navigator && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ type: "SKIP_WAITING" });
+    }
+    // Reload the page to get the new version
+    window.location.reload();
+  }, []);
+
+  const handleDismiss = useCallback(() => {
+    setUpdateAvailable(false);
+  }, []);
+
   useEffect(() => {
     // Initialize all stores from storage
     Promise.all([
@@ -276,13 +382,26 @@ export default function RootLayout() {
       initTemplateStore(),
     ]);
 
-    // Register service worker for PWA
-    registerServiceWorker();
+    // Register service worker for PWA with update callback
+    const cleanup = registerServiceWorker((version) => {
+      setUpdateVersion(version);
+      setUpdateAvailable(true);
+    });
+
+    return cleanup;
   }, []);
 
   return (
     <ThemeProvider>
       <AppContent />
+      {Platform.OS === "web" && (
+        <UpdateBanner
+          visible={updateAvailable}
+          version={updateVersion}
+          onUpdate={handleUpdate}
+          onDismiss={handleDismiss}
+        />
+      )}
     </ThemeProvider>
   );
 }
@@ -330,5 +449,67 @@ const styles = StyleSheet.create({
   pomodoroContainer: {
     width: "90%",
     maxWidth: 400,
+  },
+  // Update Banner Styles
+  updateBanner: {
+    position: "absolute",
+    top: 0,
+    start: 0,
+    end: 0,
+    backgroundColor: colors.bg.elevated,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border.default,
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.lg,
+    flexDirection: "row-reverse",
+    alignItems: "center",
+    justifyContent: "space-between",
+    zIndex: 9999,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 8,
+  },
+  updateContent: {
+    flexDirection: "row-reverse",
+    alignItems: "center",
+    gap: spacing.sm,
+  },
+  updateTextContainer: {
+    alignItems: "flex-end",
+  },
+  updateTitle: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: colors.text.primary,
+  },
+  updateVersion: {
+    fontSize: 12,
+    color: colors.text.muted,
+  },
+  updateButtons: {
+    flexDirection: "row-reverse",
+    alignItems: "center",
+    gap: spacing.sm,
+  },
+  updateButton: {
+    backgroundColor: colors.accent.primary,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    borderRadius: radius.md,
+  },
+  updateButtonText: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: colors.text.primary,
+  },
+  updateDismissButton: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+  },
+  updateDismissText: {
+    fontSize: 13,
+    color: colors.text.muted,
   },
 });

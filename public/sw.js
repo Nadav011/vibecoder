@@ -1,5 +1,7 @@
 // VibeCoder Service Worker for PWA offline support
-const CACHE_NAME = "vibecoder-v1";
+// IMPORTANT: Update this version number when deploying new versions!
+const CACHE_VERSION = "v2.0.0";
+const CACHE_NAME = `vibecoder-${CACHE_VERSION}`;
 const STATIC_ASSETS = [
   "/",
   "/manifest.json",
@@ -17,18 +19,35 @@ self.addEventListener("install", (event) => {
   self.skipWaiting();
 });
 
-// Activate event - cleanup old caches
+// Activate event - cleanup old caches and notify clients
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames
-          .filter((name) => name !== CACHE_NAME)
-          .map((name) => caches.delete(name)),
-      );
+      const oldCaches = cacheNames.filter((name) => name !== CACHE_NAME);
+
+      // If there were old caches, notify all clients about the update
+      if (oldCaches.length > 0) {
+        self.clients.matchAll().then((clients) => {
+          clients.forEach((client) => {
+            client.postMessage({
+              type: "SW_UPDATED",
+              version: CACHE_VERSION,
+            });
+          });
+        });
+      }
+
+      return Promise.all(oldCaches.map((name) => caches.delete(name)));
     }),
   );
   self.clients.claim();
+});
+
+// Listen for skip waiting message from client
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
 });
 
 // Fetch event - serve from cache, fallback to network

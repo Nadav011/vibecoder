@@ -74,6 +74,8 @@ export function WorkflowsPage() {
   const [expandedSkillName, setExpandedSkillName] = useState<string | null>(
     null,
   );
+  const [expandedPhaseId, setExpandedPhaseId] = useState<string | null>(null);
+  const [expandedPluginId, setExpandedPluginId] = useState<string | null>(null);
 
   // Track completed steps per flow (flowId-stepNumber format)
   const [completedSteps, setCompletedSteps] = useState<Set<string>>(new Set());
@@ -364,7 +366,10 @@ export function WorkflowsPage() {
 
                       {/* Quick Commands */}
                       <View style={styles.fullFlowCommands}>
-                        {phase.commands.slice(0, 4).map((cmd) => (
+                        {(expandedPhaseId === phase.id
+                          ? phase.commands
+                          : phase.commands.slice(0, 4)
+                        ).map((cmd) => (
                           <ScalePress
                             key={cmd.id}
                             onPress={async () => {
@@ -396,9 +401,31 @@ export function WorkflowsPage() {
                           </ScalePress>
                         ))}
                         {phase.commands.length > 4 && (
-                          <Text style={styles.fullFlowMoreCommands}>
-                            +{phase.commands.length - 4} עוד
-                          </Text>
+                          <ScalePress
+                            onPress={() => {
+                              haptics.light();
+                              setExpandedPhaseId(
+                                expandedPhaseId === phase.id ? null : phase.id,
+                              );
+                            }}
+                            style={styles.fullFlowMoreButton}
+                            haptic="light"
+                          >
+                            <Text style={styles.fullFlowMoreCommands}>
+                              {expandedPhaseId === phase.id
+                                ? "הסתר"
+                                : `+${phase.commands.length - 4} עוד`}
+                            </Text>
+                            <Ionicons
+                              name={
+                                expandedPhaseId === phase.id
+                                  ? "chevron-up"
+                                  : "chevron-down"
+                              }
+                              size={12}
+                              color={colors.text.muted}
+                            />
+                          </ScalePress>
                         )}
                       </View>
 
@@ -1785,7 +1812,10 @@ export function WorkflowsPage() {
                         {plugin.description}
                       </Text>
                       <View style={styles.pluginCommands}>
-                        {plugin.commands.slice(0, 3).map((cmd) => (
+                        {(expandedPluginId === plugin.id
+                          ? plugin.commands
+                          : plugin.commands.slice(0, 3)
+                        ).map((cmd) => (
                           <ScalePress
                             key={cmd.id}
                             onPress={async () => {
@@ -1809,9 +1839,33 @@ export function WorkflowsPage() {
                           </ScalePress>
                         ))}
                         {plugin.commands.length > 3 && (
-                          <Text style={styles.pluginMore}>
-                            +{plugin.commands.length - 3} עוד
-                          </Text>
+                          <ScalePress
+                            onPress={() => {
+                              haptics.light();
+                              setExpandedPluginId(
+                                expandedPluginId === plugin.id
+                                  ? null
+                                  : plugin.id,
+                              );
+                            }}
+                            style={styles.pluginMoreButton}
+                            haptic="light"
+                          >
+                            <Text style={styles.pluginMore}>
+                              {expandedPluginId === plugin.id
+                                ? "הסתר"
+                                : `+${plugin.commands.length - 3} עוד`}
+                            </Text>
+                            <Ionicons
+                              name={
+                                expandedPluginId === plugin.id
+                                  ? "chevron-up"
+                                  : "chevron-down"
+                              }
+                              size={12}
+                              color={colors.text.muted}
+                            />
+                          </ScalePress>
                         )}
                       </View>
                     </View>
@@ -3432,10 +3486,18 @@ const styles = StyleSheet.create({
     color: colors.accent.primary,
     fontFamily: Platform.OS === "ios" ? "Menlo" : "monospace",
   },
+  pluginMoreButton: {
+    flexDirection: "row-reverse",
+    alignItems: "center",
+    gap: spacing.xs,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+    borderRadius: radius.sm,
+    backgroundColor: colors.bg.tertiary,
+  },
   pluginMore: {
     fontSize: typography.size.xs,
     color: colors.text.muted,
-    alignSelf: "center",
   },
 
   // Responsive
@@ -3635,11 +3697,18 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS === "ios" ? "Menlo" : "monospace",
     fontWeight: typography.weight.medium,
   },
+  fullFlowMoreButton: {
+    flexDirection: "row-reverse",
+    alignItems: "center",
+    gap: spacing.xs,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+    borderRadius: radius.sm,
+    backgroundColor: colors.bg.tertiary,
+  },
   fullFlowMoreCommands: {
     fontSize: typography.size.xs,
     color: colors.text.muted,
-    alignSelf: "center",
-    paddingStart: spacing.xs,
   },
   fullFlowHardStops: {
     flexDirection: "row-reverse",
