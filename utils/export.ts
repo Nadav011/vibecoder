@@ -1,5 +1,6 @@
 import { Platform } from "react-native";
 import { Task, Todo, Note } from "../types";
+import { logger } from "./logger";
 
 export type ExportFormat = "json" | "csv" | "markdown";
 
@@ -205,78 +206,129 @@ export function downloadFile(
   mimeType: string,
 ): void {
   if (Platform.OS !== "web") {
-    console.warn("Download only supported on web");
-    return;
+    throw new Error("Download only supported on web platform");
   }
 
-  const blob = new Blob([content], { type: mimeType });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
+  try {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    logger.error("Download failed:", error);
+    throw new Error(`Failed to download file: ${filename}`);
+  }
+}
+
+// Export result type
+export interface ExportResult {
+  success: boolean;
+  filesExported: number;
+  error?: string;
 }
 
 // Main export function
-export function performExport(
+export async function performExport(
   tasks: Task[],
   todos: Todo[],
   notes: Note[],
   options: ExportOptions,
-): void {
-  const timestamp = new Date().toISOString().split("T")[0];
+): Promise<ExportResult> {
+  try {
+    const timestamp = new Date().toISOString().split("T")[0];
+    let filesExported = 0;
 
-  // Filter data based on options
-  let filteredTasks = options.includeTasks ? tasks : [];
-  const filteredTodos = options.includeTodos ? todos : [];
-  const filteredNotes = options.includeNotes ? notes : [];
+    // Filter data based on options
+    let filteredTasks = options.includeTasks ? tasks : [];
+    const filteredTodos = options.includeTodos ? todos : [];
+    const filteredNotes = options.includeNotes ? notes : [];
 
-  if (!options.includeCompleted) {
-    filteredTasks = filteredTasks.filter((t) => t.status !== "complete");
-  }
-
-  const data: ExportData = {
-    version: "1.0.0",
-    exportedAt: new Date().toISOString(),
-    tasks: filteredTasks.length > 0 ? filteredTasks : undefined,
-    todos: filteredTodos.length > 0 ? filteredTodos : undefined,
-    notes: filteredNotes.length > 0 ? filteredNotes : undefined,
-  };
-
-  switch (options.format) {
-    case "json": {
-      const content = exportToJson(data);
-      downloadFile(
-        content,
-        `vibecoder-export-${timestamp}.json`,
-        "application/json",
-      );
-      break;
+    if (!options.includeCompleted) {
+      filteredTasks = filteredTasks.filter((t) => t.status !== "complete");
     }
-    case "csv": {
-      // Export tasks to CSV
-      if (filteredTasks.length > 0) {
-        const tasksCSV = exportTasksToCsv(filteredTasks);
-        downloadFile(tasksCSV, `vibecoder-tasks-${timestamp}.csv`, "text/csv");
+
+    // Check if there's any data to export
+    if (
+      filteredTasks.length === 0 &&
+      filteredTodos.length === 0 &&
+      filteredNotes.length === 0
+    ) {
+      return {
+        success: false,
+        filesExported: 0,
+        error: "No data to export. Select at least one category with data.",
+      };
+    }
+
+    const data: ExportData = {
+      version: "1.0.0",
+      exportedAt: new Date().toISOString(),
+      tasks: filteredTasks.length > 0 ? filteredTasks : undefined,
+      todos: filteredTodos.length > 0 ? filteredTodos : undefined,
+      notes: filteredNotes.length > 0 ? filteredNotes : undefined,
+    };
+
+    switch (options.format) {
+      case "json": {
+        const content = exportToJson(data);
+        downloadFile(
+          content,
+          `vibecoder-export-${timestamp}.json`,
+          "application/json",
+        );
+        filesExported = 1;
+        break;
       }
-      // Export todos to CSV
-      if (filteredTodos.length > 0) {
-        const todosCSV = exportTodosToCsv(filteredTodos);
-        downloadFile(todosCSV, `vibecoder-todos-${timestamp}.csv`, "text/csv");
+      case "csv": {
+        // Export tasks to CSV
+        if (filteredTasks.length > 0) {
+          const tasksCSV = exportTasksToCsv(filteredTasks);
+          downloadFile(
+            tasksCSV,
+            `vibecoder-tasks-${timestamp}.csv`,
+            "text/csv",
+          );
+          filesExported++;
+        }
+        // Export todos to CSV
+        if (filteredTodos.length > 0) {
+          const todosCSV = exportTodosToCsv(filteredTodos);
+          downloadFile(
+            todosCSV,
+            `vibecoder-todos-${timestamp}.csv`,
+            "text/csv",
+          );
+          filesExported++;
+        }
+        break;
       }
-      break;
+      case "markdown": {
+        const content = exportToMarkdown(data);
+        downloadFile(
+          content,
+          `vibecoder-export-${timestamp}.md`,
+          "text/markdown",
+        );
+        filesExported = 1;
+        break;
+      }
     }
-    case "markdown": {
-      const content = exportToMarkdown(data);
-      downloadFile(
-        content,
-        `vibecoder-export-${timestamp}.md`,
-        "text/markdown",
-      );
-      break;
-    }
+
+    return { success: true, filesExported };
+  } catch (error) {
+    logger.error("Export failed:", error);
+    return {
+      success: false,
+      filesExported: 0,
+      error:
+        error instanceof Error
+          ? error.message
+          : "Unknown export error occurred",
+    };
   }
 }

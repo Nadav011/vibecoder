@@ -1,8 +1,6 @@
 import { create } from "zustand";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useKanbanStore } from "./kanbanStore";
-import { useTodoStore } from "./todoStore";
-import { usePomodoroStore } from "./pomodoroStore";
 
 export interface DailyStats {
   date: string; // YYYY-MM-DD

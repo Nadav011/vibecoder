@@ -97,6 +97,8 @@ export function createShortcuts(actions: {
   exportData?: () => void;
   closeModal?: () => void;
   showShortcuts?: () => void;
+  undo?: () => void;
+  redo?: () => void;
 }): KeyboardShortcut[] {
   const shortcuts: KeyboardShortcut[] = [];
 
@@ -215,6 +217,26 @@ export function createShortcuts(actions: {
       action: actions.showShortcuts,
       description: "Show Keyboard Shortcuts",
       descriptionHe: "הצג קיצורי מקלדת",
+    });
+  }
+
+  if (actions.undo) {
+    shortcuts.push({
+      key: "z",
+      modifiers: ["cmd"],
+      action: actions.undo,
+      description: "Undo",
+      descriptionHe: "בטל פעולה",
+    });
+  }
+
+  if (actions.redo) {
+    shortcuts.push({
+      key: "z",
+      modifiers: ["cmd", "shift"],
+      action: actions.redo,
+      description: "Redo",
+      descriptionHe: "בצע שוב",
     });
   }
 

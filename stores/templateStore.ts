@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TaskPriority } from "../types";
+import { handleStorageError } from "../utils/storage";
+import { generateId } from "../utils/generateId";
 
 export interface TaskTemplate {
   id: string;
@@ -135,7 +137,7 @@ export const useTemplateStore = create<TemplateStore>((set, get) => ({
   addTemplate: (template) => {
     const newTemplate: TaskTemplate = {
       ...template,
-      id: generateId(),
+      id: generateTemplateId(),
       isDefault: false,
     };
 
@@ -179,8 +181,8 @@ export const useTemplateStore = create<TemplateStore>((set, get) => ({
 }));
 
 // Helpers
-function generateId(): string {
-  return `tpl_${Math.random().toString(36).substring(2, 9)}`;
+function generateTemplateId(): string {
+  return `tpl_${generateId()}`;
 }
 
 async function saveTemplates(templates: TaskTemplate[]): Promise<void> {
@@ -189,7 +191,7 @@ async function saveTemplates(templates: TaskTemplate[]): Promise<void> {
     const customTemplates = templates.filter((t) => !t.isDefault);
     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(customTemplates));
   } catch (error) {
-    console.error("Failed to save templates:", error);
+    handleStorageError(error, "saveTemplates");
   }
 }
 
@@ -205,7 +207,7 @@ export async function initTemplateStore(): Promise<void> {
       useTemplateStore.setState({ isLoaded: true });
     }
   } catch (error) {
-    console.error("Failed to load templates:", error);
+    handleStorageError(error, "initTemplateStore");
     useTemplateStore.setState({ isLoaded: true });
   }
 }

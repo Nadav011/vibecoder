@@ -1,10 +1,9 @@
 import { create } from "zustand";
 import { Note, NotesStore } from "../types";
 import { storage } from "../utils/storage";
+import { generateId } from "../utils/generateId";
 
-const generateId = () => Math.random().toString(36).substring(2, 9);
-
-export const useNotesStore = create<NotesStore>((set, get) => ({
+export const useNotesStore = create<NotesStore>((set, _get) => ({
   notes: [],
   activeNoteId: null,
 

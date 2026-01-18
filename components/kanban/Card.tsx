@@ -1,11 +1,19 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState, useCallback } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { colors, spacing, radius, typography } from "../../theme";
 import { Task, PRIORITY_CONFIG } from "../../types";
 import { useKanbanStore } from "../../stores";
 import { haptics } from "../../utils/haptics";
 import { strings } from "../../utils/strings";
+import { formatDate } from "../../utils/dateFormat";
+import { ConfirmDialog } from "../ui";
 
 interface CardProps {
   task: Task;
@@ -17,6 +25,7 @@ interface CardProps {
 
 export function Card({ task, onPress, onDelete, drag, isActive }: CardProps) {
   const { labels } = useKanbanStore();
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const priorityConfig = PRIORITY_CONFIG[task.priority];
   const taskLabels = labels.filter((l) => task.labels.includes(l.id));
   const completedSubtasks = task.subtasks.filter((s) => s.completed).length;
@@ -27,14 +36,25 @@ export function Card({ task, onPress, onDelete, drag, isActive }: CardProps) {
     drag?.();
   };
 
-  const handleDelete = () => {
+  const handleDeletePress = useCallback(() => {
     haptics.warning();
+    setShowDeleteConfirm(true);
+  }, []);
+
+  const handleConfirmDelete = useCallback(() => {
+    setShowDeleteConfirm(false);
     onDelete();
-  };
+  }, [onDelete]);
+
+  const handleCancelDelete = useCallback(() => {
+    setShowDeleteConfirm(false);
+  }, []);
 
   const isOverdue = Boolean(
     task.dueDate && task.dueDate < Date.now() && task.status !== "complete",
   );
+
+  const accessibilityLabel = `משימה: ${task.title}. עדיפות ${strings.priorities[task.priority as keyof typeof strings.priorities]}${isOverdue ? ". באיחור" : ""}`;
 
   return (
     <TouchableOpacity
@@ -43,6 +63,9 @@ export function Card({ task, onPress, onDelete, drag, isActive }: CardProps) {
       delayLongPress={150}
       activeOpacity={0.8}
       style={[styles.container, isActive && styles.active]}
+      accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel}
+      accessibilityHint="הקש לעריכה, לחץ ארוך לגרירה"
     >
       {/* Priority indicator */}
       <View
@@ -56,9 +79,11 @@ export function Card({ task, onPress, onDelete, drag, isActive }: CardProps) {
             {task.title}
           </Text>
           <TouchableOpacity
-            onPress={handleDelete}
+            onPress={handleDeletePress}
             style={styles.deleteButton}
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            accessibilityRole="button"
+            accessibilityLabel="מחק משימה"
           >
             <Ionicons
               name="trash-outline"
@@ -157,24 +182,20 @@ export function Card({ task, onPress, onDelete, drag, isActive }: CardProps) {
           )}
         </View>
       </View>
+
+      {/* Delete Confirmation Dialog */}
+      <ConfirmDialog
+        visible={showDeleteConfirm}
+        title="מחיקת משימה"
+        message={`האם למחוק את "${task.title}"? פעולה זו אינה ניתנת לביטול.`}
+        confirmLabel="מחק"
+        cancelLabel="ביטול"
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+        variant="danger"
+      />
     </TouchableOpacity>
   );
-}
-
-function formatDate(timestamp: number): string {
-  const date = new Date(timestamp);
-  const now = new Date();
-  const diff = date.getTime() - now.getTime();
-  const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-
-  if (days === 0) return strings.today;
-  if (days === 1) return strings.tomorrow;
-  if (days === -1) return strings.yesterday;
-  if (days < 0)
-    return strings.daysAgo.replace("{days}", String(Math.abs(days)));
-  if (days <= 7) return strings.inDays.replace("{days}", String(days));
-
-  return date.toLocaleDateString("he-IL", { month: "short", day: "numeric" });
 }
 
 const styles = StyleSheet.create({
@@ -190,11 +211,15 @@ const styles = StyleSheet.create({
   active: {
     backgroundColor: colors.bg.elevated,
     borderColor: colors.accent.primary,
-    shadowColor: colors.accent.primary,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 8,
+    ...(Platform.OS === "web"
+      ? { boxShadow: `0px 4px 8px ${colors.accent.primary}4D` }
+      : {
+          shadowColor: colors.accent.primary,
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.3,
+          shadowRadius: 8,
+          elevation: 8,
+        }),
   },
   priorityBar: {
     width: 3,

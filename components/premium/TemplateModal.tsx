@@ -7,6 +7,7 @@ import { useTemplateStore, TaskTemplate } from "../../stores/templateStore";
 import { ScalePress, FadeIn } from "../animated";
 import { haptics } from "../../utils/haptics";
 import { Task } from "../../types";
+import { generateId } from "../../utils/generateId";
 
 interface TemplateModalProps {
   visible: boolean;
@@ -31,7 +32,7 @@ export function TemplateModal({
       priority: template.task.priority,
       labels: template.task.labels,
       subtasks: template.task.subtasks.map((text) => ({
-        id: Math.random().toString(36).substring(2, 9),
+        id: generateId(),
         text,
         completed: false,
       })),

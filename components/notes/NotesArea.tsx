@@ -7,6 +7,7 @@ import { NoteEditor } from "./NoteEditor";
 import { FadeIn, ScalePress, EmptyNotes } from "../animated";
 import { haptics } from "../../utils/haptics";
 import { strings } from "../../utils/strings";
+import { formatRelativeTime } from "../../utils/dateFormat";
 
 export function NotesArea() {
   const {
@@ -20,14 +21,6 @@ export function NotesArea() {
 
   const activeNote = notes.find((n) => n.id === activeNoteId);
 
-  const formatDate = (timestamp: number) => {
-    const date = new Date(timestamp);
-    return date.toLocaleDateString("he-IL", {
-      month: "short",
-      day: "numeric",
-    });
-  };
-
   return (
     <View style={styles.container}>
       <FadeIn delay={0} direction="down">
@@ -40,6 +33,8 @@ export function NotesArea() {
             }}
             style={styles.addButton}
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            accessibilityRole="button"
+            accessibilityLabel="הוסף הערה חדשה"
           >
             <Ionicons name="add" size={20} color={colors.text.secondary} />
           </ScalePress>
@@ -70,6 +65,10 @@ export function NotesArea() {
                     styles.tab,
                     activeNoteId === note.id && styles.tabActive,
                   ]}
+                  accessibilityRole="tab"
+                  accessibilityState={{ selected: activeNoteId === note.id }}
+                  accessibilityLabel={`הערה: ${note.content.split("\n")[0] || strings.untitled}`}
+                  accessibilityHint="לחיצה ארוכה למחיקה"
                 >
                   <Text
                     style={[
@@ -81,7 +80,7 @@ export function NotesArea() {
                     {note.content.split("\n")[0] || strings.untitled}
                   </Text>
                   <Text style={styles.tabDate}>
-                    {formatDate(note.updatedAt)}
+                    {formatRelativeTime(note.updatedAt)}
                   </Text>
                 </ScalePress>
               </FadeIn>

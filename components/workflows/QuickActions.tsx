@@ -56,10 +56,14 @@ export function QuickActions({ commands, onCopy }: QuickActionsProps) {
                 styles.quickAction,
                 {
                   borderColor: `${config.color}30`,
-                  shadowColor: config.color,
-                  shadowOpacity: 0.15,
-                  shadowRadius: 8,
-                  shadowOffset: { width: 0, height: 2 },
+                  ...(Platform.OS === "web"
+                    ? { boxShadow: `0px 2px 8px ${config.color}26` }
+                    : {
+                        shadowColor: config.color,
+                        shadowOpacity: 0.15,
+                        shadowRadius: 8,
+                        shadowOffset: { width: 0, height: 2 },
+                      }),
                 },
               ]}
               haptic="light"

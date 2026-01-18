@@ -39,6 +39,8 @@ export function SearchBar() {
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
                 scale={0.9}
                 haptic="none"
+                accessibilityRole="button"
+                accessibilityLabel="נקה חיפוש"
               >
                 <Ionicons
                   name="close-circle"
@@ -56,6 +58,8 @@ export function SearchBar() {
                 clearFilter();
               }}
               style={styles.clearButton}
+              accessibilityRole="button"
+              accessibilityLabel="נקה את כל הפילטרים"
             >
               <Text style={styles.clearText}>{strings.clear}</Text>
             </ScalePress>

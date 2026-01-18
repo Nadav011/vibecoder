@@ -1,13 +1,16 @@
 import { create } from "zustand";
-import { Todo, TodoStore, TaskPriority } from "../types";
+import { Todo, TodoStore } from "../types";
 import { storage } from "../utils/storage";
+import { generateId } from "../utils/generateId";
+import { todoHistory } from "../utils/history";
 
-const generateId = () => Math.random().toString(36).substring(2, 9);
-
-export const useTodoStore = create<TodoStore>((set) => ({
+export const useTodoStore = create<TodoStore>((set, get) => ({
   todos: [],
 
   addTodo: (text, priority) => {
+    const { todos } = get();
+    todoHistory.push({ todos });
+
     const newTodo: Todo = {
       id: generateId(),
       text,
@@ -24,9 +27,14 @@ export const useTodoStore = create<TodoStore>((set) => ({
   },
 
   toggleTodo: (id) => {
+    const { todos } = get();
+    todoHistory.push({ todos });
+
     set((state) => {
       const newTodos = state.todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+        todo.id === id
+          ? { ...todo, completed: !todo.completed, updatedAt: Date.now() }
+          : todo,
       );
       storage.setTodos(newTodos);
       return { todos: newTodos };
@@ -34,6 +42,9 @@ export const useTodoStore = create<TodoStore>((set) => ({
   },
 
   deleteTodo: (id) => {
+    const { todos } = get();
+    todoHistory.push({ todos });
+
     set((state) => {
       const newTodos = state.todos.filter((todo) => todo.id !== id);
       storage.setTodos(newTodos);
@@ -42,9 +53,12 @@ export const useTodoStore = create<TodoStore>((set) => ({
   },
 
   updateTodo: (id, updates) => {
+    const { todos } = get();
+    todoHistory.push({ todos });
+
     set((state) => {
       const newTodos = state.todos.map((todo) =>
-        todo.id === id ? { ...todo, ...updates } : todo,
+        todo.id === id ? { ...todo, ...updates, updatedAt: Date.now() } : todo,
       );
       storage.setTodos(newTodos);
       return { todos: newTodos };
@@ -52,6 +66,9 @@ export const useTodoStore = create<TodoStore>((set) => ({
   },
 
   clearCompleted: () => {
+    const { todos } = get();
+    todoHistory.push({ todos });
+
     set((state) => {
       const newTodos = state.todos.filter((todo) => !todo.completed);
       storage.setTodos(newTodos);
@@ -60,9 +77,40 @@ export const useTodoStore = create<TodoStore>((set) => ({
   },
 
   reorderTodos: (todos) => {
+    const currentTodos = get().todos;
+    todoHistory.push({ todos: currentTodos });
+
     storage.setTodos(todos);
     set({ todos });
   },
+
+  // Undo/Redo actions
+  undo: () => {
+    const { todos } = get();
+    const previousState = todoHistory.undo({ todos });
+    if (previousState) {
+      const restoredTodos = previousState.todos as Todo[];
+      storage.setTodos(restoredTodos);
+      set({ todos: restoredTodos });
+      return true;
+    }
+    return false;
+  },
+
+  redo: () => {
+    const { todos } = get();
+    const nextState = todoHistory.redo({ todos });
+    if (nextState) {
+      const restoredTodos = nextState.todos as Todo[];
+      storage.setTodos(restoredTodos);
+      set({ todos: restoredTodos });
+      return true;
+    }
+    return false;
+  },
+
+  canUndo: () => todoHistory.canUndo(),
+  canRedo: () => todoHistory.canRedo(),
 }));
 
 // Initialize store from storage

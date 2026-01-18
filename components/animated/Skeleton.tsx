@@ -34,7 +34,7 @@ export function Skeleton({
       -1,
       false,
     );
-  }, []);
+  }, [shimmer]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: interpolate(shimmer.value, [0, 0.5, 1], [0.3, 0.6, 0.3]),
@@ -45,7 +45,7 @@ export function Skeleton({
       style={[
         styles.skeleton,
         {
-          width: width as any,
+          width: width as ViewStyle["width"],
           height,
           borderRadius,
         },

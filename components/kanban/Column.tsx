@@ -6,7 +6,7 @@ import DraggableFlatList, {
 } from "react-native-draggable-flatlist";
 import { Ionicons } from "@expo/vector-icons";
 import { colors, spacing, radius, typography } from "../../theme";
-import { Task, TaskStatus, Column as ColumnType } from "../../types";
+import { Task, Column as ColumnType } from "../../types";
 import { Card } from "./Card";
 import { ScalePress, EmptyTasks } from "../animated";
 import { haptics } from "../../utils/haptics";
@@ -30,14 +30,27 @@ export function Column({
 }: ColumnProps) {
   const { width } = useWindowDimensions();
 
-  // Responsive column width
-  const isDesktop = width >= 1200;
+  // Responsive column width - better calculations
+  const isLargeDesktop = width >= 1400;
+  const isDesktop = width >= 1024;
   const isTablet = width >= 768;
-  const columnWidth = isDesktop
-    ? (width - 400) / 3 - 24 // Desktop: 3 columns, minus sidebar
-    : isTablet
-      ? (width - 350) / 3 - 16 // Tablet: 3 columns, smaller sidebar
-      : 280; // Mobile: fixed width for horizontal scroll
+  const isMobile = width < 768;
+
+  // Calculate available width (accounting for sidebar on tablet+)
+  const sidebarWidth = isLargeDesktop
+    ? 400
+    : isDesktop
+      ? 350
+      : isTablet
+        ? 300
+        : 0;
+  const availableWidth = width - sidebarWidth;
+  const columnGap = 16; // spacing.sm * 2
+  const totalGaps = columnGap * 4; // gaps between and around columns
+
+  const columnWidth = isMobile
+    ? Math.min(width * 0.85, 320) // Mobile: 85% of screen, max 320
+    : Math.max((availableWidth - totalGaps) / 3, 240); // Desktop/Tablet: equal thirds, min 240
 
   const renderItem = useCallback(
     ({ item, drag, isActive }: RenderItemParams<Task>) => (
@@ -62,8 +75,8 @@ export function Column({
         styles.container,
         {
           width: columnWidth,
-          minWidth: isTablet ? columnWidth : 280,
-          maxWidth: isTablet ? columnWidth : 320,
+          minWidth: isMobile ? 260 : 240,
+          maxWidth: isMobile ? 320 : columnWidth,
         },
       ]}
     >
@@ -82,6 +95,8 @@ export function Column({
           }}
           style={styles.addButton}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          accessibilityRole="button"
+          accessibilityLabel={`הוסף משימה ל${column.title}`}
         >
           <Ionicons name="add" size={20} color={colors.text.secondary} />
         </ScalePress>

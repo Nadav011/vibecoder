@@ -70,7 +70,7 @@ interface SettingsStore {
   resetSettings: () => void;
 }
 
-export const useSettingsStore = create<SettingsStore>((set, get) => ({
+export const useSettingsStore = create<SettingsStore>((set, _get) => ({
   settings: DEFAULT_SETTINGS,
   isLoaded: false,
 

@@ -54,6 +54,7 @@ export interface Todo {
   completed: boolean;
   priority?: TaskPriority;
   createdAt: number;
+  updatedAt?: number;
 }
 
 // Note for documentation
@@ -116,6 +117,12 @@ export interface KanbanStore {
   // Computed
   getFilteredTasks: () => Task[];
   getTasksByStatus: (status: TaskStatus) => Task[];
+
+  // Undo/Redo
+  undo: () => boolean;
+  redo: () => boolean;
+  canUndo: () => boolean;
+  canRedo: () => boolean;
 }
 
 export interface TodoStore {
@@ -126,6 +133,12 @@ export interface TodoStore {
   updateTodo: (id: string, updates: Partial<Todo>) => void;
   clearCompleted: () => void;
   reorderTodos: (todos: Todo[]) => void;
+
+  // Undo/Redo
+  undo: () => boolean;
+  redo: () => boolean;
+  canUndo: () => boolean;
+  canRedo: () => boolean;
 }
 
 export interface NotesStore {

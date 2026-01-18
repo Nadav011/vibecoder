@@ -31,6 +31,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
 
     setIsDark(shouldBeDark);
+    // lightColors has same structure as darkColors but different literal values
+    // Cast through unknown is safe because structure matches
     setColors(shouldBeDark ? darkColors : (lightColors as unknown as Colors));
   }, [settings.theme, systemColorScheme]);
 

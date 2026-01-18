@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSettingsStore } from "./settingsStore";
+import { handleStorageError } from "../utils/storage";
+import { generateId } from "../utils/generateId";
 
 export type PomodoroPhase = "work" | "shortBreak" | "longBreak" | "idle";
 
@@ -111,15 +113,18 @@ export const usePomodoroStore = create<PomodoroStore>((set, get) => ({
   },
 
   tick: () => {
-    const { isRunning, timeRemaining } = get();
-    if (!isRunning || timeRemaining <= 0) return;
+    // Use functional update to prevent race conditions
+    set((state) => {
+      if (!state.isRunning || state.timeRemaining <= 0) return state;
 
-    const newTime = timeRemaining - 1;
-    if (newTime <= 0) {
-      get().completePhase();
-    } else {
-      set({ timeRemaining: newTime });
-    }
+      const newTime = state.timeRemaining - 1;
+      if (newTime <= 0) {
+        // Schedule completePhase after state update to avoid race
+        setTimeout(() => get().completePhase(), 0);
+        return { ...state, timeRemaining: 0 };
+      }
+      return { ...state, timeRemaining: newTime };
+    });
   },
 
   completePhase: () => {
@@ -135,7 +140,7 @@ export const usePomodoroStore = create<PomodoroStore>((set, get) => ({
     if (phase === "work") {
       // Complete work session
       const newSession: PomodoroSession = {
-        id: Math.random().toString(36).substring(2, 9),
+        id: generateId(),
         startedAt: currentSessionStart || Date.now(),
         completedAt: Date.now(),
         phase: "work",
@@ -220,7 +225,7 @@ async function saveSessions(sessions: PomodoroSession[]): Promise<void> {
     const toSave = sessions.slice(-100);
     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
   } catch (error) {
-    console.error("Failed to save pomodoro sessions:", error);
+    handleStorageError(error, "savePomodoroSessions");
   }
 }
 
@@ -246,8 +251,8 @@ function playNotificationSound(): void {
 
       oscillator.start(audioContext.currentTime);
       oscillator.stop(audioContext.currentTime + 0.5);
-    } catch (error) {
-      console.log("Audio notification not available");
+    } catch {
+      // Audio notification not available - this is expected on some platforms
     }
   }
 }
@@ -263,7 +268,7 @@ export async function initPomodoroStore(): Promise<void> {
       });
     }
   } catch (error) {
-    console.error("Failed to load pomodoro sessions:", error);
+    handleStorageError(error, "initPomodoroStore");
   }
 }
 

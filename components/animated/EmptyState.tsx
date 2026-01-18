@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { colors, spacing, radius, typography } from "../../theme";
+import { colors, spacing, typography } from "../../theme";
 import { FadeIn } from "./FadeIn";
 import { Button } from "../ui/Button";
 import { strings } from "../../utils/strings";

@@ -7,6 +7,7 @@ import { Board } from "../components/kanban";
 import { TodoList } from "../components/todo";
 import { NotesArea } from "../components/notes";
 import { FadeIn, ScalePress } from "../components/animated";
+import { SectionErrorBoundary } from "../components/ui";
 import { haptics } from "../utils/haptics";
 import { strings } from "../utils/strings";
 
@@ -42,7 +43,9 @@ export default function HomeScreen() {
 
         <View style={styles.tabletContent}>
           <FadeIn delay={100} direction="right" style={styles.mainPanel}>
-            <Board />
+            <SectionErrorBoundary sectionName="לוח קנבן">
+              <Board />
+            </SectionErrorBoundary>
           </FadeIn>
           <FadeIn delay={200} direction="left">
             <View
@@ -52,10 +55,14 @@ export default function HomeScreen() {
               ]}
             >
               <View style={styles.sidebarSection}>
-                <TodoList />
+                <SectionErrorBoundary sectionName="משימות מהירות">
+                  <TodoList />
+                </SectionErrorBoundary>
               </View>
               <View style={styles.sidebarSection}>
-                <NotesArea />
+                <SectionErrorBoundary sectionName="הערות">
+                  <NotesArea />
+                </SectionErrorBoundary>
               </View>
             </View>
           </FadeIn>
@@ -86,17 +93,23 @@ export default function HomeScreen() {
       <View style={styles.mobileContent}>
         {activePanel === "kanban" && (
           <FadeIn delay={50} direction="up">
-            <Board />
+            <SectionErrorBoundary sectionName="לוח קנבן">
+              <Board />
+            </SectionErrorBoundary>
           </FadeIn>
         )}
         {activePanel === "todos" && (
           <FadeIn delay={50} direction="up" style={styles.mobilePanelContainer}>
-            <TodoList />
+            <SectionErrorBoundary sectionName="משימות מהירות">
+              <TodoList />
+            </SectionErrorBoundary>
           </FadeIn>
         )}
         {activePanel === "notes" && (
           <FadeIn delay={50} direction="up" style={styles.mobilePanelContainer}>
-            <NotesArea />
+            <SectionErrorBoundary sectionName="הערות">
+              <NotesArea />
+            </SectionErrorBoundary>
           </FadeIn>
         )}
       </View>
@@ -107,6 +120,9 @@ export default function HomeScreen() {
             onPress={() => handleTabPress("kanban")}
             style={[styles.tab, activePanel === "kanban" && styles.tabActive]}
             haptic="none"
+            accessibilityRole="tab"
+            accessibilityState={{ selected: activePanel === "kanban" }}
+            accessibilityLabel={strings.board}
           >
             <View
               style={[
@@ -138,6 +154,9 @@ export default function HomeScreen() {
             onPress={() => handleTabPress("todos")}
             style={[styles.tab, activePanel === "todos" && styles.tabActive]}
             haptic="none"
+            accessibilityRole="tab"
+            accessibilityState={{ selected: activePanel === "todos" }}
+            accessibilityLabel={strings.tasks}
           >
             <View
               style={[
@@ -169,6 +188,9 @@ export default function HomeScreen() {
             onPress={() => handleTabPress("notes")}
             style={[styles.tab, activePanel === "notes" && styles.tabActive]}
             haptic="none"
+            accessibilityRole="tab"
+            accessibilityState={{ selected: activePanel === "notes" }}
+            accessibilityLabel={strings.notes}
           >
             <View
               style={[

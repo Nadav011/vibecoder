@@ -8,17 +8,38 @@ import { Command, buildFullCommand } from "../../data/workflows";
 
 interface CommandCardProps {
   command: Command;
-  phaseColor: string;
+  phaseColor?: string;
   onCopy?: (text: string) => void;
 }
 
-export function CommandCard({ command, phaseColor, onCopy }: CommandCardProps) {
+export function CommandCard({
+  command,
+  phaseColor = colors.accent.primary,
+  onCopy,
+}: CommandCardProps) {
   const [copied, setCopied] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
 
   const copyToClipboard = async (text: string) => {
     if (Platform.OS === "web" && typeof navigator !== "undefined") {
-      await navigator.clipboard.writeText(text);
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (error) {
+        // Fallback for older browsers or permission denied
+        console.warn("[Clipboard] Failed to copy:", error);
+        try {
+          const textArea = document.createElement("textarea");
+          textArea.value = text;
+          textArea.style.position = "fixed";
+          textArea.style.opacity = "0";
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand("copy");
+          document.body.removeChild(textArea);
+        } catch {
+          // Silent fail - clipboard copy not critical
+        }
+      }
     }
     haptics.light();
     setCopied(true);
@@ -94,6 +115,8 @@ export function CommandCard({ command, phaseColor, onCopy }: CommandCardProps) {
           style={[styles.copyButton, copied && styles.copyButtonCopied]}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           haptic="light"
+          accessibilityRole="button"
+          accessibilityLabel={copied ? "הועתק" : "העתק פקודה"}
         >
           <Ionicons
             name={copied ? "checkmark" : "copy-outline"}
@@ -173,6 +196,8 @@ export function CommandCard({ command, phaseColor, onCopy }: CommandCardProps) {
           onPress={handleCopyCommand}
           style={[styles.actionButton, styles.primaryAction]}
           haptic="light"
+          accessibilityRole="button"
+          accessibilityLabel="העתק פקודה"
         >
           <Ionicons name="copy-outline" size={14} color={colors.text.primary} />
           <Text style={[styles.actionText, styles.primaryActionText]}>
@@ -184,6 +209,8 @@ export function CommandCard({ command, phaseColor, onCopy }: CommandCardProps) {
           onPress={() => setShowOptions(!showOptions)}
           style={styles.actionButton}
           haptic="light"
+          accessibilityRole="button"
+          accessibilityLabel={showOptions ? "סגור אפשרויות" : "פתח אפשרויות"}
         >
           <Ionicons
             name={showOptions ? "chevron-up" : "options-outline"}
@@ -198,6 +225,8 @@ export function CommandCard({ command, phaseColor, onCopy }: CommandCardProps) {
             onPress={handleCopyWithAllFlags}
             style={styles.actionButton}
             haptic="light"
+            accessibilityRole="button"
+            accessibilityLabel="העתק עם כל הפלאגים"
           >
             <Ionicons
               name="code-slash-outline"

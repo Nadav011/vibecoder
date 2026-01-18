@@ -29,6 +29,9 @@ export function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
       style={[styles.container, todo.completed && styles.containerCompleted]}
       scale={0.98}
       haptic="none"
+      accessibilityRole="checkbox"
+      accessibilityState={{ checked: todo.completed }}
+      accessibilityLabel={`משימה: ${todo.text}`}
     >
       <View style={[styles.checkbox, todo.completed && styles.checkboxChecked]}>
         {todo.completed && (
@@ -49,6 +52,8 @@ export function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
         hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         scale={0.9}
         haptic="none"
+        accessibilityRole="button"
+        accessibilityLabel="מחק משימה"
       >
         <Ionicons name="close" size={14} color={colors.text.muted} />
       </ScalePress>

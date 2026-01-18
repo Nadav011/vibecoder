@@ -8,7 +8,7 @@ import {
   TextStyle,
 } from "react-native";
 import { colors, spacing, radius, typography } from "../../theme";
-import { ScalePress } from "../animated";
+import { ScalePress } from "../animated/ScalePress";
 
 interface ButtonProps {
   onPress: () => void;

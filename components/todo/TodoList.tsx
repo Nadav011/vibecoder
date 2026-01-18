@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { View, Text, StyleSheet, FlatList, TextInput } from "react-native";
+import { useShallow } from "zustand/react/shallow";
 import { Ionicons } from "@expo/vector-icons";
 import { colors, spacing, radius, typography } from "../../theme";
 import { useTodoStore } from "../../stores";
@@ -9,29 +10,63 @@ import { FadeIn, ScalePress, EmptyTodos } from "../animated";
 import { haptics } from "../../utils/haptics";
 import { strings } from "../../utils/strings";
 
+// Item height for getItemLayout optimization
+const ITEM_HEIGHT = 56;
+
 export function TodoList() {
   const { todos, addTodo, toggleTodo, deleteTodo, clearCompleted } =
-    useTodoStore();
+    useTodoStore(
+      useShallow((state) => ({
+        todos: state.todos,
+        addTodo: state.addTodo,
+        toggleTodo: state.toggleTodo,
+        deleteTodo: state.deleteTodo,
+        clearCompleted: state.clearCompleted,
+      })),
+    );
   const [newTodo, setNewTodo] = useState("");
 
-  const handleAddTodo = () => {
+  const handleAddTodo = useCallback(() => {
     if (newTodo.trim()) {
       haptics.success();
       addTodo(newTodo.trim());
       setNewTodo("");
     }
-  };
+  }, [newTodo, addTodo]);
 
-  const completedCount = todos.filter((t) => t.completed).length;
-  const pendingCount = todos.length - completedCount;
+  const { completedCount, pendingCount, clearCompletedText } = useMemo(() => {
+    const completed = todos.filter((t) => t.completed).length;
+    return {
+      completedCount: completed,
+      pendingCount: todos.length - completed,
+      clearCompletedText: strings.clearCompleted.replace(
+        "{count}",
+        String(completed),
+      ),
+    };
+  }, [todos]);
 
-  const renderItem = ({ item }: { item: Todo }) => (
-    <TodoItem
-      todo={item}
-      onToggle={() => toggleTodo(item.id)}
-      onDelete={() => deleteTodo(item.id)}
-    />
+  const renderItem = useCallback(
+    ({ item }: { item: Todo }) => (
+      <TodoItem
+        todo={item}
+        onToggle={() => toggleTodo(item.id)}
+        onDelete={() => deleteTodo(item.id)}
+      />
+    ),
+    [toggleTodo, deleteTodo],
   );
+
+  const getItemLayout = useCallback(
+    (_: unknown, index: number) => ({
+      length: ITEM_HEIGHT,
+      offset: ITEM_HEIGHT * index,
+      index,
+    }),
+    [],
+  );
+
+  const keyExtractor = useCallback((item: Todo) => item.id, []);
 
   return (
     <View style={styles.container}>
@@ -77,10 +112,16 @@ export function TodoList() {
       <FlatList
         data={todos}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={keyExtractor}
+        getItemLayout={getItemLayout}
         showsVerticalScrollIndicator={false}
         style={styles.list}
         ListEmptyComponent={<EmptyTodos />}
+        // Performance optimizations
+        maxToRenderPerBatch={10}
+        initialNumToRender={15}
+        windowSize={5}
+        removeClippedSubviews
       />
 
       {completedCount > 0 && (
@@ -92,12 +133,7 @@ export function TodoList() {
             }}
             style={styles.clearButton}
           >
-            <Text style={styles.clearText}>
-              {strings.clearCompleted.replace(
-                "{count}",
-                String(completedCount),
-              )}
-            </Text>
+            <Text style={styles.clearText}>{clearCompletedText}</Text>
           </ScalePress>
         </FadeIn>
       )}
