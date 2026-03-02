@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Platform } from "react-native";
+import { View, Text, StyleSheet, Platform, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { colors, spacing, radius, typography } from "../../../theme";
 import { ScalePress } from "../../animated";
@@ -28,128 +28,146 @@ export function ResponsiveView({
   };
 
   return (
-    <View style={styles.section}>
-      <Text style={styles.sectionTitle}>Responsive Design</Text>
-      <Text style={styles.sectionSubtitle}>
-        תמיכה בכל המסכים וגדלי המכשירים
-      </Text>
-
-      {/* Breakpoints */}
-      <View style={styles.responsiveSection}>
-        <Text style={styles.responsiveSectionTitle}>
-          Breakpoints (Tailwind)
+    <ScrollView
+      style={styles.scrollView}
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Responsive Design</Text>
+        <Text style={styles.sectionSubtitle}>
+          תמיכה בכל המסכים וגדלי המכשירים
         </Text>
-        <View style={styles.breakpointsTable}>
-          {/* Header */}
-          <View style={styles.breakpointHeader}>
-            <Text style={[styles.breakpointHeaderText, { flex: 1 }]}>שם</Text>
-            <Text style={[styles.breakpointHeaderText, { flex: 1 }]}>טווח</Text>
-            <Text style={[styles.breakpointHeaderText, { flex: 0.5 }]}>
-              Class
-            </Text>
-          </View>
-          {breakpoints.map((bp) => (
-            <View key={bp.name} style={styles.breakpointRow}>
-              <Text style={[styles.breakpointCell, { flex: 1 }]}>
-                {bp.name}
-              </Text>
-              <Text style={[styles.breakpointCell, { flex: 1 }]}>
-                {bp.minWidth}px{bp.maxWidth ? ` - ${bp.maxWidth}px` : "+"}
-              </Text>
-              <ScalePress
-                onPress={() => copyToClipboard(`${bp.tailwindClass}:`)}
-                style={styles.breakpointClassBadge}
-                haptic="light"
-              >
-                <Text style={styles.breakpointClass}>{bp.tailwindClass}:</Text>
-              </ScalePress>
-            </View>
-          ))}
-        </View>
-      </View>
 
-      {/* Devices */}
-      <View style={styles.responsiveSection}>
-        <Text style={styles.responsiveSectionTitle}>מכשירים לבדיקה</Text>
-        <View style={styles.devicesGrid}>
-          {devices
-            .filter((d) => d.required)
-            .map((device) => (
-              <View key={device.name} style={styles.deviceCard}>
-                <Ionicons
-                  name={
-                    device.type === "mobile"
-                      ? "phone-portrait-outline"
-                      : device.type === "tablet"
-                        ? "tablet-portrait-outline"
-                        : "desktop-outline"
-                  }
-                  size={20}
-                  color={
-                    device.required ? colors.accent.success : colors.text.muted
-                  }
-                />
-                <Text style={styles.deviceName}>{device.name}</Text>
-                <Text style={styles.deviceSize}>
-                  {device.width}x{device.height}
+        {/* Breakpoints */}
+        <View style={styles.responsiveSection}>
+          <Text style={styles.responsiveSectionTitle}>
+            Breakpoints (Tailwind)
+          </Text>
+          <View style={styles.breakpointsTable}>
+            {/* Header */}
+            <View style={styles.breakpointHeader}>
+              <Text style={[styles.breakpointHeaderText, { flex: 1 }]}>שם</Text>
+              <Text style={[styles.breakpointHeaderText, { flex: 1 }]}>
+                טווח
+              </Text>
+              <Text style={[styles.breakpointHeaderText, { flex: 0.5 }]}>
+                Class
+              </Text>
+            </View>
+            {breakpoints.map((bp) => (
+              <View key={bp.name} style={styles.breakpointRow}>
+                <Text style={[styles.breakpointCell, { flex: 1 }]}>
+                  {bp.name}
                 </Text>
-                {device.required && (
-                  <View style={styles.requiredBadge}>
-                    <Text style={styles.requiredText}>חובה</Text>
-                  </View>
-                )}
+                <Text style={[styles.breakpointCell, { flex: 1 }]}>
+                  {bp.minWidth}px{bp.maxWidth ? ` - ${bp.maxWidth}px` : "+"}
+                </Text>
+                <ScalePress
+                  onPress={() => copyToClipboard(`${bp.tailwindClass}:`)}
+                  style={styles.breakpointClassBadge}
+                  haptic="light"
+                >
+                  <Text style={styles.breakpointClass}>
+                    {bp.tailwindClass}:
+                  </Text>
+                </ScalePress>
               </View>
             ))}
-        </View>
-      </View>
-
-      {/* Touch Targets */}
-      <View style={styles.responsiveSection}>
-        <Text style={styles.responsiveSectionTitle}>
-          Touch Targets (נגישות)
-        </Text>
-        <View style={styles.touchTargetsTable}>
-          <View style={styles.touchTargetHeader}>
-            <Text style={[styles.touchTargetHeaderText, { flex: 1 }]}>
-              אלמנט
-            </Text>
-            <Text style={[styles.touchTargetHeaderText, { flex: 1 }]}>
-              מינימום
-            </Text>
-            <Text style={[styles.touchTargetHeaderText, { flex: 1 }]}>
-              מומלץ
-            </Text>
           </View>
-          {touchTargets.map((tt) => (
-            <View key={tt.element} style={styles.touchTargetRow}>
-              <Text style={[styles.touchTargetCell, { flex: 1 }]}>
-                {tt.element}
+        </View>
+
+        {/* Devices */}
+        <View style={styles.responsiveSection}>
+          <Text style={styles.responsiveSectionTitle}>מכשירים לבדיקה</Text>
+          <View style={styles.devicesGrid}>
+            {devices
+              .filter((d) => d.required)
+              .map((device) => (
+                <View key={device.name} style={styles.deviceCard}>
+                  <Ionicons
+                    name={
+                      device.type === "mobile"
+                        ? "phone-portrait-outline"
+                        : device.type === "tablet"
+                          ? "tablet-portrait-outline"
+                          : "desktop-outline"
+                    }
+                    size={20}
+                    color={
+                      device.required
+                        ? colors.accent.success
+                        : colors.text.muted
+                    }
+                  />
+                  <Text style={styles.deviceName}>{device.name}</Text>
+                  <Text style={styles.deviceSize}>
+                    {device.width}x{device.height}
+                  </Text>
+                  {device.required && (
+                    <View style={styles.requiredBadge}>
+                      <Text style={styles.requiredText}>חובה</Text>
+                    </View>
+                  )}
+                </View>
+              ))}
+          </View>
+        </View>
+
+        {/* Touch Targets */}
+        <View style={styles.responsiveSection}>
+          <Text style={styles.responsiveSectionTitle}>
+            Touch Targets (נגישות)
+          </Text>
+          <View style={styles.touchTargetsTable}>
+            <View style={styles.touchTargetHeader}>
+              <Text style={[styles.touchTargetHeaderText, { flex: 1 }]}>
+                אלמנט
               </Text>
-              <Text
-                style={[
-                  styles.touchTargetCell,
-                  { flex: 1, color: colors.accent.warning },
-                ]}
-              >
-                {tt.minimum}
+              <Text style={[styles.touchTargetHeaderText, { flex: 1 }]}>
+                מינימום
               </Text>
-              <Text
-                style={[
-                  styles.touchTargetCell,
-                  { flex: 1, color: colors.accent.success },
-                ]}
-              >
-                {tt.recommended}
+              <Text style={[styles.touchTargetHeaderText, { flex: 1 }]}>
+                מומלץ
               </Text>
             </View>
-          ))}
+            {touchTargets.map((tt) => (
+              <View key={tt.element} style={styles.touchTargetRow}>
+                <Text style={[styles.touchTargetCell, { flex: 1 }]}>
+                  {tt.element}
+                </Text>
+                <Text
+                  style={[
+                    styles.touchTargetCell,
+                    { flex: 1, color: colors.accent.warning },
+                  ]}
+                >
+                  {tt.minimum}
+                </Text>
+                <Text
+                  style={[
+                    styles.touchTargetCell,
+                    { flex: 1, color: colors.accent.success },
+                  ]}
+                >
+                  {tt.recommended}
+                </Text>
+              </View>
+            ))}
+          </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  contentContainer: {
+    paddingBottom: spacing.xxl,
+  },
   section: {
     paddingHorizontal: spacing.md,
     gap: spacing.md,

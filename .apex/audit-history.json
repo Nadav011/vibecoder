@@ -1,0 +1,40 @@
+{
+  "projectName": "vibecoder",
+  "projectPath": "/home/nadavcohen/Desktop/mangment/vibecoder",
+  "entries": [
+    {
+      "timestamp": "2026-02-05T17:26:13.242Z",
+      "score": 39,
+      "maxScore": 70,
+      "verdict": "FAILED",
+      "passCount": 16,
+      "failCount": 9,
+      "warnCount": 31,
+      "duration": 83713,
+      "gatesRun": 70
+    },
+    {
+      "timestamp": "2026-02-05T17:47:07.333Z",
+      "score": 40,
+      "maxScore": 70,
+      "verdict": "FAILED",
+      "passCount": 19,
+      "failCount": 10,
+      "warnCount": 31,
+      "duration": 86131,
+      "gatesRun": 70
+    },
+    {
+      "timestamp": "2026-02-05T19:12:20.356Z",
+      "score": 40,
+      "maxScore": 70,
+      "verdict": "FAILED",
+      "passCount": 19,
+      "failCount": 10,
+      "warnCount": 31,
+      "duration": 96679,
+      "gatesRun": 70
+    }
+  ],
+  "lastUpdated": "2026-02-05T19:12:20.440Z"
+}

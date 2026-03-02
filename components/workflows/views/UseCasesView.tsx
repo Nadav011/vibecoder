@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Platform } from "react-native";
+import { View, Text, StyleSheet, Platform, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { colors, spacing, radius, typography } from "../../../theme";
 import { ScalePress, FadeIn } from "../../animated";
@@ -39,217 +39,233 @@ export function UseCasesView({
   );
 
   return (
-    <FadeIn delay={100} direction="up">
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>מדריכי פרויקט מלאים</Text>
-        <Text style={styles.sectionSubtitle}>
-          זרימות עבודה מפורטות שלב אחר שלב
-        </Text>
+    <ScrollView
+      style={styles.scrollView}
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <FadeIn delay={100} direction="up">
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>מדריכי פרויקט מלאים</Text>
+          <Text style={styles.sectionSubtitle}>
+            זרימות עבודה מפורטות שלב אחר שלב
+          </Text>
 
-        {/* Main Project Flows */}
-        <View style={styles.projectFlowsContainer}>
-          {projectFlows.map((flow, flowIndex) => (
-            <FadeIn key={flow.id} delay={100 + flowIndex * 100} direction="up">
-              <View style={styles.projectFlowCard}>
-                {/* Flow Header */}
-                <View
-                  style={[
-                    styles.projectFlowHeader,
-                    { backgroundColor: `${flow.color}15` },
-                  ]}
-                >
+          {/* Main Project Flows */}
+          <View style={styles.projectFlowsContainer}>
+            {projectFlows.map((flow, flowIndex) => (
+              <FadeIn
+                key={flow.id}
+                delay={100 + flowIndex * 100}
+                direction="up"
+              >
+                <View style={styles.projectFlowCard}>
+                  {/* Flow Header */}
                   <View
                     style={[
-                      styles.projectFlowIcon,
-                      { backgroundColor: `${flow.color}25` },
+                      styles.projectFlowHeader,
+                      { backgroundColor: `${flow.color}15` },
                     ]}
                   >
-                    <Ionicons
-                      name={flow.icon as keyof typeof Ionicons.glyphMap}
-                      size={28}
-                      color={flow.color}
-                    />
+                    <View
+                      style={[
+                        styles.projectFlowIcon,
+                        { backgroundColor: `${flow.color}25` },
+                      ]}
+                    >
+                      <Ionicons
+                        name={flow.icon as keyof typeof Ionicons.glyphMap}
+                        size={28}
+                        color={flow.color}
+                      />
+                    </View>
+                    <View style={styles.projectFlowHeaderText}>
+                      <Text style={styles.projectFlowTitle}>{flow.nameHe}</Text>
+                      <Text style={styles.projectFlowDesc}>
+                        {flow.description}
+                      </Text>
+                    </View>
+                    <View
+                      style={[
+                        styles.projectFlowBadge,
+                        { backgroundColor: flow.color },
+                      ]}
+                    >
+                      <Text style={styles.projectFlowBadgeText}>
+                        {flow.steps.length} שלבים
+                      </Text>
+                    </View>
                   </View>
-                  <View style={styles.projectFlowHeaderText}>
-                    <Text style={styles.projectFlowTitle}>{flow.nameHe}</Text>
-                    <Text style={styles.projectFlowDesc}>
-                      {flow.description}
-                    </Text>
-                  </View>
-                  <View
-                    style={[
-                      styles.projectFlowBadge,
-                      { backgroundColor: flow.color },
-                    ]}
-                  >
-                    <Text style={styles.projectFlowBadgeText}>
-                      {flow.steps.length} שלבים
-                    </Text>
-                  </View>
-                </View>
 
-                {/* Flow Steps */}
-                <View style={styles.projectFlowSteps}>
-                  {flow.steps.map((step, stepIndex) => {
-                    const phase = phases.find((p) => p.id === step.phase);
-                    const phaseColor = phase?.color || flow.color;
+                  {/* Flow Steps */}
+                  <View style={styles.projectFlowSteps}>
+                    {flow.steps.map((step, stepIndex) => {
+                      const phase = phases.find((p) => p.id === step.phase);
+                      const phaseColor = phase?.color || flow.color;
 
-                    return (
-                      <View key={stepIndex} style={styles.projectFlowStep}>
-                        <View
-                          style={[
-                            styles.projectFlowStepNumber,
-                            { backgroundColor: `${phaseColor}20` },
-                          ]}
-                        >
-                          <Text
+                      return (
+                        <View key={stepIndex} style={styles.projectFlowStep}>
+                          <View
                             style={[
-                              styles.projectFlowStepNumberText,
-                              { color: phaseColor },
+                              styles.projectFlowStepNumber,
+                              { backgroundColor: `${phaseColor}20` },
                             ]}
                           >
-                            {step.stepNumber}
-                          </Text>
-                        </View>
-                        <View style={styles.projectFlowStepContent}>
-                          <View style={styles.projectFlowStepHeader}>
                             <Text
                               style={[
-                                styles.projectFlowStepPhase,
+                                styles.projectFlowStepNumberText,
                                 { color: phaseColor },
                               ]}
                             >
-                              {phase?.name || step.phase}
+                              {step.stepNumber}
                             </Text>
-                            {step.isRequired && (
-                              <View style={styles.stepRequiredBadge}>
-                                <Text style={styles.stepRequiredBadgeText}>
-                                  חובה
+                          </View>
+                          <View style={styles.projectFlowStepContent}>
+                            <View style={styles.projectFlowStepHeader}>
+                              <Text
+                                style={[
+                                  styles.projectFlowStepPhase,
+                                  { color: phaseColor },
+                                ]}
+                              >
+                                {phase?.name || step.phase}
+                              </Text>
+                              {step.isRequired && (
+                                <View style={styles.stepRequiredBadge}>
+                                  <Text style={styles.stepRequiredBadgeText}>
+                                    חובה
+                                  </Text>
+                                </View>
+                              )}
+                            </View>
+                            <Text style={styles.projectFlowStepTitle}>
+                              {step.titleHe}
+                            </Text>
+                            <Text style={styles.projectFlowStepDesc}>
+                              {step.description}
+                            </Text>
+                            <View style={styles.projectFlowStepCommands}>
+                              {step.commands.map((cmd, cmdIdx) => (
+                                <ScalePress
+                                  key={cmdIdx}
+                                  onPress={() => handleCopyCommand(cmd)}
+                                  style={[
+                                    styles.projectFlowStepCmd,
+                                    { borderColor: `${phaseColor}40` },
+                                  ]}
+                                  haptic="none"
+                                >
+                                  <Text
+                                    style={[
+                                      styles.projectFlowStepCmdText,
+                                      { color: phaseColor },
+                                    ]}
+                                  >
+                                    {cmd}
+                                  </Text>
+                                  <Ionicons
+                                    name="copy-outline"
+                                    size={14}
+                                    color={phaseColor}
+                                  />
+                                </ScalePress>
+                              ))}
+                            </View>
+                            {step.warning && (
+                              <View style={styles.projectFlowStepWarning}>
+                                <Ionicons
+                                  name="warning"
+                                  size={14}
+                                  color={colors.status.error}
+                                />
+                                <Text style={styles.projectFlowStepWarningText}>
+                                  {step.warning}
                                 </Text>
                               </View>
                             )}
                           </View>
-                          <Text style={styles.projectFlowStepTitle}>
-                            {step.titleHe}
-                          </Text>
-                          <Text style={styles.projectFlowStepDesc}>
-                            {step.description}
-                          </Text>
-                          <View style={styles.projectFlowStepCommands}>
-                            {step.commands.map((cmd, cmdIdx) => (
-                              <ScalePress
-                                key={cmdIdx}
-                                onPress={() => handleCopyCommand(cmd)}
-                                style={[
-                                  styles.projectFlowStepCmd,
-                                  { borderColor: `${phaseColor}40` },
-                                ]}
-                                haptic="none"
-                              >
-                                <Text
-                                  style={[
-                                    styles.projectFlowStepCmdText,
-                                    { color: phaseColor },
-                                  ]}
-                                >
-                                  {cmd}
-                                </Text>
-                                <Ionicons
-                                  name="copy-outline"
-                                  size={14}
-                                  color={phaseColor}
-                                />
-                              </ScalePress>
-                            ))}
-                          </View>
-                          {step.warning && (
-                            <View style={styles.projectFlowStepWarning}>
-                              <Ionicons
-                                name="warning"
-                                size={14}
-                                color={colors.status.error}
-                              />
-                              <Text style={styles.projectFlowStepWarningText}>
-                                {step.warning}
-                              </Text>
-                            </View>
+                          {stepIndex < flow.steps.length - 1 && (
+                            <View style={styles.projectFlowStepLine} />
                           )}
                         </View>
-                        {stepIndex < flow.steps.length - 1 && (
-                          <View style={styles.projectFlowStepLine} />
-                        )}
-                      </View>
-                    );
-                  })}
+                      );
+                    })}
+                  </View>
                 </View>
-              </View>
-            </FadeIn>
-          ))}
-        </View>
+              </FadeIn>
+            ))}
+          </View>
 
-        {/* Quick Templates */}
-        <Text style={[styles.sectionTitle, { marginTop: spacing.xl }]}>
-          תבניות מהירות
-        </Text>
-        <Text style={styles.sectionSubtitle}>לחץ להעתקת כל הפקודות בסדר</Text>
-        <View style={styles.useCasesGrid}>
-          {quickTemplates.map((useCase, index) => (
-            <FadeIn key={useCase.id} delay={300 + index * 50} direction="up">
-              <ScalePress
-                onPress={() => onCopyUseCase(useCase)}
-                style={styles.useCaseCard}
-                haptic="medium"
-              >
-                <View
-                  style={[
-                    styles.useCaseIcon,
-                    {
-                      backgroundColor:
-                        useCase.id === "emergency"
-                          ? colors.status.errorBg
-                          : colors.accent.primaryGlow,
-                    },
-                  ]}
+          {/* Quick Templates */}
+          <Text style={[styles.sectionTitle, { marginTop: spacing.xl }]}>
+            תבניות מהירות
+          </Text>
+          <Text style={styles.sectionSubtitle}>לחץ להעתקת כל הפקודות בסדר</Text>
+          <View style={styles.useCasesGrid}>
+            {quickTemplates.map((useCase, index) => (
+              <FadeIn key={useCase.id} delay={300 + index * 50} direction="up">
+                <ScalePress
+                  onPress={() => onCopyUseCase(useCase)}
+                  style={styles.useCaseCard}
+                  haptic="medium"
                 >
-                  <Ionicons
-                    name={useCase.icon as keyof typeof Ionicons.glyphMap}
-                    size={24}
-                    color={
-                      useCase.id === "emergency"
-                        ? colors.status.error
-                        : colors.accent.primary
-                    }
-                  />
-                </View>
-                <Text style={styles.useCaseName}>{useCase.nameHe}</Text>
-                <Text style={styles.useCaseDescription}>
-                  {useCase.description}
-                </Text>
-                <View style={styles.useCaseCommands}>
-                  {useCase.commands.map((cmd, i) => (
-                    <Text key={i} style={styles.useCaseCommand}>
-                      {cmd}
-                    </Text>
-                  ))}
-                </View>
-                <View style={styles.useCaseCopyHint}>
-                  <Ionicons
-                    name="copy-outline"
-                    size={14}
-                    color={colors.text.muted}
-                  />
-                  <Text style={styles.useCaseCopyText}>לחץ להעתקה</Text>
-                </View>
-              </ScalePress>
-            </FadeIn>
-          ))}
+                  <View
+                    style={[
+                      styles.useCaseIcon,
+                      {
+                        backgroundColor:
+                          useCase.id === "emergency"
+                            ? colors.status.errorBg
+                            : colors.accent.primaryGlow,
+                      },
+                    ]}
+                  >
+                    <Ionicons
+                      name={useCase.icon as keyof typeof Ionicons.glyphMap}
+                      size={24}
+                      color={
+                        useCase.id === "emergency"
+                          ? colors.status.error
+                          : colors.accent.primary
+                      }
+                    />
+                  </View>
+                  <Text style={styles.useCaseName}>{useCase.nameHe}</Text>
+                  <Text style={styles.useCaseDescription}>
+                    {useCase.description}
+                  </Text>
+                  <View style={styles.useCaseCommands}>
+                    {useCase.commands.map((cmd, i) => (
+                      <Text key={i} style={styles.useCaseCommand}>
+                        {cmd}
+                      </Text>
+                    ))}
+                  </View>
+                  <View style={styles.useCaseCopyHint}>
+                    <Ionicons
+                      name="copy-outline"
+                      size={14}
+                      color={colors.text.muted}
+                    />
+                    <Text style={styles.useCaseCopyText}>לחץ להעתקה</Text>
+                  </View>
+                </ScalePress>
+              </FadeIn>
+            ))}
+          </View>
         </View>
-      </View>
-    </FadeIn>
+      </FadeIn>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  contentContainer: {
+    paddingBottom: spacing.xxl,
+  },
   section: {
     paddingHorizontal: spacing.md,
     gap: spacing.md,

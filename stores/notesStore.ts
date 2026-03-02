@@ -2,6 +2,11 @@ import { create } from "zustand";
 import { Note, NotesStore } from "../types";
 import { storage } from "../utils/storage";
 import { generateId } from "../utils/generateId";
+import {
+  syncNotesToCloud,
+  fetchNotesFromCloud,
+  deleteNoteFromCloud,
+} from "../lib/sync";
 
 export const useNotesStore = create<NotesStore>((set, _get) => ({
   notes: [],
@@ -19,6 +24,7 @@ export const useNotesStore = create<NotesStore>((set, _get) => ({
     set((state) => {
       const newNotes = [newNote, ...state.notes];
       storage.setNotes(newNotes);
+      syncNotesToCloud(newNotes);
       return { notes: newNotes, activeNoteId: newNote.id };
     });
   },
@@ -29,6 +35,7 @@ export const useNotesStore = create<NotesStore>((set, _get) => ({
         note.id === id ? { ...note, ...updates, updatedAt: Date.now() } : note,
       );
       storage.setNotes(newNotes);
+      syncNotesToCloud(newNotes);
       return { notes: newNotes };
     });
   },
@@ -43,6 +50,7 @@ export const useNotesStore = create<NotesStore>((set, _get) => ({
             : null
           : state.activeNoteId;
       storage.setNotes(newNotes);
+      deleteNoteFromCloud(id);
       return { notes: newNotes, activeNoteId: newActiveId };
     });
   },
@@ -63,18 +71,32 @@ export const useNotesStore = create<NotesStore>((set, _get) => ({
         return b.updatedAt - a.updatedAt;
       });
       storage.setNotes(newNotes);
+      syncNotesToCloud(newNotes);
       return { notes: newNotes };
     });
   },
 }));
 
-// Initialize store from storage
+// Initialize store from storage (cloud first, then local)
 export const initNotesStore = async () => {
+  // Try cloud first
+  const cloudNotes = await fetchNotesFromCloud();
+  if (cloudNotes && cloudNotes.length > 0) {
+    storage.setNotes(cloudNotes);
+    useNotesStore.setState({
+      notes: cloudNotes,
+      activeNoteId: cloudNotes.length > 0 ? cloudNotes[0].id : null,
+    });
+    return;
+  }
+
+  // Fall back to local
   const saved = await storage.getNotes<Note[]>();
-  if (saved) {
+  if (saved && saved.length > 0) {
     useNotesStore.setState({
       notes: saved,
       activeNoteId: saved.length > 0 ? saved[0].id : null,
     });
+    syncNotesToCloud(saved);
   }
 };

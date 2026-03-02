@@ -1,0 +1,804 @@
+# APEX KANBAN - Claude-Actionable Tasks
+# Each task includes file:line for direct navigation
+# Use: code --goto file:line to jump to issue
+
+apex_kanban:
+  project: "vibecoder"
+  project_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+  last_audit: "2026-02-05T19:12:20.356Z"
+  score: 40
+  max_score: 70
+  verdict: "FAILED"
+
+  summary:
+    total_issues: 99
+    fixed_since_last: 0
+    remaining: 99
+    by_gate:
+      g3: 1
+      g5: 10
+      g8: 2
+      g9: 49
+      g10: 1
+      g12: 1
+      g14: 1
+      g18: 1
+      g19: 1
+      g23: 1
+      g27: 1
+      g29: 1
+      g30: 1
+      g34: 1
+      g35: 1
+      g39: 1
+      g42: 1
+      g45: 1
+      g46: 1
+      g47: 1
+      g48: 1
+      g49: 1
+      g51: 1
+      g52: 1
+      g53: 1
+      g55: 1
+      g56: 1
+      g57: 1
+      g58: 1
+      g59: 1
+      g60: 1
+      g61: 1
+      g62: 1
+      g63: 1
+      g64: 1
+      g65: 1
+      g66: 1
+      g67: 1
+      g68: 1
+      g69: 1
+      g70: 1
+
+  # ============================================
+  # TODO: Issues to fix (newest first)
+  # ============================================
+  todo:
+
+    - id: "g9_size_data-workflows-phases-web_L1402"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "data/workflows/phases/web.ts:1402"
+      issue: "File exceeds limit: 1402 LOC (1445 total lines) > 150 limit"
+
+    - id: "g9_size_data-workflows-phases-flutter_L1299"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "data/workflows/phases/flutter.ts:1299"
+      issue: "File exceeds limit: 1299 LOC (1360 total lines) > 150 limit"
+
+    - id: "g9_size_components-workflows-views-PhasesView_L1062"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "components/workflows/views/PhasesView.tsx:1062"
+      issue: "File exceeds limit: 1062 LOC (1099 total lines) > 150 limit"
+
+    - id: "g9_size_components-workflows-CommandCard_L632"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "components/workflows/CommandCard.tsx:632"
+      issue: "File exceeds limit: 632 LOC (673 total lines) > 150 limit"
+
+    - id: "g9_size_data-workflows-project-flows_L617"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "data/workflows/project-flows.ts:617"
+      issue: "File exceeds limit: 617 LOC (633 total lines) > 150 limit"
+
+    - id: "g9_size_components-workflows-hooks-useWorkflowsState_L487"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "components/workflows/hooks/useWorkflowsState.ts:487"
+      issue: "File exceeds limit: 487 LOC (621 total lines) > 150 limit"
+
+    - id: "g9_size_components-workflows-views-UseCasesView_L477"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "components/workflows/views/UseCasesView.tsx:477"
+      issue: "File exceeds limit: 477 LOC (492 total lines) > 150 limit"
+
+    - id: "g9_size_components-workflows-views-SkillsView_L431"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "components/workflows/views/SkillsView.tsx:431"
+      issue: "File exceeds limit: 431 LOC (442 total lines) > 150 limit"
+
+    - id: "g9_size_components-premium-analytics-analyticsStyles_L377"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "components/premium/analytics/analyticsStyles.ts:377"
+      issue: "File exceeds limit: 377 LOC (398 total lines) > 150 limit"
+
+    - id: "g9_size_lib-sync_L369"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "lib/sync.ts:369"
+      issue: "File exceeds limit: 369 LOC (480 total lines) > 150 limit"
+
+    - id: "g9_size_app-_layout_L367"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "app/_layout.tsx:367"
+      issue: "File exceeds limit: 367 LOC (419 total lines) > 150 limit"
+
+    - id: "g9_size_data-workflows-skills_L361"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "data/workflows/skills.ts:361"
+      issue: "File exceeds limit: 361 LOC (372 total lines) > 150 limit"
+
+    - id: "g9_size_components-workflows-WorkflowsPage_L355"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "components/workflows/WorkflowsPage.tsx:355"
+      issue: "File exceeds limit: 355 LOC (399 total lines) > 150 limit"
+
+    - id: "g9_size_components-workflows-shared-CopyHistoryPanel_L336"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "components/workflows/shared/CopyHistoryPanel.tsx:336"
+      issue: "File exceeds limit: 336 LOC (350 total lines) > 150 limit"
+
+    - id: "g9_size_components-workflows-data-types_L323"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "components/workflows/data/types.ts:323"
+      issue: "File exceeds limit: 323 LOC (416 total lines) > 150 limit"
+
+    - id: "g9_size_components-workflows-views-FullFlowView_L316"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "components/workflows/views/FullFlowView.tsx:316"
+      issue: "File exceeds limit: 316 LOC (326 total lines) > 150 limit"
+
+    - id: "g9_size_app-index_L310"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "app/index.tsx:310"
+      issue: "File exceeds limit: 310 LOC (334 total lines) > 150 limit"
+
+    - id: "g9_size_components-workflows-views-ResponsiveView_L306"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "components/workflows/views/ResponsiveView.tsx:306"
+      issue: "File exceeds limit: 306 LOC (314 total lines) > 150 limit"
+
+    - id: "g9_size_stores-kanbanStore_L291"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "stores/kanbanStore.ts:291"
+      issue: "File exceeds limit: 291 LOC (440 total lines) > 150 limit"
+
+    - id: "g9_size_components-workflows-shared-CategoryTabs_L290"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "components/workflows/shared/CategoryTabs.tsx:290"
+      issue: "File exceeds limit: 290 LOC (307 total lines) > 150 limit"
+
+    - id: "g9_size_components-kanban-Card_L280"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "components/kanban/Card.tsx:280"
+      issue: "File exceeds limit: 280 LOC (299 total lines) > 150 limit"
+
+    - id: "g9_size_utils-export_L279"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "utils/export.ts:279"
+      issue: "File exceeds limit: 279 LOC (335 total lines) > 150 limit"
+
+    - id: "g9_size_components-workflows-shared-WorkflowsSearch_L278"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "components/workflows/shared/WorkflowsSearch.tsx:278"
+      issue: "File exceeds limit: 278 LOC (301 total lines) > 150 limit"
+
+    - id: "g9_size_stores-analyticsStore_L272"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "stores/analyticsStore.ts:272"
+      issue: "File exceeds limit: 272 LOC (341 total lines) > 150 limit"
+
+    - id: "g9_size_components-workflows-views-CategoriesView_L262"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "components/workflows/views/CategoriesView.tsx:262"
+      issue: "File exceeds limit: 262 LOC (274 total lines) > 150 limit"
+
+    - id: "g9_size_stores-pomodoroStore_L239"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "stores/pomodoroStore.ts:239"
+      issue: "File exceeds limit: 239 LOC (295 total lines) > 150 limit"
+
+    - id: "g9_size_data-workflows-categories_L236"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "FAIL"
+      location: "data/workflows/categories.ts:236"
+      issue: "File exceeds limit: 236 LOC (247 total lines) > 150 limit"
+
+    - id: "g23_general_L0"
+      gate: 23
+      gate_name: "RLS_Policies"
+      severity: "FAIL"
+      file: "general"
+      issue: "RLS violations: 0 critical, 6 high"
+      fix: "Enable RLS: ALTER TABLE <table> ENABLE ROW LEVEL SECURITY; Add policies with auth.uid(): CREATE POLICY ... USING (auth.uid() = user_id); Cover all CRUD operations: SELECT, INSERT, UPDATE, DELETE"
+
+    - id: "g29_general_L0"
+      gate: 29
+      gate_name: "Bundle_Size"
+      severity: "FAIL"
+      file: "general"
+      issue: "JS bundle: 810.3KB gzipped exceeds 500KB limit (critical); No route-level code splitting detected; Missing 'sideEffects' field in package.json (add sideEffects: false for tree shaking)"
+      fix: "Use dynamic imports: import(\"./heavy-module\"); Add \"sideEffects\": false to package.json; Use PurgeCSS or Tailwind's purge for CSS; Analyze bundle with @next/bundle-analyzer or source-map-explorer"
+
+    - id: "g30_general_L0"
+      gate: 30
+      gate_name: "Lazy_Loading"
+      severity: "FAIL"
+      file: "general"
+      issue: "Only 0 lazy loading usages found; 73 heavy components should use lazy loading"
+      fix: "import dynamic from 'next/dynamic'; const Component = dynamic(() => import(\"./Component\"), { loading: () => <Loading /> }); Wrap lazy components with <Suspense fallback={...}>; Add loading=\"lazy\" to b"
+
+    - id: "g34_general_L0"
+      gate: 34
+      gate_name: "Core_Web_Vitals"
+      severity: "FAIL"
+      file: "general"
+      issue: "0 high-severity CWV issues (LCP: 0, CLS: 1, INP: 5)"
+      fix: "LCP: Add priority to above-fold images, use server components for data; CLS: Add width/height to all images, reserve space for dynamic content; INP: Use startTransition for non-urgent updates, memoize"
+
+    - id: "g35_general_L0"
+      gate: 35
+      gate_name: "Memory_Leaks"
+      severity: "FAIL"
+      file: "general"
+      issue: "4 potential memory leaks (timers: 1, listeners: 1, subscriptions: 0, fetch: 0, websocket: 0)"
+      fix: "Timers: const id = setInterval(...); return () => clearInterval(id);; Listeners: el.addEventListener('event', handler); return () => el.removeEventListener('event', handler);; Async: let mounted = tru"
+
+    - id: "g46_general_L0"
+      gate: 46
+      gate_name: "CI_Pipeline"
+      severity: "FAIL"
+      file: "general"
+      issue: "No CI/CD pipeline found"
+      fix: "Create .github/workflows/ci.yml; Add jobs: lint -> build -> test (in dependency order); Enable concurrency to cancel stale runs"
+
+    - id: "g57_general_L0"
+      gate: 57
+      gate_name: "Error_Boundaries"
+      severity: "FAIL"
+      file: "general"
+      issue: "No error.tsx or global-error.tsx found in app directory"
+      fix: "Create app/error.tsx for route error handling; Create app/global-error.tsx for root error handling; Include fallback UI with retry button; error.tsx receives { error, reset } props - use them!"
+
+    - id: "g59_general_L0"
+      gate: 59
+      gate_name: "Graceful_Degradation"
+      severity: "FAIL"
+      file: "general"
+      issue: "Graceful degradation patterns missing or poorly implemented"
+      fix: "Create app/loading.tsx with skeleton/spinner component; Create app/not-found.tsx with helpful 404 message and navigation; Wrap async components with <Suspense fallback={<Loading />}>; Add timeout hand"
+
+    - id: "g3_schema_package.json_L1"
+      gate: 3
+      gate_name: "Schema_Lock"
+      severity: "WARN"
+      location: "package.json:1"
+      issue: "Unused dependencies: @expo-google-fonts/jetbrains-mono, @expo-google-fonts/space-grotesk, @expo/metro-runtime, expo, expo-constants"
+      fix: "Run: npm uninstall @expo-google-fonts/jetbrains-mono @expo-google-fonts/space-grotesk @expo/metro-runtime expo expo-constants"
+
+    - id: "g5_boundary_hooks-useKeyboardShortcuts_L81"
+      gate: 5
+      gate_name: "Boundary_Check"
+      severity: "WARN"
+      location: "hooks/useKeyboardShortcuts.ts:81"
+      issue: "Client API \"window.addEventListener\" used without 'use client' or typeof guard"
+      fix: "Add 'use client' directive or wrap in: if (typeof window !== 'undefined')"
+
+    - id: "g5_boundary_utils-export_L215"
+      gate: 5
+      gate_name: "Boundary_Check"
+      severity: "WARN"
+      location: "utils/export.ts:215"
+      issue: "Client API \"document.createElement\" used without 'use client' or typeof guard"
+      fix: "Add 'use client' directive or wrap in: if (typeof window !== 'undefined')"
+
+    - id: "g5_boundary_utils-export_L218"
+      gate: 5
+      gate_name: "Boundary_Check"
+      severity: "WARN"
+      location: "utils/export.ts:218"
+      issue: "Client API \"document.body\" used without 'use client' or typeof guard"
+      fix: "Add 'use client' directive or wrap in: if (typeof window !== 'undefined')"
+
+    - id: "g5_boundary_utils-export_L220"
+      gate: 5
+      gate_name: "Boundary_Check"
+      severity: "WARN"
+      location: "utils/export.ts:220"
+      issue: "Client API \"document.body\" used without 'use client' or typeof guard"
+      fix: "Add 'use client' directive or wrap in: if (typeof window !== 'undefined')"
+
+    - id: "g5_boundary_utils-registerServiceWorker_L40"
+      gate: 5
+      gate_name: "Boundary_Check"
+      severity: "WARN"
+      location: "utils/registerServiceWorker.ts:40"
+      issue: "Client API \"navigator.serviceWorker\" used without 'use client' or typeof guard"
+      fix: "Add 'use client' directive or wrap in: if (typeof window !== 'undefined')"
+
+    - id: "g5_boundary_utils-registerServiceWorker_L42"
+      gate: 5
+      gate_name: "Boundary_Check"
+      severity: "WARN"
+      location: "utils/registerServiceWorker.ts:42"
+      issue: "Client API \"window.addEventListener\" used without 'use client' or typeof guard"
+      fix: "Add 'use client' directive or wrap in: if (typeof window !== 'undefined')"
+
+    - id: "g5_boundary_utils-registerServiceWorker_L43"
+      gate: 5
+      gate_name: "Boundary_Check"
+      severity: "WARN"
+      location: "utils/registerServiceWorker.ts:43"
+      issue: "Client API \"navigator.serviceWorker\" used without 'use client' or typeof guard"
+      fix: "Add 'use client' directive or wrap in: if (typeof window !== 'undefined')"
+
+    - id: "g5_boundary_utils-registerServiceWorker_L63"
+      gate: 5
+      gate_name: "Boundary_Check"
+      severity: "WARN"
+      location: "utils/registerServiceWorker.ts:63"
+      issue: "Client API \"navigator.serviceWorker\" used without 'use client' or typeof guard"
+      fix: "Add 'use client' directive or wrap in: if (typeof window !== 'undefined')"
+
+    - id: "g5_boundary_components-workflows-CommandCard_L74"
+      gate: 5
+      gate_name: "Boundary_Check"
+      severity: "WARN"
+      location: "components/workflows/CommandCard.tsx:74"
+      issue: "Client API \"document.createElement\" used without 'use client' or typeof guard"
+      fix: "Add 'use client' directive or wrap in: if (typeof window !== 'undefined')"
+
+    - id: "g5_boundary_components-workflows-CommandCard_L78"
+      gate: 5
+      gate_name: "Boundary_Check"
+      severity: "WARN"
+      location: "components/workflows/CommandCard.tsx:78"
+      issue: "Client API \"document.body\" used without 'use client' or typeof guard"
+      fix: "Add 'use client' directive or wrap in: if (typeof window !== 'undefined')"
+
+    - id: "g8_org_lib-database.types_L1"
+      gate: 8
+      gate_name: "File_Org"
+      severity: "WARN"
+      location: "lib/database.types.ts:1"
+      issue: "File name \"database.types\" doesn't follow naming convention (use kebab-case, PascalCase, or camelCase)"
+
+    - id: "g8_org_app-_layout_L1"
+      gate: 8
+      gate_name: "File_Org"
+      severity: "WARN"
+      location: "app/_layout.tsx:1"
+      issue: "File name \"_layout\" doesn't follow naming convention (use kebab-case, PascalCase, or camelCase)"
+
+    - id: "g9_size_hooks-useKeyboardShortcuts_L225"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "hooks/useKeyboardShortcuts.ts:225"
+      issue: "File exceeds limit: 225 LOC (272 total lines) > 150 limit"
+
+    - id: "g9_size_components-premium-TemplateModal_L219"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "components/premium/TemplateModal.tsx:219"
+      issue: "File exceeds limit: 219 LOC (237 total lines) > 150 limit"
+
+    - id: "g9_size_components-kanban-SearchBar_L215"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "components/kanban/SearchBar.tsx:215"
+      issue: "File exceeds limit: 215 LOC (223 total lines) > 150 limit"
+
+    - id: "g9_size_components-workflows-shared-GlobalProgress_L207"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "components/workflows/shared/GlobalProgress.tsx:207"
+      issue: "File exceeds limit: 207 LOC (216 total lines) > 150 limit"
+
+    - id: "g9_size_data-workflows-use-cases_L206"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "data/workflows/use-cases.ts:206"
+      issue: "File exceeds limit: 206 LOC (217 total lines) > 150 limit"
+
+    - id: "g9_size_lib-database.types_L205"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "lib/database.types.ts:205"
+      issue: "File exceeds limit: 205 LOC (214 total lines) > 150 limit"
+
+    - id: "g9_size_components-todo-TodoList_L197"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "components/todo/TodoList.tsx:197"
+      issue: "File exceeds limit: 197 LOC (212 total lines) > 150 limit"
+
+    - id: "g9_size_components-premium-KeyboardShortcutsModal_L196"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "components/premium/KeyboardShortcutsModal.tsx:196"
+      issue: "File exceeds limit: 196 LOC (211 total lines) > 150 limit"
+
+    - id: "g9_size_components-ui-ConfirmDialog_L195"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "components/ui/ConfirmDialog.tsx:195"
+      issue: "File exceeds limit: 195 LOC (206 total lines) > 150 limit"
+
+    - id: "g9_size_data-workflows-utils-index_L195"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "data/workflows/utils/index.ts:195"
+      issue: "File exceeds limit: 195 LOC (277 total lines) > 150 limit"
+
+    - id: "g9_size_components-ui-Button_L194"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "components/ui/Button.tsx:194"
+      issue: "File exceeds limit: 194 LOC (204 total lines) > 150 limit"
+
+    - id: "g9_size_stores-templateStore_L192"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "stores/templateStore.ts:192"
+      issue: "File exceeds limit: 192 LOC (214 total lines) > 150 limit"
+
+    - id: "g9_size_components-workflows-views-PluginsView_L184"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "components/workflows/views/PluginsView.tsx:184"
+      issue: "File exceeds limit: 184 LOC (190 total lines) > 150 limit"
+
+    - id: "g9_size_components-premium-pomodoro-pomodoroStyles_L183"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "components/premium/pomodoro/pomodoroStyles.ts:183"
+      issue: "File exceeds limit: 183 LOC (206 total lines) > 150 limit"
+
+    - id: "g9_size_components-kanban-edit-task-SubtasksList_L176"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "components/kanban/edit-task/SubtasksList.tsx:176"
+      issue: "File exceeds limit: 176 LOC (183 total lines) > 150 limit"
+
+    - id: "g9_size_components-notes-NotesArea_L174"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "components/notes/NotesArea.tsx:174"
+      issue: "File exceeds limit: 174 LOC (181 total lines) > 150 limit"
+
+    - id: "g9_size_components-kanban-Column_L166"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "components/kanban/Column.tsx:166"
+      issue: "File exceeds limit: 166 LOC (180 total lines) > 150 limit"
+
+    - id: "g9_size_utils-storage_L162"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "utils/storage.ts:162"
+      issue: "File exceeds limit: 162 LOC (199 total lines) > 150 limit"
+
+    - id: "g9_size_nents-premium-command-palette-commandPaletteStyles_L159"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "components/premium/command-palette/commandPaletteStyles.ts:159"
+      issue: "File exceeds limit: 159 LOC (166 total lines) > 150 limit"
+
+    - id: "g9_size_components-workflows-shared-PlatformToggle_L158"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "components/workflows/shared/PlatformToggle.tsx:158"
+      issue: "File exceeds limit: 158 LOC (166 total lines) > 150 limit"
+
+    - id: "g9_size_data-workflows-plugins_L157"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "data/workflows/plugins.ts:157"
+      issue: "File exceeds limit: 157 LOC (163 total lines) > 150 limit"
+
+    - id: "g9_size_components-ui-Modal_L151"
+      gate: 9
+      gate_name: "Atomic_Size"
+      severity: "WARN"
+      location: "components/ui/Modal.tsx:151"
+      issue: "File exceeds limit: 151 LOC (159 total lines) > 150 limit"
+
+    - id: "g10_import_app-_layout_L35"
+      gate: 10
+      gate_name: "Import_Order"
+      severity: "WARN"
+      location: "app/_layout.tsx:35"
+      issue: "Import \"@expo/vector-icons\" (external) should come before relative imports (line 34)"
+      auto_fixable: true
+
+    - id: "g12_split_general_L0"
+      gate: 12
+      gate_name: "Code_Splitting_Check"
+      severity: "WARN"
+      file: "general"
+      issue: "Dynamic imports: 0, Lazy components: 0, Routes: 0"
+      fix: "Use dynamic import() for code splitting heavy modules; Use React.lazy() or next/dynamic for component-level splitting"
+
+    - id: "g14_barrel_lib_L1"
+      gate: 14
+      gate_name: "Index_Clean"
+      severity: "WARN"
+      location: "lib:1"
+      issue: "Directory could benefit from a barrel export (index.ts)"
+      auto_fixable: true
+
+    - id: "g18_general_L0"
+      gate: 18
+      gate_name: "A11y_AAA"
+      severity: "WARN"
+      file: "general"
+      issue: "A11y: 6 issues found (AST verified)"
+      fix: "Associate inputs with labels via id or aria-label"
+
+    - id: "g19_general_L0"
+      gate: 19
+      gate_name: "Speculative_UX"
+      severity: "WARN"
+      file: "general"
+      issue: "Speculative UX: parallel-load"
+      fix: "Use useOptimistic() for instant feedback on mutations; Add prefetch on hover/focus for predictive loading; Use Suspense boundaries for streaming SSR and code splitting; Consider stale-while-revalidate"
+
+    - id: "g27_general_L0"
+      gate: 27
+      gate_name: "Auth_Boundaries"
+      severity: "WARN"
+      file: "general"
+      issue: "Protected routes found but no middleware.ts"
+      fix: "Create middleware.ts for auth protection; Use Next.js middleware to protect routes"
+
+    - id: "g39_general_L0"
+      gate: 39
+      gate_name: "HLTM_Sync"
+      severity: "WARN"
+      file: "general"
+      issue: "1 TODO/FIXME comments in code"
+      fix: "Move TODO/FIXME items to centralized todo file; Use TodoWrite to track tasks during sessions; Create GitHub issues for long-term items"
+
+    - id: "g42_general_L0"
+      gate: 42
+      gate_name: "Simulation"
+      severity: "WARN"
+      file: "general"
+      issue: "Limited simulation/preview capabilities"
+      fix: "Add --dry-run flag: if (dryRun) { console.log(\"Would:\", action); return; }; Show diff preview: console.log(createPatch(original, modified)); Create backups: fs.copyFile(file, `${file}.bak`) before mod"
+
+    - id: "g45_general_L0"
+      gate: 45
+      gate_name: "PR_Template"
+      severity: "WARN"
+      file: "general"
+      issue: "No PR template found"
+      fix: "Create .github/pull_request_template.md; Include: Summary, Changes, Test Plan, Checklist (5+ items)"
+
+    - id: "g47_general_L0"
+      gate: 47
+      gate_name: "Deploy_Checks"
+      severity: "WARN"
+      file: "general"
+      issue: "Vercel configured with issues"
+      fix: "env.example has few documented variables (2)"
+
+    - id: "g48_general_L0"
+      gate: 48
+      gate_name: "Rollback_Ready"
+      severity: "WARN"
+      file: "general"
+      issue: "Insufficient rollback capability"
+      fix: "Create semantic versioning tags (v1.0.0, v1.1.0, v1.2.0); Add migration down scripts for each up migration; Add npm script: \"rollback\": \"...\"; Use Vercel/Netlify for platform-level rollback"
+
+    - id: "g49_general_L0"
+      gate: 49
+      gate_name: "Version_Bump"
+      severity: "WARN"
+      file: "general"
+      issue: "v1.0.0"
+      fix: "No CHANGELOG.md found"
+
+    - id: "g51_general_L0"
+      gate: 51
+      gate_name: "SBOM_Generation"
+      severity: "WARN"
+      file: "general"
+      issue: "No SBOM generation configured"
+      fix: "Install @cyclonedx/cyclonedx-npm for CycloneDX format; Or use @spdx/tools for SPDX format; Add sbom script to package.json; Generate SBOM in CI pipeline"
+
+    - id: "g52_general_L0"
+      gate: 52
+      gate_name: "Vuln_Scan"
+      severity: "WARN"
+      file: "general"
+      issue: "npm audit failed: Command failed: npm audit --json"
+      fix: "Ensure npm is installed and accessible; Check if package-lock.json exists; Run npm audit manually to diagnose"
+
+    - id: "g53_general_L0"
+      gate: 53
+      gate_name: "License_Compliance"
+      severity: "WARN"
+      file: "general"
+      issue: "Could not run license-checker"
+      fix: "Install license-checker: npm install -D license-checker; Or run manually: npx license-checker --json --production"
+
+    - id: "g55_general_L0"
+      gate: 55
+      gate_name: "Typosquat_Guard"
+      severity: "WARN"
+      file: "general"
+      issue: "9 potentially suspicious package(s) found (9 high, 0 medium risk)"
+      fix: "Verify suspicious packages are intentional; Check npm registry for package authenticity; Review package author and download counts; Consider using npm-audit-resolver for package verification"
+
+    - id: "g56_general_L0"
+      gate: 56
+      gate_name: "Supply_Attestation"
+      severity: "WARN"
+      file: "general"
+      issue: "No supply chain attestation configured"
+      fix: "Enable npm provenance: add { publishConfig: { provenance: true } } to package.json; Configure SLSA L3 provenance: uses: slsa-framework/slsa-github-generator@v2; Enable GPG commit signing: git config c"
+
+    - id: "g58_general_L0"
+      gate: 58
+      gate_name: "Offline_Detection"
+      severity: "WARN"
+      file: "general"
+      issue: "No offline detection found"
+      fix: "Create useOnlineStatus hook with navigator.onLine + event listeners; Add visual indicator when user is offline; Use serwist or next-pwa for PWA support with caching; Configure service worker with cach"
+
+    - id: "g60_general_L0"
+      gate: 60
+      gate_name: "Health_Endpoints"
+      severity: "WARN"
+      file: "general"
+      issue: "No health check endpoint found (server not running for live test)"
+      fix: "Create app/api/health/route.ts with GET handler; Return { status: 'healthy', timestamp: Date.now(), checks: {...} }; Include database connectivity check; Include external service checks (Redis, APIs, "
+
+    - id: "g61_general_L0"
+      gate: 61
+      gate_name: "Retry_Patterns"
+      severity: "WARN"
+      file: "general"
+      issue: "No retry patterns found for external calls"
+      fix: "Use p-retry for promise-based retries with backoff; Configure retry in TanStack Query: { retry: 3, retryDelay: attemptIndex => ... }; Use axios-retry for HTTP retries; Consider cockatiel for comprehen"
+
+    - id: "g62_general_L0"
+      gate: 62
+      gate_name: "Circuit_Breaker"
+      severity: "WARN"
+      file: "general"
+      issue: "No circuit breaker or rate limiting found"
+      fix: "Use @upstash/ratelimit for serverless rate limiting; Use cockatiel for circuit breaker patterns; Implement circuit breaker for external service calls; Add rate limiting to protect against abuse"
+
+    - id: "g63_general_L0"
+      gate: 63
+      gate_name: "Data_Recovery"
+      severity: "WARN"
+      file: "general"
+      issue: "Data recovery and queue management patterns missing"
+      fix: "Use localStorage or Zustand persist for state recovery; Add autosave for forms and editors; Implement beforeunload warning for unsaved changes; For background jobs, use BullMQ with dead letter queue; "
+
+    - id: "g64_general_L0"
+      gate: 64
+      gate_name: "Structured_Logging"
+      severity: "WARN"
+      file: "general"
+      issue: "No structured logging library installed"
+      fix: "Install pino: npm install pino; Or winston: npm install winston"
+
+    - id: "g65_general_L0"
+      gate: 65
+      gate_name: "Error_Tracking"
+      severity: "WARN"
+      file: "general"
+      issue: "No error tracking library installed"
+      fix: "Install @sentry/nextjs for Next.js apps; Install @sentry/react for React apps"
+
+    - id: "g66_general_L0"
+      gate: 66
+      gate_name: "Perf_Monitor"
+      severity: "WARN"
+      file: "general"
+      issue: "No performance monitoring detected"
+      fix: "Install @vercel/speed-insights for automatic Core Web Vitals; Or use web-vitals: import { onCLS, onLCP, onINP } from 'web-vitals'"
+
+    - id: "g67_general_L0"
+      gate: 67
+      gate_name: "User_Analytics"
+      severity: "WARN"
+      file: "general"
+      issue: "Google Analytics partially configured: 0 events"
+      fix: "Add more track() calls for key user actions; Add identify() to link events to users"
+
+    - id: "g68_general_L0"
+      gate: 68
+      gate_name: "Trace_Context"
+      severity: "WARN"
+      file: "general"
+      issue: "No tracing library installed"
+      fix: "Install @opentelemetry/sdk-trace-node; Install @opentelemetry/api for trace API"
+
+    - id: "g69_general_L0"
+      gate: 69
+      gate_name: "Metrics_Export"
+      severity: "WARN"
+      file: "general"
+      issue: "No metrics library installed"
+      fix: "Install @opentelemetry/sdk-metrics; Or prom-client for Prometheus metrics"
+
+    - id: "g70_general_L0"
+      gate: 70
+      gate_name: "Dashboard_Ready"
+      severity: "WARN"
+      file: "general"
+      issue: "No dashboard or alert configuration files found"
+      fix: "Create dashboards/*.json for Grafana dashboards; Create alerts.yaml for alerting rules; Export dashboards from your monitoring tool and commit to repo"

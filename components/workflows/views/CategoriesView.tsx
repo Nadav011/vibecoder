@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet, Platform, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+  Dimensions,
+  ScrollView,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { colors, spacing, radius, typography } from "../../../theme";
 import { ScalePress, FadeIn } from "../../animated";
@@ -16,6 +23,8 @@ interface CategoriesViewProps {
   onCopyCommand: (command: string) => void;
   getCommandsByCategory: (categoryId: string) => Command[];
   allCategories: Category[];
+  isBeginnerMode?: boolean;
+  searchQuery?: string;
 }
 
 export function CategoriesView({
@@ -25,55 +34,63 @@ export function CategoriesView({
   onCopyCommand,
   getCommandsByCategory,
   allCategories,
+  isBeginnerMode = false,
+  searchQuery = "",
 }: CategoriesViewProps) {
   // Categories Grid (no category selected)
   if (!selectedCategoryId) {
     return (
-      <FadeIn delay={50} direction="up">
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>קטגוריות</Text>
-          <Text style={styles.sectionSubtitle}>פקודות מאורגנות לפי תחום</Text>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.contentContainer}
+        showsVerticalScrollIndicator={false}
+      >
+        <FadeIn delay={50} direction="up">
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>קטגוריות</Text>
+            <Text style={styles.sectionSubtitle}>פקודות מאורגנות לפי תחום</Text>
 
-          <View style={styles.categoriesGrid}>
-            {categories.map((category, index) => {
-              const commandCount = getCommandsByCategory(category.id).length;
-              return (
-                <FadeIn
-                  key={category.id}
-                  delay={100 + index * 50}
-                  direction="up"
-                >
-                  <ScalePress
-                    onPress={() => onSelectCategory(category.id)}
-                    style={styles.categoryCard}
-                    haptic="medium"
+            <View style={styles.categoriesGrid}>
+              {categories.map((category, index) => {
+                const commandCount = getCommandsByCategory(category.id).length;
+                return (
+                  <FadeIn
+                    key={category.id}
+                    delay={100 + index * 50}
+                    direction="up"
                   >
-                    <View
-                      style={[
-                        styles.categoryIcon,
-                        { backgroundColor: `${category.color}20` },
-                      ]}
+                    <ScalePress
+                      onPress={() => onSelectCategory(category.id)}
+                      style={styles.categoryCard}
+                      haptic="medium"
                     >
-                      <Ionicons
-                        name={category.icon as keyof typeof Ionicons.glyphMap}
-                        size={28}
-                        color={category.color}
-                      />
-                    </View>
-                    <Text style={styles.categoryName}>{category.nameHe}</Text>
-                    <Text style={styles.categoryNameEn}>{category.name}</Text>
-                    <View style={styles.categoryCount}>
-                      <Text style={styles.categoryCountText}>
-                        {commandCount} פקודות
-                      </Text>
-                    </View>
-                  </ScalePress>
-                </FadeIn>
-              );
-            })}
+                      <View
+                        style={[
+                          styles.categoryIcon,
+                          { backgroundColor: `${category.color}20` },
+                        ]}
+                      >
+                        <Ionicons
+                          name={category.icon as keyof typeof Ionicons.glyphMap}
+                          size={28}
+                          color={category.color}
+                        />
+                      </View>
+                      <Text style={styles.categoryName}>{category.nameHe}</Text>
+                      <Text style={styles.categoryNameEn}>{category.name}</Text>
+                      <View style={styles.categoryCount}>
+                        <Text style={styles.categoryCountText}>
+                          {commandCount} פקודות
+                        </Text>
+                      </View>
+                    </ScalePress>
+                  </FadeIn>
+                );
+              })}
+            </View>
           </View>
-        </View>
-      </FadeIn>
+        </FadeIn>
+      </ScrollView>
     );
   }
 
@@ -83,60 +100,74 @@ export function CategoriesView({
   if (!category) return null;
 
   return (
-    <FadeIn delay={50} direction="up">
-      <View style={styles.section}>
-        <ScalePress
-          onPress={() => onSelectCategory(null)}
-          style={styles.backToCategories}
-          haptic="light"
-        >
-          <Ionicons
-            name="arrow-forward"
-            size={20}
-            color={colors.accent.primary}
-          />
-          <Text style={styles.backToCategoriesText}>חזרה לקטגוריות</Text>
-        </ScalePress>
-
-        <View style={styles.categoryDetailHeader}>
-          <View
-            style={[
-              styles.categoryDetailIcon,
-              { backgroundColor: `${category.color}20` },
-            ]}
+    <ScrollView
+      style={styles.scrollView}
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <FadeIn delay={50} direction="up">
+        <View style={styles.section}>
+          <ScalePress
+            onPress={() => onSelectCategory(null)}
+            style={styles.backToCategories}
+            haptic="light"
           >
             <Ionicons
-              name={category.icon as keyof typeof Ionicons.glyphMap}
-              size={32}
-              color={category.color}
+              name="arrow-forward"
+              size={20}
+              color={colors.accent.primary}
             />
-          </View>
-          <View style={styles.categoryDetailInfo}>
-            <Text style={styles.categoryDetailName}>{category.nameHe}</Text>
-            <Text style={styles.categoryDetailNameEn}>{category.name}</Text>
-            <Text style={styles.categoryDetailCount}>
-              {commands.length} פקודות
-            </Text>
-          </View>
-        </View>
+            <Text style={styles.backToCategoriesText}>חזרה לקטגוריות</Text>
+          </ScalePress>
 
-        <View style={styles.commandsList}>
-          {commands.map((cmd, index) => (
-            <FadeIn key={cmd.id} delay={100 + index * 30} direction="up">
-              <CommandCard
-                command={cmd}
-                phaseColor={category.color}
-                onCopy={onCopyCommand}
+          <View style={styles.categoryDetailHeader}>
+            <View
+              style={[
+                styles.categoryDetailIcon,
+                { backgroundColor: `${category.color}20` },
+              ]}
+            >
+              <Ionicons
+                name={category.icon as keyof typeof Ionicons.glyphMap}
+                size={32}
+                color={category.color}
               />
-            </FadeIn>
-          ))}
+            </View>
+            <View style={styles.categoryDetailInfo}>
+              <Text style={styles.categoryDetailName}>{category.nameHe}</Text>
+              <Text style={styles.categoryDetailNameEn}>{category.name}</Text>
+              <Text style={styles.categoryDetailCount}>
+                {commands.length} פקודות
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.commandsList}>
+            {commands.map((cmd, index) => (
+              <FadeIn key={cmd.id} delay={100 + index * 30} direction="up">
+                <CommandCard
+                  command={cmd}
+                  phaseColor={category.color}
+                  onCopy={onCopyCommand}
+                  isBeginnerMode={isBeginnerMode}
+                  searchQuery={searchQuery}
+                />
+              </FadeIn>
+            ))}
+          </View>
         </View>
-      </View>
-    </FadeIn>
+      </FadeIn>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  contentContainer: {
+    paddingBottom: spacing.xxl,
+  },
   section: {
     paddingHorizontal: spacing.md,
     gap: spacing.md,

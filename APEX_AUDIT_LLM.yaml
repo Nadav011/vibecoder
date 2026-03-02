@@ -1,0 +1,2460 @@
+metadata:
+  version: "23.2.0"
+  format: "yaml"
+  target_model: "claude"
+  project_name: "vibecoder"
+  project_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+  timestamp: "2026-02-05T19:12:20.356Z"
+  duration_ms: 96679
+summary:
+  score: 40
+  max_score: 70
+  percentage: 57
+  verdict: "FAILED"
+  by_severity:
+    CRITICAL: 2
+    HIGH: 56
+    MEDIUM: 32
+    LOW: 0
+    INFO: 0
+  by_cluster:
+    FOUNDATION:
+      passed: 5
+      failed: 2
+      total: 7
+    STRUCTURE:
+      passed: 1
+      failed: 5
+      total: 7
+    SENSATION:
+      passed: 5
+      failed: 2
+      total: 7
+    INTEGRITY:
+      passed: 2
+      failed: 2
+      total: 7
+    PERFORMANCE:
+      passed: 1
+      failed: 4
+      total: 7
+    NEURAL:
+      passed: 2
+      failed: 2
+      total: 7
+    EVOLUTION:
+      passed: 2
+      failed: 5
+      total: 7
+    SUPPLY_CHAIN:
+      passed: 1
+      failed: 5
+      total: 7
+    RESILIENCE:
+      passed: 0
+      failed: 7
+      total: 7
+    OBSERVABILITY:
+      passed: 0
+      failed: 7
+      total: 7
+  total_issues: 90
+  auto_fixable: 6
+  blocking_deployment: 2
+  blocking_pr: 56
+instructions:
+  fix_order: "Fix issues in order: CRITICAL -> HIGH -> AUTO-FIXABLE -> MEDIUM -> LOW"
+  verification: "After each fix, run: pnpm apex audit --gates <gate_id>"
+  important_notes:
+    - "CRITICAL issues BLOCK deployment - fix immediately"
+    - "HIGH issues BLOCK PR merge - fix before review"
+    - "Auto-fixable issues can be fixed with /heal command"
+    - "Total estimated fix time: Major overhaul (~738 minutes)"
+  model_specific:
+    - "Recommended temperature: 0.3"
+    - "Maximum tokens: 200,000"
+fix_plan:
+  total_issues: 90
+  estimated_effort: "Major overhaul (~738 minutes)"
+  phases:
+    - phase: 1
+      name: "Critical Blockers"
+      description: "Fix deployment-blocking issues immediately"
+      issue_ids:
+        - "APEX-G3-0"
+        - "APEX-G23-0"
+      estimated_time: "30 minutes"
+      can_autofix: false
+    - phase: 2
+      name: "High Priority"
+      description: "Fix PR-blocking issues before code review"
+      issue_ids:
+        - "APEX-G9-0"
+        - "APEX-G9-1"
+        - "APEX-G9-2"
+        - "APEX-G9-3"
+        - "APEX-G9-4"
+        - "APEX-G9-5"
+        - "APEX-G9-6"
+        - "APEX-G9-7"
+        - "APEX-G9-8"
+        - "APEX-G9-9"
+        - "APEX-G9-10"
+        - "APEX-G9-11"
+        - "APEX-G9-12"
+        - "APEX-G9-13"
+        - "APEX-G9-14"
+        - "APEX-G9-15"
+        - "APEX-G9-16"
+        - "APEX-G9-17"
+        - "APEX-G9-18"
+        - "APEX-G9-19"
+        - "APEX-G9-20"
+        - "APEX-G9-21"
+        - "APEX-G9-22"
+        - "APEX-G9-23"
+        - "APEX-G9-24"
+        - "APEX-G9-25"
+        - "APEX-G9-26"
+        - "APEX-G9-27"
+        - "APEX-G9-28"
+        - "APEX-G9-29"
+        - "APEX-G9-30"
+        - "APEX-G9-31"
+        - "APEX-G9-32"
+        - "APEX-G9-33"
+        - "APEX-G9-34"
+        - "APEX-G9-35"
+        - "APEX-G9-36"
+        - "APEX-G9-37"
+        - "APEX-G9-38"
+        - "APEX-G9-39"
+        - "APEX-G9-40"
+        - "APEX-G9-41"
+        - "APEX-G9-42"
+        - "APEX-G9-43"
+        - "APEX-G9-44"
+        - "APEX-G9-45"
+        - "APEX-G9-46"
+        - "APEX-G9-47"
+        - "APEX-G9-48"
+        - "APEX-G29-0"
+        - "APEX-G30-0"
+        - "APEX-G34-0"
+        - "APEX-G35-0"
+        - "APEX-G46-0"
+        - "APEX-G57-0"
+        - "APEX-G59-0"
+      estimated_time: "560 minutes"
+      can_autofix: true
+    - phase: 3
+      name: "Quick Auto-Fixes"
+      description: "Apply automated fixes for remaining issues"
+      issue_ids:
+        - "APEX-G10-0"
+        - "APEX-G14-0"
+        - "APEX-G60-0"
+        - "APEX-G63-0"
+      estimated_time: "8 minutes"
+      can_autofix: true
+    - phase: 4
+      name: "Manual Review"
+      description: "Review and fix remaining issues manually"
+      issue_ids:
+        - "APEX-G5-0"
+        - "APEX-G8-0"
+        - "APEX-G8-1"
+        - "APEX-G12-0"
+        - "APEX-G18-0"
+        - "APEX-G19-0"
+        - "APEX-G27-0"
+        - "APEX-G39-0"
+        - "APEX-G42-0"
+        - "APEX-G45-0"
+        - "APEX-G47-0"
+        - "APEX-G48-0"
+        - "APEX-G49-0"
+        - "APEX-G51-0"
+        - "APEX-G52-0"
+        - "APEX-G53-0"
+        - "APEX-G55-0"
+        - "APEX-G56-0"
+        - "APEX-G58-0"
+        - "APEX-G61-0"
+        - "APEX-G62-0"
+        - "APEX-G64-0"
+        - "APEX-G65-0"
+        - "APEX-G66-0"
+        - "APEX-G67-0"
+        - "APEX-G68-0"
+        - "APEX-G69-0"
+        - "APEX-G70-0"
+      estimated_time: "140 minutes"
+      can_autofix: false
+by_file:
+  project:
+    file: "project"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+    language: "unknown"
+    total_issues: 37
+    critical_count: 2
+    high_count: 7
+    auto_fixable_count: 4
+    issues:
+      - &a1
+        id: "APEX-G3-0"
+        gate_id: 3
+        gate_name: "Schema_Lock"
+        cluster: "FOUNDATION"
+        severity: "CRITICAL"
+        severity_score: 9.5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "No validation library installed; 14 unused production dependencies"
+        explanation: "No validation library installed; 14 unused production dependencies"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 3"
+        apex_law: "#1 ZERO TRUST"
+        documentation_url: "https://apex.dev/gates/3"
+        manual_steps:
+          - "Remove unused deps: @expo-google-fonts/jetbrains-mono, @expo-google-fonts/space-grotesk, @expo/metro-runtime, expo,
+            expo-constants"
+          - "Install zod: bun add zod"
+      - &a2
+        id: "APEX-G23-0"
+        gate_id: 23
+        gate_name: "Input_Valid"
+        cluster: "INTEGRITY"
+        severity: "CRITICAL"
+        severity_score: 9.5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "RLS violations: 0 critical, 6 high"
+        explanation: "RLS violations: 0 critical, 6 high"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 23"
+        apex_law: "#1 ZERO TRUST"
+        documentation_url: "https://apex.dev/gates/23"
+        manual_steps:
+          - "Enable RLS: ALTER TABLE <table> ENABLE ROW LEVEL SECURITY"
+          - "Add policies with auth.uid(): CREATE POLICY ... USING (auth.uid() = user_id)"
+          - "Cover all CRUD operations: SELECT, INSERT, UPDATE, DELETE"
+      - &a52
+        id: "APEX-G29-0"
+        gate_id: 29
+        gate_name: "Bundle_Size"
+        cluster: "PERFORMANCE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "JS bundle: 810.3KB gzipped exceeds 500KB limit (critical); No route-level code splitting detected; Missing
+          'sideEffects' field in package.json (add sideEffects: false for tree shaking)"
+        explanation: "JS bundle: 810.3KB gzipped exceeds 500KB limit (critical); No route-level code splitting detected; Missing
+          'sideEffects' field in package.json (add sideEffects: false for tree shaking)"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 29"
+        apex_law: "#2 INFINITE SCALE"
+        documentation_url: "https://apex.dev/gates/29"
+        manual_steps:
+          - "Use dynamic imports: import(\"./heavy-module\")"
+          - "Add \"sideEffects\": false to package.json"
+          - "Use PurgeCSS or Tailwind's purge for CSS"
+          - "Analyze bundle with @next/bundle-analyzer or source-map-explorer"
+      - &a53
+        id: "APEX-G30-0"
+        gate_id: 30
+        gate_name: "Lazy_Loading"
+        cluster: "PERFORMANCE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "Only 0 lazy loading usages found; 73 heavy components should use lazy loading"
+        explanation: "Only 0 lazy loading usages found; 73 heavy components should use lazy loading"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 30"
+        apex_law: "#2 INFINITE SCALE"
+        documentation_url: "https://apex.dev/gates/30"
+        manual_steps:
+          - "import dynamic from 'next/dynamic'"
+          - "const Component = dynamic(() => import(\"./Component\"), { loading: () => <Loading /> })"
+          - "Wrap lazy components with <Suspense fallback={...}>"
+          - "Add loading=\"lazy\" to below-fold images"
+      - &a54
+        id: "APEX-G34-0"
+        gate_id: 34
+        gate_name: "Core_Web_Vitals"
+        cluster: "PERFORMANCE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "0 high-severity CWV issues (LCP: 0, CLS: 1, INP: 5)"
+        explanation: "0 high-severity CWV issues (LCP: 0, CLS: 1, INP: 5)"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 34"
+        apex_law: "#2 INFINITE SCALE"
+        documentation_url: "https://apex.dev/gates/34"
+        manual_steps:
+          - "LCP: Add priority to above-fold images, use server components for data"
+          - "CLS: Add width/height to all images, reserve space for dynamic content"
+          - "INP: Use startTransition for non-urgent updates, memoize heavy computations"
+          - "Add CWV monitoring (web-vitals, @vercel/speed-insights)"
+      - &a55
+        id: "APEX-G35-0"
+        gate_id: 35
+        gate_name: "Memory_Leaks"
+        cluster: "PERFORMANCE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "4 potential memory leaks (timers: 1, listeners: 1, subscriptions: 0, fetch: 0, websocket: 0)"
+        explanation: "4 potential memory leaks (timers: 1, listeners: 1, subscriptions: 0, fetch: 0, websocket: 0)"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 35"
+        apex_law: "#4 ROI"
+        documentation_url: "https://apex.dev/gates/35"
+        manual_steps:
+          - "Timers: const id = setInterval(...); return () => clearInterval(id);"
+          - "Listeners: el.addEventListener('event', handler); return () => el.removeEventListener('event', handler);"
+          - "Async: let mounted = true; async fn() { if(mounted) setState(...) }; return () => { mounted = false };"
+      - &a56
+        id: "APEX-G46-0"
+        gate_id: 46
+        gate_name: "CI_Pipeline"
+        cluster: "EVOLUTION"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "No CI/CD pipeline found"
+        explanation: "No CI/CD pipeline found"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 46"
+        apex_law: ""
+        documentation_url: "https://apex.dev/gates/46"
+        manual_steps:
+          - "Create .github/workflows/ci.yml"
+          - "Add jobs: lint -> build -> test (in dependency order)"
+          - "Enable concurrency to cancel stale runs"
+      - &a57
+        id: "APEX-G57-0"
+        gate_id: 57
+        gate_name: "Error_Bounds"
+        cluster: "RESILIENCE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "No error.tsx or global-error.tsx found in app directory"
+        explanation: "No error.tsx or global-error.tsx found in app directory"
+        fix_confidence: 0.8
+        auto_fixable: true
+        verify_command: "pnpm apex audit --gates 57"
+        apex_law: "#1 ZERO TRUST"
+        documentation_url: "https://apex.dev/gates/57"
+        manual_steps:
+          - "Create app/error.tsx for route error handling"
+          - "Create app/global-error.tsx for root error handling"
+          - "Include fallback UI with retry button"
+          - "error.tsx receives { error, reset } props - use them!"
+      - &a58
+        id: "APEX-G59-0"
+        gate_id: 59
+        gate_name: "Graceful_Deg"
+        cluster: "RESILIENCE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "Graceful degradation patterns missing or poorly implemented"
+        explanation: "Graceful degradation patterns missing or poorly implemented"
+        fix_confidence: 0.8
+        auto_fixable: true
+        verify_command: "pnpm apex audit --gates 59"
+        apex_law: "#1 ZERO TRUST"
+        documentation_url: "https://apex.dev/gates/59"
+        manual_steps:
+          - "Create app/loading.tsx with skeleton/spinner component"
+          - "Create app/not-found.tsx with helpful 404 message and navigation"
+          - "Wrap async components with <Suspense fallback={<Loading />}>"
+          - "Add timeout handling for external requests with AbortController"
+      - &a59
+        id: "APEX-G5-0"
+        gate_id: 5
+        gate_name: "Boundary_Check"
+        cluster: "FOUNDATION"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "11 client-side API usages need 'use client' or typeof guard (AST verified)"
+        explanation: "11 client-side API usages need 'use client' or typeof guard (AST verified)"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 5"
+        apex_law: "#1 ZERO TRUST"
+        documentation_url: "https://apex.dev/gates/5"
+        manual_steps:
+          - "Add 'use client' at the top of components using React hooks"
+          - "Add 'use client' for files using browser APIs (localStorage, etc.)"
+          - "Or wrap browser API access in: if (typeof window !== 'undefined')"
+          - "Consider extracting client logic into separate components"
+      - &a63
+        id: "APEX-G12-0"
+        gate_id: 12
+        gate_name: "Barrel_Export"
+        cluster: "STRUCTURE"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "Dynamic imports: 0, Lazy components: 0, Routes: 0"
+        explanation: "Dynamic imports: 0, Lazy components: 0, Routes: 0"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 12"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/12"
+        manual_steps:
+          - "Use dynamic import() for code splitting heavy modules"
+          - "Use React.lazy() or next/dynamic for component-level splitting"
+      - &a65
+        id: "APEX-G18-0"
+        gate_id: 18
+        gate_name: "A11y_Contrast"
+        cluster: "SENSATION"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "A11y: 6 issues found (AST verified)"
+        explanation: "A11y: 6 issues found (AST verified)"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 18"
+        apex_law: "#6 RESPONSIVE"
+        documentation_url: "https://apex.dev/gates/18"
+        manual_steps:
+          - "Associate inputs with labels via id or aria-label"
+      - &a66
+        id: "APEX-G19-0"
+        gate_id: 19
+        gate_name: "Responsive"
+        cluster: "SENSATION"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "Speculative UX: parallel-load"
+        explanation: "Speculative UX: parallel-load"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 19"
+        apex_law: "#6 RESPONSIVE"
+        documentation_url: "https://apex.dev/gates/19"
+        manual_steps:
+          - "Use useOptimistic() for instant feedback on mutations"
+          - "Add prefetch on hover/focus for predictive loading"
+          - "Use Suspense boundaries for streaming SSR and code splitting"
+          - "Consider stale-while-revalidate for better perceived performance"
+      - &a67
+        id: "APEX-G27-0"
+        gate_id: 27
+        gate_name: "RLS_Policy"
+        cluster: "INTEGRITY"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "Protected routes found but no middleware.ts"
+        explanation: "Protected routes found but no middleware.ts"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 27"
+        apex_law: "#1 ZERO TRUST"
+        documentation_url: "https://apex.dev/gates/27"
+        manual_steps:
+          - "Create middleware.ts for auth protection"
+          - "Use Next.js middleware to protect routes"
+      - &a68
+        id: "APEX-G39-0"
+        gate_id: 39
+        gate_name: "README_Fresh"
+        cluster: "NEURAL"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "1 TODO/FIXME comments in code"
+        explanation: "1 TODO/FIXME comments in code"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 39"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/39"
+        manual_steps:
+          - "Move TODO/FIXME items to centralized todo file"
+          - "Use TodoWrite to track tasks during sessions"
+          - "Create GitHub issues for long-term items"
+      - &a69
+        id: "APEX-G42-0"
+        gate_id: 42
+        gate_name: "Example_Code"
+        cluster: "NEURAL"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "Limited simulation/preview capabilities"
+        explanation: "Limited simulation/preview capabilities"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 42"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/42"
+        manual_steps:
+          - "Add --dry-run flag: if (dryRun) { console.log(\"Would:\", action); return; }"
+          - "Show diff preview: console.log(createPatch(original, modified))"
+          - "Create backups: fs.copyFile(file, `${file}.bak`) before modifications"
+          - "Initialize git for version-controlled rollback"
+      - &a70
+        id: "APEX-G45-0"
+        gate_id: 45
+        gate_name: "PR_Template"
+        cluster: "EVOLUTION"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "No PR template found"
+        explanation: "No PR template found"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 45"
+        apex_law: ""
+        documentation_url: "https://apex.dev/gates/45"
+        manual_steps:
+          - "Create .github/pull_request_template.md"
+          - "Include: Summary, Changes, Test Plan, Checklist (5+ items)"
+      - &a71
+        id: "APEX-G47-0"
+        gate_id: 47
+        gate_name: "Deploy_Checks"
+        cluster: "EVOLUTION"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "Vercel configured with issues"
+        explanation: "Vercel configured with issues"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 47"
+        apex_law: ""
+        documentation_url: "https://apex.dev/gates/47"
+        manual_steps:
+          - "env.example has few documented variables (2)"
+      - &a72
+        id: "APEX-G48-0"
+        gate_id: 48
+        gate_name: "Rollback_Ready"
+        cluster: "EVOLUTION"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "Insufficient rollback capability"
+        explanation: "Insufficient rollback capability"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 48"
+        apex_law: ""
+        documentation_url: "https://apex.dev/gates/48"
+        manual_steps:
+          - "Create semantic versioning tags (v1.0.0, v1.1.0, v1.2.0)"
+          - "Add migration down scripts for each up migration"
+          - "Add npm script: \"rollback\": \"...\""
+          - "Use Vercel/Netlify for platform-level rollback"
+      - &a73
+        id: "APEX-G49-0"
+        gate_id: 49
+        gate_name: "Version_Bump"
+        cluster: "EVOLUTION"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "v1.0.0"
+        explanation: "v1.0.0"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 49"
+        apex_law: ""
+        documentation_url: "https://apex.dev/gates/49"
+        manual_steps:
+          - "No CHANGELOG.md found"
+      - &a74
+        id: "APEX-G51-0"
+        gate_id: 51
+        gate_name: "Lock_Integrity"
+        cluster: "SUPPLY_CHAIN"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "No SBOM generation configured"
+        explanation: "No SBOM generation configured"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 51"
+        apex_law: "#1 ZERO TRUST"
+        documentation_url: "https://apex.dev/gates/51"
+        manual_steps:
+          - "Install @cyclonedx/cyclonedx-npm for CycloneDX format"
+          - "Or use @spdx/tools for SPDX format"
+          - "Add sbom script to package.json"
+          - "Generate SBOM in CI pipeline"
+      - &a75
+        id: "APEX-G52-0"
+        gate_id: 52
+        gate_name: "License_Check"
+        cluster: "SUPPLY_CHAIN"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "npm audit failed: Command failed: npm audit --json"
+        explanation: "npm audit failed: Command failed: npm audit --json"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 52"
+        apex_law: "#1 ZERO TRUST"
+        documentation_url: "https://apex.dev/gates/52"
+        manual_steps:
+          - "Ensure npm is installed and accessible"
+          - "Check if package-lock.json exists"
+          - "Run npm audit manually to diagnose"
+      - &a76
+        id: "APEX-G53-0"
+        gate_id: 53
+        gate_name: "SBOM_Gen"
+        cluster: "SUPPLY_CHAIN"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "Could not run license-checker"
+        explanation: "Could not run license-checker"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 53"
+        apex_law: "#1 ZERO TRUST"
+        documentation_url: "https://apex.dev/gates/53"
+        manual_steps:
+          - "Install license-checker: npm install -D license-checker"
+          - "Or run manually: npx license-checker --json --production"
+      - &a77
+        id: "APEX-G55-0"
+        gate_id: 55
+        gate_name: "Typosquat"
+        cluster: "SUPPLY_CHAIN"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "9 potentially suspicious package(s) found (9 high, 0 medium risk)"
+        explanation: "9 potentially suspicious package(s) found (9 high, 0 medium risk)"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 55"
+        apex_law: "#1 ZERO TRUST"
+        documentation_url: "https://apex.dev/gates/55"
+        manual_steps:
+          - "Verify suspicious packages are intentional"
+          - "Check npm registry for package authenticity"
+          - "Review package author and download counts"
+          - "Consider using npm-audit-resolver for package verification"
+      - &a78
+        id: "APEX-G56-0"
+        gate_id: 56
+        gate_name: "Outdated_Check"
+        cluster: "SUPPLY_CHAIN"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "No supply chain attestation configured"
+        explanation: "No supply chain attestation configured"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 56"
+        apex_law: "#1 ZERO TRUST"
+        documentation_url: "https://apex.dev/gates/56"
+        manual_steps:
+          - "Enable npm provenance: add { publishConfig: { provenance: true } } to package.json"
+          - "Configure SLSA L3 provenance: uses: slsa-framework/slsa-github-generator@v2"
+          - "Enable GPG commit signing: git config commit.gpgsign true"
+          - "Use Gitsign for keyless signing: https://github.com/sigstore/gitsign"
+          - "See SLSA levels: https://slsa.dev/spec/v1.0/levels"
+      - &a79
+        id: "APEX-G58-0"
+        gate_id: 58
+        gate_name: "Offline_Detect"
+        cluster: "RESILIENCE"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "No offline detection found"
+        explanation: "No offline detection found"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 58"
+        apex_law: "#1 ZERO TRUST"
+        documentation_url: "https://apex.dev/gates/58"
+        manual_steps:
+          - "Create useOnlineStatus hook with navigator.onLine + event listeners"
+          - "Add visual indicator when user is offline"
+          - "Use serwist or next-pwa for PWA support with caching"
+          - "Configure service worker with cache strategies"
+      - &a80
+        id: "APEX-G60-0"
+        gate_id: 60
+        gate_name: "Health_Endpt"
+        cluster: "RESILIENCE"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "No health check endpoint found (server not running for live test)"
+        explanation: "No health check endpoint found (server not running for live test)"
+        fix_confidence: 0.8
+        auto_fixable: true
+        verify_command: "pnpm apex audit --gates 60"
+        apex_law: "#1 ZERO TRUST"
+        documentation_url: "https://apex.dev/gates/60"
+        manual_steps:
+          - "Create app/api/health/route.ts with GET handler"
+          - "Return { status: 'healthy', timestamp: Date.now(), checks: {...} }"
+          - "Include database connectivity check"
+          - "Include external service checks (Redis, APIs, etc.)"
+          - "Start dev server to enable live health check testing"
+      - &a81
+        id: "APEX-G61-0"
+        gate_id: 61
+        gate_name: "Retry_Pattern"
+        cluster: "RESILIENCE"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "No retry patterns found for external calls"
+        explanation: "No retry patterns found for external calls"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 61"
+        apex_law: "#1 ZERO TRUST"
+        documentation_url: "https://apex.dev/gates/61"
+        manual_steps:
+          - "Use p-retry for promise-based retries with backoff"
+          - "Configure retry in TanStack Query: { retry: 3, retryDelay: attemptIndex => ... }"
+          - "Use axios-retry for HTTP retries"
+          - "Consider cockatiel for comprehensive resilience patterns"
+      - &a82
+        id: "APEX-G62-0"
+        gate_id: 62
+        gate_name: "Circuit_Break"
+        cluster: "RESILIENCE"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "No circuit breaker or rate limiting found"
+        explanation: "No circuit breaker or rate limiting found"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 62"
+        apex_law: "#1 ZERO TRUST"
+        documentation_url: "https://apex.dev/gates/62"
+        manual_steps:
+          - "Use @upstash/ratelimit for serverless rate limiting"
+          - "Use cockatiel for circuit breaker patterns"
+          - "Implement circuit breaker for external service calls"
+          - "Add rate limiting to protect against abuse"
+      - &a83
+        id: "APEX-G63-0"
+        gate_id: 63
+        gate_name: "Data_Recovery"
+        cluster: "RESILIENCE"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "Data recovery and queue management patterns missing"
+        explanation: "Data recovery and queue management patterns missing"
+        fix_confidence: 0.8
+        auto_fixable: true
+        verify_command: "pnpm apex audit --gates 63"
+        apex_law: "#1 ZERO TRUST"
+        documentation_url: "https://apex.dev/gates/63"
+        manual_steps:
+          - "Use localStorage or Zustand persist for state recovery"
+          - "Add autosave for forms and editors"
+          - "Implement beforeunload warning for unsaved changes"
+          - "For background jobs, use BullMQ with dead letter queue"
+          - "Add backup/restore functionality for user data"
+      - &a84
+        id: "APEX-G64-0"
+        gate_id: 64
+        gate_name: "Struct_Logging"
+        cluster: "OBSERVABILITY"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "No structured logging library installed"
+        explanation: "No structured logging library installed"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 64"
+        apex_law: "#4 ROI"
+        documentation_url: "https://apex.dev/gates/64"
+        manual_steps:
+          - "Install pino: npm install pino"
+          - "Or winston: npm install winston"
+      - &a85
+        id: "APEX-G65-0"
+        gate_id: 65
+        gate_name: "Error_Track"
+        cluster: "OBSERVABILITY"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "No error tracking library installed"
+        explanation: "No error tracking library installed"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 65"
+        apex_law: "#4 ROI"
+        documentation_url: "https://apex.dev/gates/65"
+        manual_steps:
+          - "Install @sentry/nextjs for Next.js apps"
+          - "Install @sentry/react for React apps"
+      - &a86
+        id: "APEX-G66-0"
+        gate_id: 66
+        gate_name: "Perf_Monitor"
+        cluster: "OBSERVABILITY"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "No performance monitoring detected"
+        explanation: "No performance monitoring detected"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 66"
+        apex_law: "#4 ROI"
+        documentation_url: "https://apex.dev/gates/66"
+        manual_steps:
+          - "Install @vercel/speed-insights for automatic Core Web Vitals"
+          - "Or use web-vitals: import { onCLS, onLCP, onINP } from 'web-vitals'"
+      - &a87
+        id: "APEX-G67-0"
+        gate_id: 67
+        gate_name: "User_Analytics"
+        cluster: "OBSERVABILITY"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "Google Analytics partially configured: 0 events"
+        explanation: "Google Analytics partially configured: 0 events"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 67"
+        apex_law: "#4 ROI"
+        documentation_url: "https://apex.dev/gates/67"
+        manual_steps:
+          - "Add more track() calls for key user actions"
+          - "Add identify() to link events to users"
+      - &a88
+        id: "APEX-G68-0"
+        gate_id: 68
+        gate_name: "Trace_Context"
+        cluster: "OBSERVABILITY"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "No tracing library installed"
+        explanation: "No tracing library installed"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 68"
+        apex_law: "#4 ROI"
+        documentation_url: "https://apex.dev/gates/68"
+        manual_steps:
+          - "Install @opentelemetry/sdk-trace-node"
+          - "Install @opentelemetry/api for trace API"
+      - &a89
+        id: "APEX-G69-0"
+        gate_id: 69
+        gate_name: "Metrics_Export"
+        cluster: "OBSERVABILITY"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "No metrics library installed"
+        explanation: "No metrics library installed"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 69"
+        apex_law: "#4 ROI"
+        documentation_url: "https://apex.dev/gates/69"
+        manual_steps:
+          - "Install @opentelemetry/sdk-metrics"
+          - "Or prom-client for Prometheus metrics"
+      - &a90
+        id: "APEX-G70-0"
+        gate_id: 70
+        gate_name: "Dashboard_Ready"
+        cluster: "OBSERVABILITY"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "project"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder"
+        message: "No dashboard or alert configuration files found"
+        explanation: "No dashboard or alert configuration files found"
+        fix_confidence: 0.4
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 70"
+        apex_law: "#4 ROI"
+        documentation_url: "https://apex.dev/gates/70"
+        manual_steps:
+          - "Create dashboards/*.json for Grafana dashboards"
+          - "Create alerts.yaml for alerting rules"
+          - "Export dashboards from your monitoring tool and commit to repo"
+  data/workflows/phases/web.ts:
+    file: "data/workflows/phases/web.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/phases/web.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a3
+        id: "APEX-G9-0"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "data/workflows/phases/web.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/phases/web.ts"
+        line: 1402
+        message: "File exceeds limit: 1402 LOC (1445 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  data/workflows/phases/flutter.ts:
+    file: "data/workflows/phases/flutter.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/phases/flutter.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a4
+        id: "APEX-G9-1"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "data/workflows/phases/flutter.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/phases/flutter.ts"
+        line: 1299
+        message: "File exceeds limit: 1299 LOC (1360 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/workflows/views/PhasesView.tsx:
+    file: "components/workflows/views/PhasesView.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/PhasesView.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a5
+        id: "APEX-G9-2"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/workflows/views/PhasesView.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/PhasesView.tsx"
+        line: 1062
+        message: "File exceeds limit: 1062 LOC (1099 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/workflows/CommandCard.tsx:
+    file: "components/workflows/CommandCard.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/CommandCard.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a6
+        id: "APEX-G9-3"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/workflows/CommandCard.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/CommandCard.tsx"
+        line: 632
+        message: "File exceeds limit: 632 LOC (673 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  data/workflows/project-flows.ts:
+    file: "data/workflows/project-flows.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/project-flows.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a7
+        id: "APEX-G9-4"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "data/workflows/project-flows.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/project-flows.ts"
+        line: 617
+        message: "File exceeds limit: 617 LOC (633 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/workflows/hooks/useWorkflowsState.ts:
+    file: "components/workflows/hooks/useWorkflowsState.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/hooks/useWorkflowsState.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a8
+        id: "APEX-G9-5"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/workflows/hooks/useWorkflowsState.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/hooks/useWorkflowsState.ts"
+        line: 487
+        message: "File exceeds limit: 487 LOC (621 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/workflows/views/UseCasesView.tsx:
+    file: "components/workflows/views/UseCasesView.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/UseCasesView.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a9
+        id: "APEX-G9-6"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/workflows/views/UseCasesView.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/UseCasesView.tsx"
+        line: 477
+        message: "File exceeds limit: 477 LOC (492 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/workflows/views/SkillsView.tsx:
+    file: "components/workflows/views/SkillsView.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/SkillsView.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a10
+        id: "APEX-G9-7"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/workflows/views/SkillsView.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/SkillsView.tsx"
+        line: 431
+        message: "File exceeds limit: 431 LOC (442 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/premium/analytics/analyticsStyles.ts:
+    file: "components/premium/analytics/analyticsStyles.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/analytics/analyticsStyles.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a11
+        id: "APEX-G9-8"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/premium/analytics/analyticsStyles.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/analytics/analyticsStyles.ts"
+        line: 377
+        message: "File exceeds limit: 377 LOC (398 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  lib/sync.ts:
+    file: "lib/sync.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/lib/sync.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a12
+        id: "APEX-G9-9"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "lib/sync.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/lib/sync.ts"
+        line: 369
+        message: "File exceeds limit: 369 LOC (480 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  app/_layout.tsx:
+    file: "app/_layout.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/app/_layout.tsx"
+    language: "typescript-react"
+    total_issues: 3
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 1
+    issues:
+      - &a13
+        id: "APEX-G9-10"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "app/_layout.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/app/_layout.tsx"
+        line: 367
+        message: "File exceeds limit: 367 LOC (419 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+      - &a61
+        id: "APEX-G8-1"
+        gate_id: 8
+        gate_name: "File_Org"
+        cluster: "STRUCTURE"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "app/_layout.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/app/_layout.tsx"
+        line: 1
+        message: "File name \"_layout\" doesn't follow naming convention (use kebab-case, PascalCase, or camelCase)"
+        explanation: "Found 2 organization issues (0 critical, 2 warnings)"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 8"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/8"
+      - &a62
+        id: "APEX-G10-0"
+        gate_id: 10
+        gate_name: "Import_Order"
+        cluster: "STRUCTURE"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "app/_layout.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/app/_layout.tsx"
+        line: 35
+        message: "Import \"@expo/vector-icons\" (external) should come before relative imports (line 34)"
+        explanation: "1/5 files have import ordering issues"
+        fix_confidence: 0.9
+        auto_fixable: true
+        verify_command: "pnpm apex audit --gates 10"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/10"
+  data/workflows/skills.ts:
+    file: "data/workflows/skills.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/skills.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a14
+        id: "APEX-G9-11"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "data/workflows/skills.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/skills.ts"
+        line: 361
+        message: "File exceeds limit: 361 LOC (372 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/workflows/WorkflowsPage.tsx:
+    file: "components/workflows/WorkflowsPage.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/WorkflowsPage.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a15
+        id: "APEX-G9-12"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/workflows/WorkflowsPage.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/WorkflowsPage.tsx"
+        line: 355
+        message: "File exceeds limit: 355 LOC (399 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/workflows/shared/CopyHistoryPanel.tsx:
+    file: "components/workflows/shared/CopyHistoryPanel.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/CopyHistoryPanel.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a16
+        id: "APEX-G9-13"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/workflows/shared/CopyHistoryPanel.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/CopyHistoryPanel.tsx"
+        line: 336
+        message: "File exceeds limit: 336 LOC (350 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/workflows/data/types.ts:
+    file: "components/workflows/data/types.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/data/types.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a17
+        id: "APEX-G9-14"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/workflows/data/types.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/data/types.ts"
+        line: 323
+        message: "File exceeds limit: 323 LOC (416 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/workflows/views/FullFlowView.tsx:
+    file: "components/workflows/views/FullFlowView.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/FullFlowView.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a18
+        id: "APEX-G9-15"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/workflows/views/FullFlowView.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/FullFlowView.tsx"
+        line: 316
+        message: "File exceeds limit: 316 LOC (326 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  app/index.tsx:
+    file: "app/index.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/app/index.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a19
+        id: "APEX-G9-16"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "app/index.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/app/index.tsx"
+        line: 310
+        message: "File exceeds limit: 310 LOC (334 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/workflows/views/ResponsiveView.tsx:
+    file: "components/workflows/views/ResponsiveView.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/ResponsiveView.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a20
+        id: "APEX-G9-17"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/workflows/views/ResponsiveView.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/ResponsiveView.tsx"
+        line: 306
+        message: "File exceeds limit: 306 LOC (314 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  stores/kanbanStore.ts:
+    file: "stores/kanbanStore.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/stores/kanbanStore.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a21
+        id: "APEX-G9-18"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "stores/kanbanStore.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/stores/kanbanStore.ts"
+        line: 291
+        message: "File exceeds limit: 291 LOC (440 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/workflows/shared/CategoryTabs.tsx:
+    file: "components/workflows/shared/CategoryTabs.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/CategoryTabs.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a22
+        id: "APEX-G9-19"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/workflows/shared/CategoryTabs.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/CategoryTabs.tsx"
+        line: 290
+        message: "File exceeds limit: 290 LOC (307 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/kanban/Card.tsx:
+    file: "components/kanban/Card.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/kanban/Card.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a23
+        id: "APEX-G9-20"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/kanban/Card.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/kanban/Card.tsx"
+        line: 280
+        message: "File exceeds limit: 280 LOC (299 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  utils/export.ts:
+    file: "utils/export.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/utils/export.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a24
+        id: "APEX-G9-21"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "utils/export.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/utils/export.ts"
+        line: 279
+        message: "File exceeds limit: 279 LOC (335 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/workflows/shared/WorkflowsSearch.tsx:
+    file: "components/workflows/shared/WorkflowsSearch.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/WorkflowsSearch.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a25
+        id: "APEX-G9-22"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/workflows/shared/WorkflowsSearch.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/WorkflowsSearch.tsx"
+        line: 278
+        message: "File exceeds limit: 278 LOC (301 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  stores/analyticsStore.ts:
+    file: "stores/analyticsStore.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/stores/analyticsStore.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a26
+        id: "APEX-G9-23"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "stores/analyticsStore.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/stores/analyticsStore.ts"
+        line: 272
+        message: "File exceeds limit: 272 LOC (341 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/workflows/views/CategoriesView.tsx:
+    file: "components/workflows/views/CategoriesView.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/CategoriesView.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a27
+        id: "APEX-G9-24"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/workflows/views/CategoriesView.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/CategoriesView.tsx"
+        line: 262
+        message: "File exceeds limit: 262 LOC (274 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  stores/pomodoroStore.ts:
+    file: "stores/pomodoroStore.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/stores/pomodoroStore.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a28
+        id: "APEX-G9-25"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "stores/pomodoroStore.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/stores/pomodoroStore.ts"
+        line: 239
+        message: "File exceeds limit: 239 LOC (295 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  data/workflows/categories.ts:
+    file: "data/workflows/categories.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/categories.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a29
+        id: "APEX-G9-26"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "data/workflows/categories.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/categories.ts"
+        line: 236
+        message: "File exceeds limit: 236 LOC (247 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  hooks/useKeyboardShortcuts.ts:
+    file: "hooks/useKeyboardShortcuts.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/hooks/useKeyboardShortcuts.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a30
+        id: "APEX-G9-27"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "hooks/useKeyboardShortcuts.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/hooks/useKeyboardShortcuts.ts"
+        line: 225
+        message: "File exceeds limit: 225 LOC (272 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/premium/TemplateModal.tsx:
+    file: "components/premium/TemplateModal.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/TemplateModal.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a31
+        id: "APEX-G9-28"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/premium/TemplateModal.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/TemplateModal.tsx"
+        line: 219
+        message: "File exceeds limit: 219 LOC (237 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/kanban/SearchBar.tsx:
+    file: "components/kanban/SearchBar.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/kanban/SearchBar.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a32
+        id: "APEX-G9-29"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/kanban/SearchBar.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/kanban/SearchBar.tsx"
+        line: 215
+        message: "File exceeds limit: 215 LOC (223 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/workflows/shared/GlobalProgress.tsx:
+    file: "components/workflows/shared/GlobalProgress.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/GlobalProgress.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a33
+        id: "APEX-G9-30"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/workflows/shared/GlobalProgress.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/GlobalProgress.tsx"
+        line: 207
+        message: "File exceeds limit: 207 LOC (216 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  data/workflows/use-cases.ts:
+    file: "data/workflows/use-cases.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/use-cases.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a34
+        id: "APEX-G9-31"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "data/workflows/use-cases.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/use-cases.ts"
+        line: 206
+        message: "File exceeds limit: 206 LOC (217 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  lib/database.types.ts:
+    file: "lib/database.types.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/lib/database.types.ts"
+    language: "typescript"
+    total_issues: 2
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a35
+        id: "APEX-G9-32"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "lib/database.types.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/lib/database.types.ts"
+        line: 205
+        message: "File exceeds limit: 205 LOC (214 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+      - &a60
+        id: "APEX-G8-0"
+        gate_id: 8
+        gate_name: "File_Org"
+        cluster: "STRUCTURE"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "lib/database.types.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/lib/database.types.ts"
+        line: 1
+        message: "File name \"database.types\" doesn't follow naming convention (use kebab-case, PascalCase, or camelCase)"
+        explanation: "Found 2 organization issues (0 critical, 2 warnings)"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 8"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/8"
+  components/todo/TodoList.tsx:
+    file: "components/todo/TodoList.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/todo/TodoList.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a36
+        id: "APEX-G9-33"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/todo/TodoList.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/todo/TodoList.tsx"
+        line: 197
+        message: "File exceeds limit: 197 LOC (212 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/premium/KeyboardShortcutsModal.tsx:
+    file: "components/premium/KeyboardShortcutsModal.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/KeyboardShortcutsModal.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a37
+        id: "APEX-G9-34"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/premium/KeyboardShortcutsModal.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/KeyboardShortcutsModal.tsx"
+        line: 196
+        message: "File exceeds limit: 196 LOC (211 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/ui/ConfirmDialog.tsx:
+    file: "components/ui/ConfirmDialog.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/ui/ConfirmDialog.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a38
+        id: "APEX-G9-35"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/ui/ConfirmDialog.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/ui/ConfirmDialog.tsx"
+        line: 195
+        message: "File exceeds limit: 195 LOC (206 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  data/workflows/utils/index.ts:
+    file: "data/workflows/utils/index.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/utils/index.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a39
+        id: "APEX-G9-36"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "data/workflows/utils/index.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/utils/index.ts"
+        line: 195
+        message: "File exceeds limit: 195 LOC (277 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/ui/Button.tsx:
+    file: "components/ui/Button.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/ui/Button.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a40
+        id: "APEX-G9-37"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/ui/Button.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/ui/Button.tsx"
+        line: 194
+        message: "File exceeds limit: 194 LOC (204 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  stores/templateStore.ts:
+    file: "stores/templateStore.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/stores/templateStore.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a41
+        id: "APEX-G9-38"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "stores/templateStore.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/stores/templateStore.ts"
+        line: 192
+        message: "File exceeds limit: 192 LOC (214 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/workflows/views/PluginsView.tsx:
+    file: "components/workflows/views/PluginsView.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/PluginsView.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a42
+        id: "APEX-G9-39"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/workflows/views/PluginsView.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/PluginsView.tsx"
+        line: 184
+        message: "File exceeds limit: 184 LOC (190 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/premium/pomodoro/pomodoroStyles.ts:
+    file: "components/premium/pomodoro/pomodoroStyles.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/pomodoro/pomodoroStyles.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a43
+        id: "APEX-G9-40"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/premium/pomodoro/pomodoroStyles.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/pomodoro/pomodoroStyles.ts"
+        line: 183
+        message: "File exceeds limit: 183 LOC (206 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/kanban/edit-task/SubtasksList.tsx:
+    file: "components/kanban/edit-task/SubtasksList.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/kanban/edit-task/SubtasksList.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a44
+        id: "APEX-G9-41"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/kanban/edit-task/SubtasksList.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/kanban/edit-task/SubtasksList.tsx"
+        line: 176
+        message: "File exceeds limit: 176 LOC (183 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/notes/NotesArea.tsx:
+    file: "components/notes/NotesArea.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/notes/NotesArea.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a45
+        id: "APEX-G9-42"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/notes/NotesArea.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/notes/NotesArea.tsx"
+        line: 174
+        message: "File exceeds limit: 174 LOC (181 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/kanban/Column.tsx:
+    file: "components/kanban/Column.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/kanban/Column.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a46
+        id: "APEX-G9-43"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/kanban/Column.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/kanban/Column.tsx"
+        line: 166
+        message: "File exceeds limit: 166 LOC (180 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  utils/storage.ts:
+    file: "utils/storage.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/utils/storage.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a47
+        id: "APEX-G9-44"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "utils/storage.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/utils/storage.ts"
+        line: 162
+        message: "File exceeds limit: 162 LOC (199 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/premium/command-palette/commandPaletteStyles.ts:
+    file: "components/premium/command-palette/commandPaletteStyles.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/command-palette/commandPaletteStyles.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a48
+        id: "APEX-G9-45"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/premium/command-palette/commandPaletteStyles.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/command-palette/commandPaletteStyles.ts"
+        line: 159
+        message: "File exceeds limit: 159 LOC (166 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/workflows/shared/PlatformToggle.tsx:
+    file: "components/workflows/shared/PlatformToggle.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/PlatformToggle.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a49
+        id: "APEX-G9-46"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/workflows/shared/PlatformToggle.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/PlatformToggle.tsx"
+        line: 158
+        message: "File exceeds limit: 158 LOC (166 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  data/workflows/plugins.ts:
+    file: "data/workflows/plugins.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/plugins.ts"
+    language: "typescript"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a50
+        id: "APEX-G9-47"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "data/workflows/plugins.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/plugins.ts"
+        line: 157
+        message: "File exceeds limit: 157 LOC (163 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  components/ui/Modal.tsx:
+    file: "components/ui/Modal.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/ui/Modal.tsx"
+    language: "typescript-react"
+    total_issues: 1
+    critical_count: 0
+    high_count: 1
+    auto_fixable_count: 0
+    issues:
+      - &a51
+        id: "APEX-G9-48"
+        gate_id: 9
+        gate_name: "Atomic_Size"
+        cluster: "STRUCTURE"
+        severity: "HIGH"
+        severity_score: 7.5
+        file: "components/ui/Modal.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/ui/Modal.tsx"
+        line: 151
+        message: "File exceeds limit: 151 LOC (159 total lines) > 150 limit"
+        explanation: "49 files exceed 150 LOC limit"
+        fix_confidence: 0.5
+        auto_fixable: false
+        verify_command: "pnpm apex audit --gates 9"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/9"
+  lib:
+    file: "lib"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/lib"
+    language: "unknown"
+    total_issues: 1
+    critical_count: 0
+    high_count: 0
+    auto_fixable_count: 1
+    issues:
+      - &a64
+        id: "APEX-G14-0"
+        gate_id: 14
+        gate_name: "Index_Clean"
+        cluster: "STRUCTURE"
+        severity: "MEDIUM"
+        severity_score: 5
+        file: "lib"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/lib"
+        line: 1
+        message: "Directory could benefit from a barrel export (index.ts)"
+        explanation: "1 barrel files, 1 issues found (1 missing barrels)"
+        fix_confidence: 0.9
+        auto_fixable: true
+        verify_command: "pnpm apex audit --gates 14"
+        apex_law: "#3 IMMORTALITY"
+        documentation_url: "https://apex.dev/gates/14"
+issues:
+  - *a1
+  - *a2
+  - *a3
+  - *a4
+  - *a5
+  - *a6
+  - *a7
+  - *a8
+  - *a9
+  - *a10
+  - *a11
+  - *a12
+  - *a13
+  - *a14
+  - *a15
+  - *a16
+  - *a17
+  - *a18
+  - *a19
+  - *a20
+  - *a21
+  - *a22
+  - *a23
+  - *a24
+  - *a25
+  - *a26
+  - *a27
+  - *a28
+  - *a29
+  - *a30
+  - *a31
+  - *a32
+  - *a33
+  - *a34
+  - *a35
+  - *a36
+  - *a37
+  - *a38
+  - *a39
+  - *a40
+  - *a41
+  - *a42
+  - *a43
+  - *a44
+  - *a45
+  - *a46
+  - *a47
+  - *a48
+  - *a49
+  - *a50
+  - *a51
+  - *a52
+  - *a53
+  - *a54
+  - *a55
+  - *a56
+  - *a57
+  - *a58
+  - *a59
+  - *a60
+  - *a61
+  - *a62
+  - *a63
+  - *a64
+  - *a65
+  - *a66
+  - *a67
+  - *a68
+  - *a69
+  - *a70
+  - *a71
+  - *a72
+  - *a73
+  - *a74
+  - *a75
+  - *a76
+  - *a77
+  - *a78
+  - *a79
+  - *a80
+  - *a81
+  - *a82
+  - *a83
+  - *a84
+  - *a85
+  - *a86
+  - *a87
+  - *a88
+  - *a89
+  - *a90
+critical_issues:
+  - *a1
+  - *a2
+blocking_issues:
+  - *a1
+  - *a2
+  - *a3
+  - *a4
+  - *a5
+  - *a6
+  - *a7
+  - *a8
+  - *a9
+  - *a10
+  - *a11
+  - *a12
+  - *a13
+  - *a14
+  - *a15
+  - *a16
+  - *a17
+  - *a18
+  - *a19
+  - *a20
+  - *a21
+  - *a22
+  - *a23
+  - *a24
+  - *a25
+  - *a26
+  - *a27
+  - *a28
+  - *a29
+  - *a30
+  - *a31
+  - *a32
+  - *a33
+  - *a34
+  - *a35
+  - *a36
+  - *a37
+  - *a38
+  - *a39
+  - *a40
+  - *a41
+  - *a42
+  - *a43
+  - *a44
+  - *a45
+  - *a46
+  - *a47
+  - *a48
+  - *a49
+  - *a50
+  - *a51
+  - *a52
+  - *a53
+  - *a54
+  - *a55
+  - *a56
+  - *a57
+  - *a58
+quick_wins:
+  - *a57
+  - *a58
+  - *a62
+  - *a64
+  - *a80
+  - *a83

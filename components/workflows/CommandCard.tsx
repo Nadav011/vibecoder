@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { View, Text, StyleSheet, Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { colors, spacing, radius, typography } from "../../theme";
-import { ScalePress } from "../animated";
+import { ScalePress, FadeIn } from "../animated";
 import { haptics } from "../../utils/haptics";
 import { Command, buildFullCommand } from "../../data/workflows";
 
@@ -10,15 +10,58 @@ interface CommandCardProps {
   command: Command;
   phaseColor?: string;
   onCopy?: (text: string) => void;
+  isBeginnerMode?: boolean;
+  searchQuery?: string;
+}
+
+// Helper to highlight search terms in text
+function highlightText(
+  text: string,
+  searchQuery: string,
+): React.ReactNode[] | string {
+  if (!searchQuery || !text) return text;
+
+  const query = searchQuery.toLowerCase();
+  const lowerText = text.toLowerCase();
+  const index = lowerText.indexOf(query);
+
+  if (index === -1) return text;
+
+  const before = text.slice(0, index);
+  const match = text.slice(index, index + query.length);
+  const after = text.slice(index + query.length);
+
+  return [
+    before,
+    <Text key="highlight" style={styles.highlight}>
+      {match}
+    </Text>,
+    after,
+  ];
 }
 
 export function CommandCard({
   command,
   phaseColor = colors.accent.primary,
   onCopy,
+  isBeginnerMode = false,
+  searchQuery = "",
 }: CommandCardProps) {
   const [copied, setCopied] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
+  const [showBeginnerTip, setShowBeginnerTip] = useState(false);
+
+  // Get beginner tip from command or generate default
+  const beginnerTip = useMemo(() => {
+    if ((command as Command & { beginnerTip?: string }).beginnerTip) {
+      return (command as Command & { beginnerTip?: string }).beginnerTip;
+    }
+    // Default tip based on command type
+    if (command.command.startsWith("/")) {
+      return "פקודת Claude Code - העתק והדבק בטרמינל כדי להפעיל";
+    }
+    return "העתק את הפקודה ולחץ Enter להפעלה";
+  }, [command]);
 
   const copyToClipboard = async (text: string) => {
     if (Platform.OS === "web" && typeof navigator !== "undefined") {
@@ -81,6 +124,14 @@ export function CommandCard({
     setShowOptions(false);
   };
 
+  // Highlighted text elements
+  const highlightedCommand = searchQuery
+    ? highlightText(command.command, searchQuery)
+    : command.command;
+  const highlightedDescription = searchQuery
+    ? highlightText(command.description, searchQuery)
+    : command.description;
+
   return (
     <View
       style={[
@@ -92,7 +143,7 @@ export function CommandCard({
       <View style={styles.header}>
         <View style={styles.commandWrapper}>
           <Text style={[styles.command, { color: phaseColor }]}>
-            {command.command}
+            {highlightedCommand}
           </Text>
           {command.flags?.map((flag) => (
             <ScalePress
@@ -100,6 +151,8 @@ export function CommandCard({
               onPress={() => copyToClipboard(`${command.command} ${flag}`)}
               style={styles.flagBadge}
               haptic="light"
+              accessibilityRole="button"
+              accessibilityLabel={`העתק עם ${flag}`}
             >
               <Text style={styles.flag}>{flag}</Text>
             </ScalePress>
@@ -127,7 +180,39 @@ export function CommandCard({
       </View>
 
       {/* Description */}
-      <Text style={styles.description}>{command.description}</Text>
+      <Text style={styles.description}>{highlightedDescription}</Text>
+
+      {/* Beginner Mode Tip */}
+      {isBeginnerMode && (
+        <FadeIn direction="down" distance={10}>
+          <ScalePress
+            onPress={() => setShowBeginnerTip(!showBeginnerTip)}
+            style={styles.beginnerTipContainer}
+            haptic="light"
+            accessibilityRole="button"
+            accessibilityLabel="טיפ למתחילים"
+          >
+            <View style={styles.beginnerTipHeader}>
+              <Ionicons
+                name="bulb-outline"
+                size={14}
+                color={colors.accent.warning}
+              />
+              <Text style={styles.beginnerTipTitle}>למתחילים</Text>
+              <Ionicons
+                name={showBeginnerTip ? "chevron-up" : "chevron-down"}
+                size={14}
+                color={colors.text.muted}
+              />
+            </View>
+            {showBeginnerTip && (
+              <FadeIn direction="down" distance={5}>
+                <Text style={styles.beginnerTipText}>{beginnerTip}</Text>
+              </FadeIn>
+            )}
+          </ScalePress>
+        </FadeIn>
+      )}
 
       {/* Meta Info Row */}
       <View style={styles.metaRow}>
@@ -178,6 +263,8 @@ export function CommandCard({
           onPress={() => copyToClipboard(command.shortcut!)}
           style={styles.shortcutWrapper}
           haptic="light"
+          accessibilityRole="button"
+          accessibilityLabel={`העתק קיצור: ${command.shortcut}`}
         >
           <Ionicons name="link-outline" size={12} color={colors.text.muted} />
           <Text style={styles.shortcut}>קיצור: {command.shortcut}</Text>
@@ -211,6 +298,7 @@ export function CommandCard({
           haptic="light"
           accessibilityRole="button"
           accessibilityLabel={showOptions ? "סגור אפשרויות" : "פתח אפשרויות"}
+          accessibilityState={{ expanded: showOptions }}
         >
           <Ionicons
             name={showOptions ? "chevron-up" : "options-outline"}
@@ -240,70 +328,84 @@ export function CommandCard({
 
       {/* Copy Options */}
       {showOptions && (
-        <View style={styles.optionsMenu}>
-          <ScalePress
-            onPress={handleCopyCommandOnly}
-            style={styles.optionItem}
-            haptic="light"
-          >
-            <Ionicons
-              name="terminal-outline"
-              size={14}
-              color={colors.text.secondary}
-            />
-            <Text style={styles.optionText}>העתק רק פקודה</Text>
-            <Text style={styles.optionPreview}>{command.command}</Text>
-          </ScalePress>
+        <FadeIn direction="down" distance={10}>
+          <View style={styles.optionsMenu}>
+            <ScalePress
+              onPress={handleCopyCommandOnly}
+              style={styles.optionItem}
+              haptic="light"
+              accessibilityRole="button"
+              accessibilityLabel="העתק רק פקודה"
+            >
+              <Ionicons
+                name="terminal-outline"
+                size={14}
+                color={colors.text.secondary}
+              />
+              <Text style={styles.optionText}>העתק רק פקודה</Text>
+              <Text style={styles.optionPreview}>{command.command}</Text>
+            </ScalePress>
 
-          <ScalePress
-            onPress={handleCopyWithDescription}
-            style={styles.optionItem}
-            haptic="light"
-          >
-            <Ionicons
-              name="document-text-outline"
-              size={14}
-              color={colors.text.secondary}
-            />
-            <Text style={styles.optionText}>העתק עם תיאור</Text>
-          </ScalePress>
+            <ScalePress
+              onPress={handleCopyWithDescription}
+              style={styles.optionItem}
+              haptic="light"
+              accessibilityRole="button"
+              accessibilityLabel="העתק עם תיאור"
+            >
+              <Ionicons
+                name="document-text-outline"
+                size={14}
+                color={colors.text.secondary}
+              />
+              <Text style={styles.optionText}>העתק עם תיאור</Text>
+            </ScalePress>
 
-          <ScalePress
-            onPress={handleCopyAsCodeBlock}
-            style={styles.optionItem}
-            haptic="light"
-          >
-            <Ionicons
-              name="code-slash-outline"
-              size={14}
-              color={colors.text.secondary}
-            />
-            <Text style={styles.optionText}>העתק כ-code block</Text>
-          </ScalePress>
+            <ScalePress
+              onPress={handleCopyAsCodeBlock}
+              style={styles.optionItem}
+              haptic="light"
+              accessibilityRole="button"
+              accessibilityLabel="העתק כ-code block"
+            >
+              <Ionicons
+                name="code-slash-outline"
+                size={14}
+                color={colors.text.secondary}
+              />
+              <Text style={styles.optionText}>העתק כ-code block</Text>
+            </ScalePress>
 
-          {command.flags && command.flags.length > 1 && (
-            <>
-              <View style={styles.optionDivider} />
-              <Text style={styles.optionSectionTitle}>פלאגים נפרדים:</Text>
-              {command.flags.map((flag) => (
-                <ScalePress
-                  key={flag}
-                  onPress={() => {
-                    copyToClipboard(`${command.command} ${flag}`);
-                    setShowOptions(false);
-                  }}
-                  style={styles.optionItem}
-                  haptic="light"
-                >
-                  <Ionicons name="flag-outline" size={14} color={phaseColor} />
-                  <Text style={[styles.optionText, { color: phaseColor }]}>
-                    {command.command} {flag}
-                  </Text>
-                </ScalePress>
-              ))}
-            </>
-          )}
-        </View>
+            {command.flags && command.flags.length > 1 && (
+              <>
+                <View style={styles.optionDivider} />
+                <Text style={styles.optionSectionTitle}>פלאגים נפרדים:</Text>
+                {command.flags.map((flag) => (
+                  <ScalePress
+                    key={flag}
+                    onPress={() => {
+                      copyToClipboard(`${command.command} ${flag}`);
+                      setShowOptions(false);
+                    }}
+                    style={styles.optionItem}
+                    haptic="light"
+                    accessibilityRole="button"
+                    accessibilityLabel={`העתק ${command.command} ${flag}`}
+                  >
+                    <Ionicons
+                      name="flag-outline"
+                      size={14}
+                      color={phaseColor}
+                    />
+                    <Text style={[styles.optionText, { color: phaseColor }]}>
+                      {command.command} {flag}
+                    </Text>
+                  </ScalePress>
+                ))}
+              </>
+            )}
+          </View>
+        </FadeIn>
       )}
     </View>
   );
@@ -317,6 +419,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.glass.border,
     gap: spacing.sm,
+    marginBottom: spacing.sm,
     // Glass morphism effect
     ...(Platform.OS === "web" && {
       backdropFilter: "blur(12px)",
@@ -341,6 +444,12 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS === "ios" ? "Menlo" : "monospace",
     textAlign: "right",
     writingDirection: "rtl",
+  },
+  highlight: {
+    backgroundColor: colors.accent.warningGlow,
+    color: colors.accent.warning,
+    borderRadius: 2,
+    paddingHorizontal: 2,
   },
   flagBadge: {
     backgroundColor: colors.bg.tertiary,
@@ -380,6 +489,35 @@ const styles = StyleSheet.create({
     color: colors.text.primary,
     textAlign: "right",
     writingDirection: "rtl",
+  },
+  // Beginner tip styles
+  beginnerTipContainer: {
+    backgroundColor: colors.accent.warningGlow,
+    borderRadius: radius.md,
+    padding: spacing.sm,
+    borderWidth: 1,
+    borderColor: colors.accent.warning,
+  },
+  beginnerTipHeader: {
+    flexDirection: "row-reverse",
+    alignItems: "center",
+    gap: spacing.xs,
+  },
+  beginnerTipTitle: {
+    flex: 1,
+    fontSize: typography.size.xs,
+    color: colors.accent.warning,
+    fontWeight: typography.weight.semibold,
+    textAlign: "right",
+    writingDirection: "rtl",
+  },
+  beginnerTipText: {
+    fontSize: typography.size.sm,
+    color: colors.text.primary,
+    marginTop: spacing.xs,
+    textAlign: "right",
+    writingDirection: "rtl",
+    lineHeight: 20,
   },
   metaRow: {
     flexDirection: "row-reverse",

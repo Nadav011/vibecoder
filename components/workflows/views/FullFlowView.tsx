@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Platform } from "react-native";
+import { View, Text, StyleSheet, Platform, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { colors, spacing, radius, typography } from "../../../theme";
 import { ScalePress, FadeIn } from "../../animated";
@@ -30,151 +30,169 @@ export function FullFlowView({
   };
 
   return (
-    <FadeIn delay={50} direction="up">
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>
-          {platformFilter === "flutter"
-            ? "זרימת Flutter"
-            : platformFilter === "web"
-              ? "זרימת Web"
-              : "הזרימה המלאה"}
-        </Text>
-        <Text style={styles.sectionSubtitle}>
-          {phases.length} שלבים{" "}
-          {platformFilter === "all"
-            ? "(Web + Flutter)"
-            : platformFilter === "flutter"
-              ? "לפיתוח מובייל"
-              : "לפיתוח Web"}
-        </Text>
+    <ScrollView
+      style={styles.scrollView}
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <FadeIn delay={50} direction="up">
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>
+            {platformFilter === "flutter"
+              ? "זרימת Flutter"
+              : platformFilter === "web"
+                ? "זרימת Web"
+                : "הזרימה המלאה"}
+          </Text>
+          <Text style={styles.sectionSubtitle}>
+            {phases.length} שלבים{" "}
+            {platformFilter === "all"
+              ? "(Web + Flutter)"
+              : platformFilter === "flutter"
+                ? "לפיתוח מובייל"
+                : "לפיתוח Web"}
+          </Text>
 
-        <View style={styles.fullFlowContainer}>
-          {phases.map((phase, phaseIndex) => (
-            <FadeIn key={phase.id} delay={100 + phaseIndex * 50} direction="up">
-              <View style={styles.fullFlowPhase}>
-                {/* Phase Header */}
-                <View style={styles.fullFlowPhaseHeader}>
-                  <View
-                    style={[
-                      styles.fullFlowPhaseIcon,
-                      { backgroundColor: `${phase.color}20` },
-                    ]}
-                  >
-                    <Ionicons
-                      name={phase.icon as keyof typeof Ionicons.glyphMap}
-                      size={20}
-                      color={phase.color}
-                    />
+          <View style={styles.fullFlowContainer}>
+            {phases.map((phase, phaseIndex) => (
+              <FadeIn
+                key={phase.id}
+                delay={100 + phaseIndex * 50}
+                direction="up"
+              >
+                <View style={styles.fullFlowPhase}>
+                  {/* Phase Header */}
+                  <View style={styles.fullFlowPhaseHeader}>
+                    <View
+                      style={[
+                        styles.fullFlowPhaseIcon,
+                        { backgroundColor: `${phase.color}20` },
+                      ]}
+                    >
+                      <Ionicons
+                        name={phase.icon as keyof typeof Ionicons.glyphMap}
+                        size={20}
+                        color={phase.color}
+                      />
+                    </View>
+                    <View style={styles.fullFlowPhaseInfo}>
+                      <Text style={styles.fullFlowPhaseNumber}>
+                        Phase {phase.number}
+                      </Text>
+                      <Text style={styles.fullFlowPhaseName}>{phase.name}</Text>
+                      <Text style={styles.fullFlowPhaseSkill}>
+                        {phase.skill}
+                      </Text>
+                    </View>
+                    {phase.id === "phase-boot" && (
+                      <View style={styles.requiredBadgeLarge}>
+                        <Text style={styles.requiredTextLarge}>חובה!</Text>
+                      </View>
+                    )}
                   </View>
-                  <View style={styles.fullFlowPhaseInfo}>
-                    <Text style={styles.fullFlowPhaseNumber}>
-                      Phase {phase.number}
+
+                  {/* Phase Description */}
+                  {phase.description && (
+                    <Text style={styles.fullFlowPhaseDescription}>
+                      {phase.description}
                     </Text>
-                    <Text style={styles.fullFlowPhaseName}>{phase.name}</Text>
-                    <Text style={styles.fullFlowPhaseSkill}>{phase.skill}</Text>
+                  )}
+
+                  {/* Quick Commands */}
+                  <View style={styles.fullFlowCommands}>
+                    {(expandedPhaseId === phase.id
+                      ? phase.commands
+                      : phase.commands.slice(0, 4)
+                    ).map((cmd) => (
+                      <ScalePress
+                        key={cmd.id}
+                        onPress={() => handleCopyCommand(cmd.command)}
+                        style={[
+                          styles.fullFlowCommandBadge,
+                          { borderColor: `${phase.color}40` },
+                        ]}
+                        haptic="light"
+                      >
+                        <Text
+                          style={[
+                            styles.fullFlowCommandText,
+                            { color: phase.color },
+                          ]}
+                        >
+                          {cmd.command}
+                        </Text>
+                      </ScalePress>
+                    ))}
+                    {phase.commands.length > 4 && (
+                      <ScalePress
+                        onPress={() => {
+                          haptics.light();
+                          onExpandPhase(
+                            expandedPhaseId === phase.id ? null : phase.id,
+                          );
+                        }}
+                        style={styles.fullFlowMoreButton}
+                        haptic="light"
+                      >
+                        <Text style={styles.fullFlowMoreCommands}>
+                          {expandedPhaseId === phase.id
+                            ? "הסתר"
+                            : `+${phase.commands.length - 4} עוד`}
+                        </Text>
+                        <Ionicons
+                          name={
+                            expandedPhaseId === phase.id
+                              ? "chevron-up"
+                              : "chevron-down"
+                          }
+                          size={12}
+                          color={colors.text.muted}
+                        />
+                      </ScalePress>
+                    )}
                   </View>
-                  {phase.id === "phase-boot" && (
-                    <View style={styles.requiredBadgeLarge}>
-                      <Text style={styles.requiredTextLarge}>חובה!</Text>
+
+                  {/* Hard Stops Warning */}
+                  {phase.hardStops && phase.hardStops.length > 0 && (
+                    <View style={styles.fullFlowHardStops}>
+                      <Ionicons
+                        name="warning"
+                        size={12}
+                        color={colors.status.error}
+                      />
+                      <Text style={styles.fullFlowHardStopText}>
+                        {phase.hardStops[0]}
+                      </Text>
+                    </View>
+                  )}
+
+                  {/* Arrow to next phase */}
+                  {phaseIndex < phases.length - 1 && (
+                    <View style={styles.fullFlowArrow}>
+                      <Ionicons
+                        name="arrow-down"
+                        size={20}
+                        color={colors.text.muted}
+                      />
                     </View>
                   )}
                 </View>
-
-                {/* Phase Description */}
-                {phase.description && (
-                  <Text style={styles.fullFlowPhaseDescription}>
-                    {phase.description}
-                  </Text>
-                )}
-
-                {/* Quick Commands */}
-                <View style={styles.fullFlowCommands}>
-                  {(expandedPhaseId === phase.id
-                    ? phase.commands
-                    : phase.commands.slice(0, 4)
-                  ).map((cmd) => (
-                    <ScalePress
-                      key={cmd.id}
-                      onPress={() => handleCopyCommand(cmd.command)}
-                      style={[
-                        styles.fullFlowCommandBadge,
-                        { borderColor: `${phase.color}40` },
-                      ]}
-                      haptic="light"
-                    >
-                      <Text
-                        style={[
-                          styles.fullFlowCommandText,
-                          { color: phase.color },
-                        ]}
-                      >
-                        {cmd.command}
-                      </Text>
-                    </ScalePress>
-                  ))}
-                  {phase.commands.length > 4 && (
-                    <ScalePress
-                      onPress={() => {
-                        haptics.light();
-                        onExpandPhase(
-                          expandedPhaseId === phase.id ? null : phase.id,
-                        );
-                      }}
-                      style={styles.fullFlowMoreButton}
-                      haptic="light"
-                    >
-                      <Text style={styles.fullFlowMoreCommands}>
-                        {expandedPhaseId === phase.id
-                          ? "הסתר"
-                          : `+${phase.commands.length - 4} עוד`}
-                      </Text>
-                      <Ionicons
-                        name={
-                          expandedPhaseId === phase.id
-                            ? "chevron-up"
-                            : "chevron-down"
-                        }
-                        size={12}
-                        color={colors.text.muted}
-                      />
-                    </ScalePress>
-                  )}
-                </View>
-
-                {/* Hard Stops Warning */}
-                {phase.hardStops && phase.hardStops.length > 0 && (
-                  <View style={styles.fullFlowHardStops}>
-                    <Ionicons
-                      name="warning"
-                      size={12}
-                      color={colors.status.error}
-                    />
-                    <Text style={styles.fullFlowHardStopText}>
-                      {phase.hardStops[0]}
-                    </Text>
-                  </View>
-                )}
-
-                {/* Arrow to next phase */}
-                {phaseIndex < phases.length - 1 && (
-                  <View style={styles.fullFlowArrow}>
-                    <Ionicons
-                      name="arrow-down"
-                      size={20}
-                      color={colors.text.muted}
-                    />
-                  </View>
-                )}
-              </View>
-            </FadeIn>
-          ))}
+              </FadeIn>
+            ))}
+          </View>
         </View>
-      </View>
-    </FadeIn>
+      </FadeIn>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  contentContainer: {
+    paddingBottom: spacing.xxl,
+  },
   section: {
     paddingHorizontal: spacing.md,
     gap: spacing.md,

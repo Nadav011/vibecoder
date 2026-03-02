@@ -34,10 +34,13 @@ function createLogger(): Logger {
   }
 
   return {
+    // eslint-disable-next-line no-console
     log: (...args: unknown[]) => console.log("[VibeCoder]", ...args),
+    // eslint-disable-next-line no-console
     info: (...args: unknown[]) => console.info("[VibeCoder]", ...args),
     warn: (...args: unknown[]) => console.warn("[VibeCoder]", ...args),
     error: (...args: unknown[]) => console.error("[VibeCoder]", ...args),
+    // eslint-disable-next-line no-console
     debug: (...args: unknown[]) => console.debug("[VibeCoder]", ...args),
   };
 }

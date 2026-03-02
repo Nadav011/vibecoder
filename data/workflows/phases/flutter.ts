@@ -21,6 +21,7 @@ export const FLUTTER_PHASES: Phase[] = [
         command: "/flutter boot",
         description: "אתחול סביבת Flutter מלא",
         isQuickAction: true,
+        beginnerTip: "זו הפקודה הראשונה שתריץ בכל עבודה עם Flutter. היא מאתחלת את כל הסביבה ומוודאת ש-Claude מבין את הפרויקט שלך.",
       },
       {
         id: "flutter-boot-status",
@@ -73,6 +74,7 @@ export const FLUTTER_PHASES: Phase[] = [
         flags: ["--deep"],
         description: "סריקת פרויקט מהירה",
         isQuickAction: true,
+        beginnerTip: "סורק את כל הפרויקט ומציג סיכום של מבנה הקבצים, dependencies, ובעיות פוטנציאליות. הרץ בתחילת עבודה על פרויקט קיים.",
       },
       {
         id: "flutter-audit",
@@ -88,6 +90,7 @@ export const FLUTTER_PHASES: Phase[] = [
         id: "flutter-heal",
         command: "/flutter heal",
         description: "תיקון אוטומטי של בעיות",
+        beginnerTip: "מתקן אוטומטית בעיות שנמצאו בסריקה - שגיאות קוד, בעיות תלויות, ועוד. פקודה נוחה לתיקון מהיר.",
       },
       {
         id: "flutter-sync",
@@ -129,6 +132,7 @@ export const FLUTTER_PHASES: Phase[] = [
         params: "[name]",
         description: "יצירת פרויקט חדש",
         isQuickAction: true,
+        beginnerTip: "יוצר פרויקט Flutter חדש עם מבנה נכון, הגדרות מומלצות, ותבנית קוד בסיסית. לדוגמה: /flutter init new myapp",
       },
       {
         id: "flutter-init-firebase",
@@ -177,6 +181,7 @@ export const FLUTTER_PHASES: Phase[] = [
         command: "/flutter arch feature",
         params: "[name]",
         description: "יצירת feature folder מלא",
+        beginnerTip: "יוצר תיקיית feature עם כל הקבצים הנדרשים - models, repositories, providers, widgets. לדוגמה: /flutter arch feature auth",
       },
       {
         id: "flutter-arch-layer",
@@ -218,11 +223,13 @@ export const FLUTTER_PHASES: Phase[] = [
         command: "/flutter tpa audit",
         description: "מציאת כל dynamic types",
         isQuickAction: true,
+        beginnerTip: "מוצא את כל המקומות בקוד שמשתמשים ב-dynamic במקום טייפים מפורשים. ב-Dart, חשוב להימנע מ-dynamic כדי למנוע באגים.",
       },
       {
         id: "flutter-tpa-fix",
         command: "/flutter tpa fix",
         description: "תיקון אוטומטי של טייפים",
+        beginnerTip: "מתקן אוטומטית בעיות טייפים בקוד - מחליף dynamic בטייפים מפורשים ומוסיף הגדרות טייפים חסרות.",
       },
       {
         id: "flutter-tpa-strict",
@@ -281,6 +288,7 @@ export const FLUTTER_PHASES: Phase[] = [
         command: "/flutter state setup",
         description: "התקנת Riverpod 3.0",
         isQuickAction: true,
+        beginnerTip: "מתקין Riverpod - ספריית ניהול state מומלצת ל-Flutter. Riverpod יותר פשוט ובטוח מ-Provider או Bloc.",
       },
       {
         id: "flutter-state-add",
@@ -334,6 +342,7 @@ export const FLUTTER_PHASES: Phase[] = [
         command: "/flutter firebase init",
         description: "הגדרת Firebase מלאה",
         isQuickAction: true,
+        beginnerTip: "מגדיר Firebase בפרויקט - מוסיף את כל הקונפיגורציות הנדרשות ל-iOS ו-Android. Firebase מספק auth, database, storage ועוד.",
       },
       {
         id: "flutter-firebase-auth",
@@ -389,6 +398,7 @@ export const FLUTTER_PHASES: Phase[] = [
         command: "/flutter supabase init",
         description: "הגדרת Supabase",
         isQuickAction: true,
+        beginnerTip: "מגדיר Supabase - אלטרנטיבה open-source ל-Firebase. כולל Postgres database, auth, ו-realtime. מומלץ למי שרוצה שליטה מלאה על ה-backend.",
       },
       {
         id: "flutter-supabase-auth",

@@ -31,6 +31,7 @@ export function registerServiceWorker(
     // Listen for update messages from service worker
     const handleMessage = (event: MessageEvent) => {
       if (event.data && event.data.type === "SW_UPDATED") {
+        // eslint-disable-next-line no-console
         console.log("PWA Update available:", event.data.version);
         onUpdate(event.data.version);
       }
@@ -42,6 +43,7 @@ export function registerServiceWorker(
       navigator.serviceWorker
         .register("/sw.js")
         .then((registration) => {
+          // eslint-disable-next-line no-console
           console.log("SW registered:", registration.scope);
 
           // Check for updates periodically (every 30 minutes)
@@ -53,7 +55,7 @@ export function registerServiceWorker(
           );
         })
         .catch((error) => {
-          console.log("SW registration failed:", error);
+          console.error("SW registration failed:", error);
         });
     });
 

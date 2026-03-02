@@ -9,6 +9,13 @@ import {
 import { storage } from "../utils/storage";
 import { generateId } from "../utils/generateId";
 import { kanbanHistory } from "../utils/history";
+import {
+  syncTasksToCloud,
+  fetchTasksFromCloud,
+  deleteTaskFromCloud,
+  deleteSubtaskFromCloud,
+  deleteLabelFromCloud,
+} from "../lib/sync";
 
 /**
  * Kanban board store - manages tasks, labels, and filtering
@@ -56,6 +63,8 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
     set((state) => {
       const newTasks = [...state.tasks, newTask];
       storage.setKanban({ tasks: newTasks, labels: state.labels });
+      // Sync to cloud (fire and forget)
+      syncTasksToCloud(newTasks, state.labels);
       return { tasks: newTasks };
     });
   },
@@ -74,6 +83,7 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
         task.id === id ? { ...task, ...updates, updatedAt: Date.now() } : task,
       );
       storage.setKanban({ tasks: newTasks, labels: state.labels });
+      syncTasksToCloud(newTasks, state.labels);
       return { tasks: newTasks };
     });
   },
@@ -89,6 +99,7 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
     set((state) => {
       const newTasks = state.tasks.filter((task) => task.id !== id);
       storage.setKanban({ tasks: newTasks, labels: state.labels });
+      deleteTaskFromCloud(id);
       return { tasks: newTasks };
     });
   },
@@ -109,6 +120,7 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
           : task,
       );
       storage.setKanban({ tasks: newTasks, labels: state.labels });
+      syncTasksToCloud(newTasks, state.labels);
       return { tasks: newTasks };
     });
   },
@@ -126,6 +138,7 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
       const otherTasks = state.tasks.filter((t) => t.status !== status);
       const newTasks = [...otherTasks, ...reorderedTasks];
       storage.setKanban({ tasks: newTasks, labels: state.labels });
+      syncTasksToCloud(newTasks, state.labels);
       return { tasks: newTasks };
     });
   },
@@ -154,6 +167,7 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
         return task;
       });
       storage.setKanban({ tasks: newTasks, labels: state.labels });
+      syncTasksToCloud(newTasks, state.labels);
       return { tasks: newTasks };
     });
   },
@@ -181,6 +195,7 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
         return task;
       });
       storage.setKanban({ tasks: newTasks, labels: state.labels });
+      syncTasksToCloud(newTasks, state.labels);
       return { tasks: newTasks };
     });
   },
@@ -206,6 +221,7 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
         return task;
       });
       storage.setKanban({ tasks: newTasks, labels: state.labels });
+      deleteSubtaskFromCloud(subtaskId);
       return { tasks: newTasks };
     });
   },
@@ -223,6 +239,7 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
       const newLabel: Label = { id: generateId(), name, color };
       const newLabels = [...state.labels, newLabel];
       storage.setKanban({ tasks: state.tasks, labels: newLabels });
+      syncTasksToCloud(state.tasks, newLabels);
       return { labels: newLabels };
     });
   },
@@ -243,6 +260,8 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
         labels: task.labels.filter((l) => l !== labelId),
       }));
       storage.setKanban({ tasks: newTasks, labels: newLabels });
+      deleteLabelFromCloud(labelId);
+      syncTasksToCloud(newTasks, newLabels);
       return { labels: newLabels, tasks: newTasks };
     });
   },
@@ -357,6 +376,7 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
       const restoredTasks = previousState.tasks as Task[];
       const restoredLabels = previousState.labels as Label[];
       storage.setKanban({ tasks: restoredTasks, labels: restoredLabels });
+      syncTasksToCloud(restoredTasks, restoredLabels);
       set({ tasks: restoredTasks, labels: restoredLabels });
       return true;
     }
@@ -374,6 +394,7 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
       const restoredTasks = nextState.tasks as Task[];
       const restoredLabels = nextState.labels as Label[];
       storage.setKanban({ tasks: restoredTasks, labels: restoredLabels });
+      syncTasksToCloud(restoredTasks, restoredLabels);
       set({ tasks: restoredTasks, labels: restoredLabels });
       return true;
     }
@@ -389,14 +410,30 @@ export const useKanbanStore = create<KanbanStore>((set, get) => ({
 
 /**
  * Initialize the kanban store from persistent storage
+ * Tries cloud first, falls back to local storage
  * Should be called once on app startup before rendering
  */
 export const initKanbanStore = async () => {
+  // Try to fetch from cloud first
+  const cloudData = await fetchTasksFromCloud();
+  if (cloudData && (cloudData.tasks.length > 0 || cloudData.labels.length > 0)) {
+    // Cloud has data, use it and update local
+    const tasks = cloudData.tasks;
+    const labels = cloudData.labels.length > 0 ? cloudData.labels : DEFAULT_LABELS;
+    storage.setKanban({ tasks, labels });
+    useKanbanStore.setState({ tasks, labels });
+    return;
+  }
+
+  // Fall back to local storage
   const saved = await storage.getKanban<{ tasks: Task[]; labels: Label[] }>();
   if (saved) {
-    useKanbanStore.setState({
-      tasks: saved.tasks || [],
-      labels: saved.labels || DEFAULT_LABELS,
-    });
+    const tasks = saved.tasks || [];
+    const labels = saved.labels || DEFAULT_LABELS;
+    useKanbanStore.setState({ tasks, labels });
+    // Sync local data to cloud
+    if (tasks.length > 0) {
+      syncTasksToCloud(tasks, labels);
+    }
   }
 };

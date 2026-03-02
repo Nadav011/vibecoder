@@ -13,7 +13,7 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated";
 import { haptics } from "../../utils/haptics";
-import { colors } from "../../theme";
+import { colors, SPRING_CONFIG } from "../../theme";
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -22,6 +22,7 @@ interface ScalePressProps extends Omit<PressableProps, "style"> {
   scale?: number;
   haptic?: "light" | "medium" | "selection" | "none";
   style?: StyleProp<ViewStyle>;
+  springConfig?: keyof typeof SPRING_CONFIG;
 }
 
 // Focus style for web accessibility
@@ -40,6 +41,7 @@ export function ScalePress({
   scale = 0.97,
   haptic = "light",
   style,
+  springConfig = "press",
   onPressIn,
   onPressOut,
   ...props
@@ -47,15 +49,14 @@ export function ScalePress({
   const scaleValue = useSharedValue(1);
   const [isFocused, setIsFocused] = useState(false);
 
+  const config = SPRING_CONFIG[springConfig];
+
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scaleValue.value }],
   }));
 
   const handlePressIn = (e: GestureResponderEvent) => {
-    scaleValue.value = withSpring(scale, {
-      damping: 15,
-      stiffness: 400,
-    });
+    scaleValue.value = withSpring(scale, config);
     if (haptic !== "none") {
       haptics[haptic]();
     }
@@ -63,10 +64,7 @@ export function ScalePress({
   };
 
   const handlePressOut = (e: GestureResponderEvent) => {
-    scaleValue.value = withSpring(1, {
-      damping: 15,
-      stiffness: 400,
-    });
+    scaleValue.value = withSpring(1, config);
     onPressOut?.(e);
   };
 

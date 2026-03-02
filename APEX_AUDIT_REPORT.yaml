@@ -1,0 +1,3584 @@
+apex_audit:
+  version: "23.1.0"
+  project: "/home/nadavcohen/Desktop/mangment/vibecoder"
+  project_absolute: "/home/nadavcohen/Desktop/mangment/vibecoder"
+  project_name: "vibecoder"
+  timestamp: "2026-02-05T19:12:20.356Z"
+  duration_ms: 96679
+  score: 40
+  max_score: 70
+  verdict: "FAILED"
+  summary:
+    passed: 19
+    warned: 31
+    failed: 10
+    skipped: 10
+    healable: 5
+    auto_fixable: 0
+claude_instructions:
+  fix_order: "תקן לפי סדר העדיפות (priority). תקן GATE אחד בכל פעם. אל תנסה לתקן הכל ביחד!"
+  verification: "אחרי כל תיקון הרץ: npm run typecheck && npm run lint"
+  important_notes:
+    - "קרא את הקובץ לפני עריכה (Read tool)"
+    - "תקן שורה אחת בכל פעם (Edit tool)"
+    - "וודא שהתיקון עובד לפני המעבר ל-GATE הבא"
+    - "שים לב ל-context - 3 שורות מעל ומתחת"
+    - "אם יש depends_on, תקן את ה-GATE התלוי קודם"
+fix_plan:
+  total_fixes: 90
+  estimated_phases: 3
+  phases:
+    - phase: 1
+      description: "תקן הגדרות טיפוסים ויסודות"
+      gates:
+        - 3
+        - 9
+        - 5
+        - 8
+        - 10
+        - 12
+        - 14
+        - 18
+        - 19
+      files:
+        - "data/workflows/phases/web.ts"
+        - "data/workflows/phases/flutter.ts"
+        - "components/workflows/views/PhasesView.tsx"
+        - "components/workflows/CommandCard.tsx"
+        - "data/workflows/project-flows.ts"
+        - "components/workflows/hooks/useWorkflowsState.ts"
+        - "components/workflows/views/UseCasesView.tsx"
+        - "components/workflows/views/SkillsView.tsx"
+        - "components/premium/analytics/analyticsStyles.ts"
+        - "lib/sync.ts"
+        - "app/_layout.tsx"
+        - "data/workflows/skills.ts"
+        - "components/workflows/WorkflowsPage.tsx"
+        - "components/workflows/shared/CopyHistoryPanel.tsx"
+        - "components/workflows/data/types.ts"
+        - "components/workflows/views/FullFlowView.tsx"
+        - "app/index.tsx"
+        - "components/workflows/views/ResponsiveView.tsx"
+        - "stores/kanbanStore.ts"
+        - "components/workflows/shared/CategoryTabs.tsx"
+        - "components/kanban/Card.tsx"
+        - "utils/export.ts"
+        - "components/workflows/shared/WorkflowsSearch.tsx"
+        - "stores/analyticsStore.ts"
+        - "components/workflows/views/CategoriesView.tsx"
+        - "stores/pomodoroStore.ts"
+        - "data/workflows/categories.ts"
+        - "hooks/useKeyboardShortcuts.ts"
+        - "components/premium/TemplateModal.tsx"
+        - "components/kanban/SearchBar.tsx"
+        - "components/workflows/shared/GlobalProgress.tsx"
+        - "data/workflows/use-cases.ts"
+        - "lib/database.types.ts"
+        - "components/todo/TodoList.tsx"
+        - "components/premium/KeyboardShortcutsModal.tsx"
+        - "components/ui/ConfirmDialog.tsx"
+        - "data/workflows/utils/index.ts"
+        - "components/ui/Button.tsx"
+        - "stores/templateStore.ts"
+        - "components/workflows/views/PluginsView.tsx"
+        - "components/premium/pomodoro/pomodoroStyles.ts"
+        - "components/kanban/edit-task/SubtasksList.tsx"
+        - "components/notes/NotesArea.tsx"
+        - "components/kanban/Column.tsx"
+        - "utils/storage.ts"
+        - "components/premium/command-palette/commandPaletteStyles.ts"
+        - "components/workflows/shared/PlatformToggle.tsx"
+        - "data/workflows/plugins.ts"
+        - "components/ui/Modal.tsx"
+        - "lib"
+      estimated_effort: "30 דקות"
+    - phase: 2
+      description: "תקן בעיות אבטחה"
+      gates:
+        - 46
+        - 42
+        - 45
+        - 47
+        - 48
+        - 49
+      files: []
+      estimated_effort: "5 דקות"
+    - phase: 3
+      description: "תקן בעיות נוספות"
+      gates:
+        - 23
+        - 29
+        - 30
+        - 34
+        - 35
+        - 57
+        - 59
+        - 27
+        - 39
+        - 51
+        - 52
+        - 53
+        - 55
+        - 56
+        - 58
+        - 60
+        - 61
+        - 62
+        - 63
+        - 64
+        - 65
+        - 66
+        - 67
+        - 68
+        - 69
+        - 70
+      files: []
+      estimated_effort: "5 דקות"
+by_file:
+  data/workflows/phases/web.ts:
+    file: "data/workflows/phases/web.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/phases/web.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 1402
+        severity: "FAIL"
+        message: "File exceeds limit: 1402 LOC (1445 total lines) > 150 limit"
+        context: "     1400:         flags: [\"--fast\"],
+
+          \     1401:         description: \"פריסה מהירה לפרודקשן\",
+
+          \ --> 1402:         output: \"Deploy Status\",
+
+          \     1403:         requirement: \"קריטי\",
+
+          \     1404:       },
+
+          \     1405:       {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  data/workflows/phases/flutter.ts:
+    file: "data/workflows/phases/flutter.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/phases/flutter.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 1299
+        severity: "FAIL"
+        message: "File exceeds limit: 1299 LOC (1360 total lines) > 150 limit"
+        context: "     1297:         id: \"flutter-hotfix-apply\",
+
+          \     1298:         command: \"/flutter hotfix apply\",
+
+          \ --> 1299:         description: \"החלת התיקון\",
+
+          \     1300:       },
+
+          \     1301:       {
+
+          \     1302:         id: \"flutter-hotfix-verify\","
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/workflows/views/PhasesView.tsx:
+    file: "components/workflows/views/PhasesView.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/PhasesView.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 1062
+        severity: "FAIL"
+        message: "File exceeds limit: 1062 LOC (1099 total lines) > 150 limit"
+        context: "     1060:   },
+
+          \     1061:   flowStepWarningContent: {
+
+          \ --> 1062:     fontSize: typography.size.sm,
+
+          \     1063:     color: colors.status.error,
+
+          \     1064:     textAlign: \"right\",
+
+          \     1065:     flex: 1,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/workflows/CommandCard.tsx:
+    file: "components/workflows/CommandCard.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/CommandCard.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 632
+        severity: "FAIL"
+        message: "File exceeds limit: 632 LOC (673 total lines) > 150 limit"
+        context: "     630:   primaryActionText: {
+
+          \     631:     color: colors.accent.primary,
+
+          \ --> 632:     fontWeight: typography.weight.medium,
+
+          \     633:   },
+
+          \     634:   optionsMenu: {
+
+          \     635:     backgroundColor: colors.bg.tertiary,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  data/workflows/project-flows.ts:
+    file: "data/workflows/project-flows.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/project-flows.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 617
+        severity: "FAIL"
+        message: "File exceeds limit: 617 LOC (633 total lines) > 150 limit"
+        context: "     615:         titleHe: \"הגדרת מעקב\",
+
+          \     616:         description: \"Crashlytics + Analytics\",
+
+          \ --> 617:         commands: [\"/flutter monitor setup\"],
+
+          \     618:         tips: [\"Crashlytics לשגיאות\", \"Analytics למעקב שימוש\"],
+
+          \     619:         isRequired: false,
+
+          \     620:       },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/workflows/hooks/useWorkflowsState.ts:
+    file: "components/workflows/hooks/useWorkflowsState.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/hooks/useWorkflowsState.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 487
+        severity: "FAIL"
+        message: "File exceeds limit: 487 LOC (621 total lines) > 150 limit"
+        context: "     485:       setSelectedFlowId(null);
+
+          \     486:       setExpandedSkillName(null);
+
+          \ --> 487:     } else if (VIEW_MODE_LABELS[itemId as ViewMode]) {
+
+          \     488:       // Clear sub-selections
+
+          \     489:       setSelectedCategoryId(null);
+
+          \     490:       setSelectedFlowId(null);"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/workflows/views/UseCasesView.tsx:
+    file: "components/workflows/views/UseCasesView.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/UseCasesView.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 477
+        severity: "FAIL"
+        message: "File exceeds limit: 477 LOC (492 total lines) > 150 limit"
+        context: "     475:     fontSize: typography.size.xs,
+
+          \     476:     color: colors.text.muted,
+
+          \ --> 477:     fontFamily: Platform.OS === \"ios\" ? \"Menlo\" : \"monospace\",
+
+          \     478:     textAlign: \"right\",
+
+          \     479:   },
+
+          \     480:   useCaseCopyHint: {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/workflows/views/SkillsView.tsx:
+    file: "components/workflows/views/SkillsView.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/SkillsView.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 431
+        severity: "FAIL"
+        message: "File exceeds limit: 431 LOC (442 total lines) > 150 limit"
+        context: "     429:     flexDirection: \"row-reverse\",
+
+          \     430:     alignItems: \"flex-start\",
+
+          \ --> 431:     gap: spacing.sm,
+
+          \     432:     marginBottom: spacing.xs,
+
+          \     433:   },
+
+          \     434:   skillHardStopText: {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/premium/analytics/analyticsStyles.ts:
+    file: "components/premium/analytics/analyticsStyles.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/analytics/analyticsStyles.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 377
+        severity: "FAIL"
+        message: "File exceeds limit: 377 LOC (398 total lines) > 150 limit"
+        context: "     375:     backgroundColor: colors.bg.tertiary,
+
+          \     376:     borderRadius: radius.full,
+
+          \ --> 377:     paddingHorizontal: spacing.md,
+
+          \     378:     paddingVertical: spacing.sm,
+
+          \     379:   },
+
+          \     380:   compactStat: {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  lib/sync.ts:
+    file: "lib/sync.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/lib/sync.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 369
+        severity: "FAIL"
+        message: "File exceeds limit: 369 LOC (480 total lines) > 150 limit"
+        context: "     367:\ 
+
+          \     368:       if (error) throw error;
+
+          \ --> 369:     }
+
+          \     370:\ 
+
+          \     371:     syncStatus = \"idle\";
+
+          \     372:     lastSyncError = null;"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  app/_layout.tsx:
+    file: "app/_layout.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/app/_layout.tsx"
+    total_issues: 3
+    auto_fixable_count: 1
+    issues:
+      - gate_id: 8
+        gate_name: "File_Org"
+        line: 1
+        severity: "WARN"
+        message: "File name \"_layout\" doesn't follow naming convention (use kebab-case, PascalCase, or camelCase)"
+        context: " --> 1: import React, { useEffect, useState, useCallback } from \"react\";
+
+          \     2: import { Stack } from \"expo-router\";
+
+          \     3: import { StatusBar } from \"expo-status-bar\";
+
+          \     4: import { GestureHandlerRootView } from \"react-native-gesture-handler\";"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1.3
+      - gate_id: 10
+        gate_name: "Import_Order"
+        line: 35
+        severity: "WARN"
+        message: "Import \"@expo/vector-icons\" (external) should come before relative imports (line 34)"
+        context: "     33: } from \"../hooks/useKeyboardShortcuts\";
+
+          \     34: import { ScalePress } from \"../components/animated/ScalePress\";
+
+          \ --> 35: import { Ionicons } from \"@expo/vector-icons\";
+
+          \     36: import { useRouter } from \"expo-router\";
+
+          \     37: import { generateId } from \"../utils/generateId\";
+
+          \     38: import { registerServiceWorker } from \"../utils/registerServiceWorker\";"
+        fix_confidence: 0.95
+        auto_fixable: true
+        priority: 1.3
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 367
+        severity: "FAIL"
+        message: "File exceeds limit: 367 LOC (419 total lines) > 150 limit"
+        context: "     365:       </ThemeProvider>
+
+          \     366:     </ErrorBoundary>
+
+          \ --> 367:   );
+
+          \     368: }
+
+          \     369:\ 
+
+          \     370: const styles = StyleSheet.create({"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  data/workflows/skills.ts:
+    file: "data/workflows/skills.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/skills.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 361
+        severity: "FAIL"
+        message: "File exceeds limit: 361 LOC (372 total lines) > 150 limit"
+        context: "     359:     number: 47,
+
+          \     360:     name: \"FLUTTER-FORGE\",
+
+          \ --> 361:     phase: \"META\",
+
+          \     362:     role: \"Mobile Skill Builder\",
+
+          \     363:     keyCommands: [\"/flutter forge [desc]\"],
+
+          \     364:   },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/workflows/WorkflowsPage.tsx:
+    file: "components/workflows/WorkflowsPage.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/WorkflowsPage.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 355
+        severity: "FAIL"
+        message: "File exceeds limit: 355 LOC (399 total lines) > 150 limit"
+        context: "     353:     paddingBottom: spacing.xxl,
+
+          \     354:   },
+
+          \ --> 355:   mainContent: {
+
+          \     356:     flex: 1,
+
+          \     357:   },
+
+          \     358:   toggleRow: {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/workflows/shared/CopyHistoryPanel.tsx:
+    file: "components/workflows/shared/CopyHistoryPanel.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/CopyHistoryPanel.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 336
+        severity: "FAIL"
+        message: "File exceeds limit: 336 LOC (350 total lines) > 150 limit"
+        context: "     334:     alignItems: \"center\",
+
+          \     335:     justifyContent: \"center\",
+
+          \ --> 336:     marginStart: spacing.sm,
+
+          \     337:   },
+
+          \     338:   panelFooter: {
+
+          \     339:     paddingHorizontal: spacing.md,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/workflows/data/types.ts:
+    file: "components/workflows/data/types.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/data/types.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 323
+        severity: "FAIL"
+        message: "File exceeds limit: 323 LOC (416 total lines) > 150 limit"
+        context: "     321:   commands: 0.25, // 25%
+
+          \     322:   skills: 0.2, // 20%
+
+          \ --> 323:   gates: 0.25, // 25%
+
+          \     324: };
+
+          \     325:\ 
+
+          \     326: export interface ProgressData {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/workflows/views/FullFlowView.tsx:
+    file: "components/workflows/views/FullFlowView.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/FullFlowView.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 316
+        severity: "FAIL"
+        message: "File exceeds limit: 316 LOC (326 total lines) > 150 limit"
+        context: "     314:     paddingHorizontal: spacing.sm,
+
+          \     315:     paddingVertical: spacing.xs,
+
+          \ --> 316:     borderRadius: radius.sm,
+
+          \     317:     borderWidth: 1,
+
+          \     318:     borderColor: colors.status.error,
+
+          \     319:   },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  app/index.tsx:
+    file: "app/index.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/app/index.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 310
+        severity: "FAIL"
+        message: "File exceeds limit: 310 LOC (334 total lines) > 150 limit"
+        context: "     308:   tab: {
+
+          \     309:     flex: 1,
+
+          \ --> 310:     alignItems: \"center\",
+
+          \     311:     paddingVertical: spacing.md,
+
+          \     312:     gap: spacing.xs,
+
+          \     313:   },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/workflows/views/ResponsiveView.tsx:
+    file: "components/workflows/views/ResponsiveView.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/ResponsiveView.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 306
+        severity: "FAIL"
+        message: "File exceeds limit: 306 LOC (314 total lines) > 150 limit"
+        context: "     304:     paddingHorizontal: spacing.md,
+
+          \     305:     borderBottomWidth: 1,
+
+          \ --> 306:     borderBottomColor: colors.border.subtle,
+
+          \     307:   },
+
+          \     308:   touchTargetCell: {
+
+          \     309:     fontSize: typography.size.sm,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  stores/kanbanStore.ts:
+    file: "stores/kanbanStore.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/stores/kanbanStore.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 291
+        severity: "FAIL"
+        message: "File exceeds limit: 291 LOC (440 total lines) > 150 limit"
+        context: "     289:    * @returns Filtered array of tasks
+
+          \     290:    */
+
+          \ --> 291:   getFilteredTasks: () => {
+
+          \     292:     const { tasks, filter } = get();
+
+          \     293:\ 
+
+          \     294:     // Defensive: ensure tasks is an array"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/workflows/shared/CategoryTabs.tsx:
+    file: "components/workflows/shared/CategoryTabs.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/CategoryTabs.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 290
+        severity: "FAIL"
+        message: "File exceeds limit: 290 LOC (307 total lines) > 150 limit"
+        context: "     288:   },
+
+          \     289:   subViewTab: {
+
+          \ --> 290:     flexDirection: \"row-reverse\",
+
+          \     291:     alignItems: \"center\",
+
+          \     292:     gap: spacing.xs,
+
+          \     293:     paddingHorizontal: spacing.sm,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/kanban/Card.tsx:
+    file: "components/kanban/Card.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/kanban/Card.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 280
+        severity: "FAIL"
+        message: "File exceeds limit: 280 LOC (299 total lines) > 150 limit"
+        context: "     278:   moreLabels: {
+
+          \     279:     color: colors.text.muted,
+
+          \ --> 280:     fontSize: typography.size.xs,
+
+          \     281:     alignSelf: \"center\",
+
+          \     282:   },
+
+          \     283:   footer: {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  utils/export.ts:
+    file: "utils/export.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/utils/export.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 279
+        severity: "FAIL"
+        message: "File exceeds limit: 279 LOC (335 total lines) > 150 limit"
+        context: "     277:       case \"json\": {
+
+          \     278:         const content = exportToJson(data);
+
+          \ --> 279:         downloadFile(
+
+          \     280:           content,
+
+          \     281:           `vibecoder-export-${timestamp}.json`,
+
+          \     282:           \"application/json\","
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/workflows/shared/WorkflowsSearch.tsx:
+    file: "components/workflows/shared/WorkflowsSearch.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/WorkflowsSearch.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 278
+        severity: "FAIL"
+        message: "File exceeds limit: 278 LOC (301 total lines) > 150 limit"
+        context: "     276:   },
+
+          \     277:   historyTitle: {
+
+          \ --> 278:     fontSize: typography.size.xs,
+
+          \     279:     color: colors.text.muted,
+
+          \     280:     fontWeight: typography.weight.medium,
+
+          \     281:   },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  stores/analyticsStore.ts:
+    file: "stores/analyticsStore.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/stores/analyticsStore.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 272
+        severity: "FAIL"
+        message: "File exceeds limit: 272 LOC (341 total lines) > 150 limit"
+        context: "     270:     score += Math.min(todayStats.tasksCompleted * 10, 40);
+
+          \     271:\ 
+
+          \ --> 272:     // Todos completed (up to 20 points)
+
+          \     273:     score += Math.min(todayStats.todosCompleted * 5, 20);
+
+          \     274:\ 
+
+          \     275:     // Pomodoro sessions (up to 30 points)"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/workflows/views/CategoriesView.tsx:
+    file: "components/workflows/views/CategoriesView.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/CategoriesView.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 262
+        severity: "FAIL"
+        message: "File exceeds limit: 262 LOC (274 total lines) > 150 limit"
+        context: "     260:   categoryDetailNameEn: {
+
+          \     261:     fontSize: typography.size.sm,
+
+          \ --> 262:     color: colors.text.muted,
+
+          \     263:     fontFamily: Platform.OS === \"ios\" ? \"Menlo\" : \"monospace\",
+
+          \     264:   },
+
+          \     265:   categoryDetailCount: {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  stores/pomodoroStore.ts:
+    file: "stores/pomodoroStore.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/stores/pomodoroStore.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 239
+        severity: "FAIL"
+        message: "File exceeds limit: 239 LOC (295 total lines) > 150 limit"
+        context: "     237:       const oscillator = audioContext.createOscillator();
+
+          \     238:       const gainNode = audioContext.createGain();
+
+          \ --> 239:\ 
+
+          \     240:       oscillator.connect(gainNode);
+
+          \     241:       gainNode.connect(audioContext.destination);
+
+          \     242: "
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  data/workflows/categories.ts:
+    file: "data/workflows/categories.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/categories.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 236
+        severity: "FAIL"
+        message: "File exceeds limit: 236 LOC (247 total lines) > 150 limit"
+        context: "     234:     name: \"Flutter AI/ML\",
+
+          \     235:     nameHe: \"AI מובייל\",
+
+          \ --> 236:     icon: \"bulb-outline\",
+
+          \     237:     color: \"#EA80FC\",
+
+          \     238:     commandPatterns: [\"flutter-ai\", \"flutter ai-edge\", \"tflite\", \"mediapipe\"],
+
+          \     239:   },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  hooks/useKeyboardShortcuts.ts:
+    file: "hooks/useKeyboardShortcuts.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/hooks/useKeyboardShortcuts.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 225
+        severity: "WARN"
+        message: "File exceeds limit: 225 LOC (272 total lines) > 150 limit"
+        context: "     223:   if (actions.undo) {
+
+          \     224:     shortcuts.push({
+
+          \ --> 225:       key: \"z\",
+
+          \     226:       modifiers: [\"cmd\"],
+
+          \     227:       action: actions.undo,
+
+          \     228:       description: \"Undo\","
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/premium/TemplateModal.tsx:
+    file: "components/premium/TemplateModal.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/TemplateModal.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 219
+        severity: "WARN"
+        message: "File exceeds limit: 219 LOC (237 total lines) > 150 limit"
+        context: "     217:   },
+
+          \     218:   templateName: {
+
+          \ --> 219:     color: colors.text.primary,
+
+          \     220:     fontSize: typography.size.md,
+
+          \     221:     fontWeight: typography.weight.medium,
+
+          \     222:     textAlign: \"right\","
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/kanban/SearchBar.tsx:
+    file: "components/kanban/SearchBar.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/kanban/SearchBar.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 215
+        severity: "WARN"
+        message: "File exceeds limit: 215 LOC (223 total lines) > 150 limit"
+        context: "     213:     borderRadius: radius.full,
+
+          \     214:   },
+
+          \ --> 215:   filterText: {
+
+          \     216:     color: colors.text.muted,
+
+          \     217:     fontSize: typography.size.xs,
+
+          \     218:     fontWeight: typography.weight.medium,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/workflows/shared/GlobalProgress.tsx:
+    file: "components/workflows/shared/GlobalProgress.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/GlobalProgress.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 207
+        severity: "WARN"
+        message: "File exceeds limit: 207 LOC (216 total lines) > 150 limit"
+        context: "     205:   categoryProgressBar: {
+
+          \     206:     height: 4,
+
+          \ --> 207:     backgroundColor: colors.bg.elevated,
+
+          \     208:     borderRadius: radius.full,
+
+          \     209:     overflow: \"hidden\",
+
+          \     210:   },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  data/workflows/use-cases.ts:
+    file: "data/workflows/use-cases.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/use-cases.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 206
+        severity: "WARN"
+        message: "File exceeds limit: 206 LOC (217 total lines) > 150 limit"
+        context: "     204:     commands: [
+
+          \     205:       \"/flutter perf profile\",
+
+          \ --> 206:       \"/flutter perf frames\",
+
+          \     207:       \"/flutter perf memory\",
+
+          \     208:       \"/flutter perf startup\",
+
+          \     209:       \"/flutter perf bundle\","
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  lib/database.types.ts:
+    file: "lib/database.types.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/lib/database.types.ts"
+    total_issues: 2
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 8
+        gate_name: "File_Org"
+        line: 1
+        severity: "WARN"
+        message: "File name \"database.types\" doesn't follow naming convention (use kebab-case, PascalCase, or camelCase)"
+        context: " --> 1: // ============================================
+
+          \     2: // VIBECODER - Database Types (Auto-generated style)
+
+          \     3: // Run `supabase gen types typescript` to regenerate
+
+          \     4: // ============================================"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1.3
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 205
+        severity: "WARN"
+        message: "File exceeds limit: 205 LOC (214 total lines) > 150 limit"
+        context: "     203:     };
+
+          \     204:   };
+
+          \ --> 205: }
+
+          \     206:\ 
+
+          \     207: // Convenience types
+
+          \     208: export type Tables<T extends keyof Database[\"public\"][\"Tables\"]> ="
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/todo/TodoList.tsx:
+    file: "components/todo/TodoList.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/todo/TodoList.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 197
+        severity: "WARN"
+        message: "File exceeds limit: 197 LOC (212 total lines) > 150 limit"
+        context: "     195:   },
+
+          \     196:   addButtonDisabled: {
+
+          \ --> 197:     backgroundColor: colors.bg.tertiary,
+
+          \     198:   },
+
+          \     199:   list: {
+
+          \     200:     flex: 1,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/premium/KeyboardShortcutsModal.tsx:
+    file: "components/premium/KeyboardShortcutsModal.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/KeyboardShortcutsModal.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 196
+        severity: "WARN"
+        message: "File exceeds limit: 196 LOC (211 total lines) > 150 limit"
+        context: "     194:     fontSize: typography.size.sm,
+
+          \     195:     fontWeight: typography.weight.medium,
+
+          \ --> 196:     fontFamily: Platform.select({ ios: \"Menlo\", android: \"monospace\" }),
+
+          \     197:   },
+
+          \     198:   tip: {
+
+          \     199:     padding: spacing.md,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/ui/ConfirmDialog.tsx:
+    file: "components/ui/ConfirmDialog.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/ui/ConfirmDialog.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 195
+        severity: "WARN"
+        message: "File exceeds limit: 195 LOC (206 total lines) > 150 limit"
+        context: "     193:   },
+
+          \     194:   dangerButton: {
+
+          \ --> 195:     backgroundColor: colors.priority.critical,
+
+          \     196:   },
+
+          \     197:   warningButton: {
+
+          \     198:     backgroundColor: colors.accent.warning,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  data/workflows/utils/index.ts:
+    file: "data/workflows/utils/index.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/utils/index.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 195
+        severity: "WARN"
+        message: "File exceeds limit: 195 LOC (277 total lines) > 150 limit"
+        context: "     193:     phase.commands.filter((cmd) => cmd.isQuickAction),
+
+          \     194:   );
+
+          \ --> 195: }
+
+          \     196:\ 
+
+          \     197: // קבלת כל פקודות Flutter
+
+          \     198: export function getAllFlutterCommands(): (Command & {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/ui/Button.tsx:
+    file: "components/ui/Button.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/ui/Button.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 194
+        severity: "WARN"
+        message: "File exceeds limit: 194 LOC (204 total lines) > 150 limit"
+        context: "     192:     textAlign: \"right\",
+
+          \     193:     writingDirection: \"rtl\",
+
+          \ --> 194:   },
+
+          \     195:   text_lg: {
+
+          \     196:     fontSize: typography.size.lg,
+
+          \     197:     textAlign: \"right\","
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  stores/templateStore.ts:
+    file: "stores/templateStore.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/stores/templateStore.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 192
+        severity: "WARN"
+        message: "File exceeds limit: 192 LOC (214 total lines) > 150 limit"
+        context: "     190:     // Only save custom templates (non-default)
+
+          \     191:     const customTemplates = templates.filter((t) => !t.isDefault);
+
+          \ --> 192:     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(customTemplates));
+
+          \     193:   } catch (error) {
+
+          \     194:     handleStorageError(error, \"saveTemplates\");
+
+          \     195:   }"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/workflows/views/PluginsView.tsx:
+    file: "components/workflows/views/PluginsView.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/PluginsView.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 184
+        severity: "WARN"
+        message: "File exceeds limit: 184 LOC (190 total lines) > 150 limit"
+        context: "     182:     borderRadius: radius.sm,
+
+          \     183:     backgroundColor: colors.bg.tertiary,
+
+          \ --> 184:   },
+
+          \     185:   pluginMore: {
+
+          \     186:     fontSize: typography.size.xs,
+
+          \     187:     color: colors.text.muted,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/premium/pomodoro/pomodoroStyles.ts:
+    file: "components/premium/pomodoro/pomodoroStyles.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/pomodoro/pomodoroStyles.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 183
+        severity: "WARN"
+        message: "File exceeds limit: 183 LOC (206 total lines) > 150 limit"
+        context: "     181:   compactIndicator: {
+
+          \     182:     width: 6,
+
+          \ --> 183:     height: 6,
+
+          \     184:     borderRadius: radius.full,
+
+          \     185:     backgroundColor: colors.text.muted,
+
+          \     186:   },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/kanban/edit-task/SubtasksList.tsx:
+    file: "components/kanban/edit-task/SubtasksList.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/kanban/edit-task/SubtasksList.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 176
+        severity: "WARN"
+        message: "File exceeds limit: 176 LOC (183 total lines) > 150 limit"
+        context: "     174:     fontSize: typography.size.sm,
+
+          \     175:     textAlign: \"right\",
+
+          \ --> 176:     writingDirection: \"rtl\",
+
+          \     177:   },
+
+          \     178:   subtaskTextCompleted: {
+
+          \     179:     color: colors.text.muted,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/notes/NotesArea.tsx:
+    file: "components/notes/NotesArea.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/notes/NotesArea.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 174
+        severity: "WARN"
+        message: "File exceeds limit: 174 LOC (181 total lines) > 150 limit"
+        context: "     172:     fontSize: typography.size.xs,
+
+          \     173:     marginTop: spacing.xs,
+
+          \ --> 174:     textAlign: \"right\",
+
+          \     175:     writingDirection: \"rtl\",
+
+          \     176:   },
+
+          \     177:   editorContainer: {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/kanban/Column.tsx:
+    file: "components/kanban/Column.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/kanban/Column.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 166
+        severity: "WARN"
+        message: "File exceeds limit: 166 LOC (180 total lines) > 150 limit"
+        context: "     164:     writingDirection: \"rtl\",
+
+          \     165:   },
+
+          \ --> 166:   addButton: {
+
+          \     167:     padding: spacing.xs,
+
+          \     168:     backgroundColor: colors.bg.tertiary,
+
+          \     169:     borderRadius: radius.sm,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  utils/storage.ts:
+    file: "utils/storage.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/utils/storage.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 162
+        severity: "WARN"
+        message: "File exceeds limit: 162 LOC (199 total lines) > 150 limit"
+        context: "     160:       return false;
+
+          \     161:     }
+
+          \ --> 162:   },
+
+          \     163:\ 
+
+          \     164:   // Workflow Progress
+
+          \     165:   async getWorkflowProgress(): Promise<string[] | null> {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/premium/command-palette/commandPaletteStyles.ts:
+    file: "components/premium/command-palette/commandPaletteStyles.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/command-palette/commandPaletteStyles.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 159
+        severity: "WARN"
+        message: "File exceeds limit: 159 LOC (166 total lines) > 150 limit"
+        context: "     157:     paddingHorizontal: spacing.sm,
+
+          \     158:     paddingVertical: 2,
+
+          \ --> 159:     borderRadius: radius.xs,
+
+          \     160:   },
+
+          \     161:   footerText: {
+
+          \     162:     color: colors.text.muted,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/workflows/shared/PlatformToggle.tsx:
+    file: "components/workflows/shared/PlatformToggle.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/PlatformToggle.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 158
+        severity: "WARN"
+        message: "File exceeds limit: 158 LOC (166 total lines) > 150 limit"
+        context: "     156:   },
+
+          \     157:   platformBadgeText: {
+
+          \ --> 158:     fontSize: typography.size.xs,
+
+          \     159:     color: colors.text.muted,
+
+          \     160:     fontWeight: typography.weight.medium,
+
+          \     161:   },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  data/workflows/plugins.ts:
+    file: "data/workflows/plugins.ts"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/plugins.ts"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 157
+        severity: "WARN"
+        message: "File exceeds limit: 157 LOC (163 total lines) > 150 limit"
+        context: "     155:       {
+
+          \     156:         id: \"fd-design\",
+
+          \ --> 157:         command: \"/frontend-design\",
+
+          \     158:         description: \"יצירת קומפוננט UI\",
+
+          \     159:       },
+
+          \     160:     ],"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  components/ui/Modal.tsx:
+    file: "components/ui/Modal.tsx"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/ui/Modal.tsx"
+    total_issues: 1
+    auto_fixable_count: 0
+    issues:
+      - gate_id: 9
+        gate_name: "Atomic_Size"
+        line: 151
+        severity: "WARN"
+        message: "File exceeds limit: 151 LOC (159 total lines) > 150 limit"
+        context: "     149:     fontWeight: typography.weight.semibold,
+
+          \     150:     textAlign: \"right\",
+
+          \ --> 151:     writingDirection: \"rtl\",
+
+          \     152:     flex: 1,
+
+          \     153:   },
+
+          \     154:   closeButton: {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        priority: 1
+  lib:
+    file: "lib"
+    absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/lib"
+    total_issues: 1
+    auto_fixable_count: 1
+    issues:
+      - gate_id: 14
+        gate_name: "Index_Clean"
+        line: 1
+        severity: "WARN"
+        message: "Directory could benefit from a barrel export (index.ts)"
+        fix_confidence: 0.95
+        auto_fixable: true
+        priority: 1.3
+gates:
+  - &a1
+    id: 3
+    name: "Schema_Lock"
+    cluster: "FOUNDATION"
+    status: "FAIL"
+    message: "No validation library installed; 14 unused production dependencies"
+    priority: 1
+    effort: "quick"
+    duration_ms: 64
+    apex_law: "ZERO_TRUST"
+    why: "חוק #1: אמון אפס - כל קלט חייב אימות עם Zod. אסור 'any'. Result<T,E> לטיפול בשגיאות."
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Remove unused deps: @expo-google-fonts/jetbrains-mono, @expo-google-fonts/space-grotesk, @expo/metro-runtime, expo,
+        expo-constants"
+      - "Install zod: bun add zod"
+  - &a2
+    id: 9
+    name: "Atomic_Size"
+    cluster: "STRUCTURE"
+    status: "FAIL"
+    message: "49 files exceed 150 LOC limit"
+    priority: 1
+    effort: "refactor"
+    duration_ms: 41
+    depends_on:
+      - 14
+      - 18
+      - 19
+    violations:
+      - file: "data/workflows/phases/web.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/phases/web.ts"
+        line: 1402
+        message: "File exceeds limit: 1402 LOC (1445 total lines) > 150 limit"
+        context: "     1400:         flags: [\"--fast\"],
+
+          \     1401:         description: \"פריסה מהירה לפרודקשן\",
+
+          \ --> 1402:         output: \"Deploy Status\",
+
+          \     1403:         requirement: \"קריטי\",
+
+          \     1404:       },
+
+          \     1405:       {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "data/workflows/phases/flutter.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/phases/flutter.ts"
+        line: 1299
+        message: "File exceeds limit: 1299 LOC (1360 total lines) > 150 limit"
+        context: "     1297:         id: \"flutter-hotfix-apply\",
+
+          \     1298:         command: \"/flutter hotfix apply\",
+
+          \ --> 1299:         description: \"החלת התיקון\",
+
+          \     1300:       },
+
+          \     1301:       {
+
+          \     1302:         id: \"flutter-hotfix-verify\","
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "components/workflows/views/PhasesView.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/PhasesView.tsx"
+        line: 1062
+        message: "File exceeds limit: 1062 LOC (1099 total lines) > 150 limit"
+        context: "     1060:   },
+
+          \     1061:   flowStepWarningContent: {
+
+          \ --> 1062:     fontSize: typography.size.sm,
+
+          \     1063:     color: colors.status.error,
+
+          \     1064:     textAlign: \"right\",
+
+          \     1065:     flex: 1,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "components/workflows/CommandCard.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/CommandCard.tsx"
+        line: 632
+        message: "File exceeds limit: 632 LOC (673 total lines) > 150 limit"
+        context: "     630:   primaryActionText: {
+
+          \     631:     color: colors.accent.primary,
+
+          \ --> 632:     fontWeight: typography.weight.medium,
+
+          \     633:   },
+
+          \     634:   optionsMenu: {
+
+          \     635:     backgroundColor: colors.bg.tertiary,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "data/workflows/project-flows.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/project-flows.ts"
+        line: 617
+        message: "File exceeds limit: 617 LOC (633 total lines) > 150 limit"
+        context: "     615:         titleHe: \"הגדרת מעקב\",
+
+          \     616:         description: \"Crashlytics + Analytics\",
+
+          \ --> 617:         commands: [\"/flutter monitor setup\"],
+
+          \     618:         tips: [\"Crashlytics לשגיאות\", \"Analytics למעקב שימוש\"],
+
+          \     619:         isRequired: false,
+
+          \     620:       },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "components/workflows/hooks/useWorkflowsState.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/hooks/useWorkflowsState.ts"
+        line: 487
+        message: "File exceeds limit: 487 LOC (621 total lines) > 150 limit"
+        context: "     485:       setSelectedFlowId(null);
+
+          \     486:       setExpandedSkillName(null);
+
+          \ --> 487:     } else if (VIEW_MODE_LABELS[itemId as ViewMode]) {
+
+          \     488:       // Clear sub-selections
+
+          \     489:       setSelectedCategoryId(null);
+
+          \     490:       setSelectedFlowId(null);"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "components/workflows/views/UseCasesView.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/UseCasesView.tsx"
+        line: 477
+        message: "File exceeds limit: 477 LOC (492 total lines) > 150 limit"
+        context: "     475:     fontSize: typography.size.xs,
+
+          \     476:     color: colors.text.muted,
+
+          \ --> 477:     fontFamily: Platform.OS === \"ios\" ? \"Menlo\" : \"monospace\",
+
+          \     478:     textAlign: \"right\",
+
+          \     479:   },
+
+          \     480:   useCaseCopyHint: {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "components/workflows/views/SkillsView.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/SkillsView.tsx"
+        line: 431
+        message: "File exceeds limit: 431 LOC (442 total lines) > 150 limit"
+        context: "     429:     flexDirection: \"row-reverse\",
+
+          \     430:     alignItems: \"flex-start\",
+
+          \ --> 431:     gap: spacing.sm,
+
+          \     432:     marginBottom: spacing.xs,
+
+          \     433:   },
+
+          \     434:   skillHardStopText: {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "components/premium/analytics/analyticsStyles.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/analytics/analyticsStyles.ts"
+        line: 377
+        message: "File exceeds limit: 377 LOC (398 total lines) > 150 limit"
+        context: "     375:     backgroundColor: colors.bg.tertiary,
+
+          \     376:     borderRadius: radius.full,
+
+          \ --> 377:     paddingHorizontal: spacing.md,
+
+          \     378:     paddingVertical: spacing.sm,
+
+          \     379:   },
+
+          \     380:   compactStat: {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "lib/sync.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/lib/sync.ts"
+        line: 369
+        message: "File exceeds limit: 369 LOC (480 total lines) > 150 limit"
+        context: "     367:\ 
+
+          \     368:       if (error) throw error;
+
+          \ --> 369:     }
+
+          \     370:\ 
+
+          \     371:     syncStatus = \"idle\";
+
+          \     372:     lastSyncError = null;"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "app/_layout.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/app/_layout.tsx"
+        line: 367
+        message: "File exceeds limit: 367 LOC (419 total lines) > 150 limit"
+        context: "     365:       </ThemeProvider>
+
+          \     366:     </ErrorBoundary>
+
+          \ --> 367:   );
+
+          \     368: }
+
+          \     369:\ 
+
+          \     370: const styles = StyleSheet.create({"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "data/workflows/skills.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/skills.ts"
+        line: 361
+        message: "File exceeds limit: 361 LOC (372 total lines) > 150 limit"
+        context: "     359:     number: 47,
+
+          \     360:     name: \"FLUTTER-FORGE\",
+
+          \ --> 361:     phase: \"META\",
+
+          \     362:     role: \"Mobile Skill Builder\",
+
+          \     363:     keyCommands: [\"/flutter forge [desc]\"],
+
+          \     364:   },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "components/workflows/WorkflowsPage.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/WorkflowsPage.tsx"
+        line: 355
+        message: "File exceeds limit: 355 LOC (399 total lines) > 150 limit"
+        context: "     353:     paddingBottom: spacing.xxl,
+
+          \     354:   },
+
+          \ --> 355:   mainContent: {
+
+          \     356:     flex: 1,
+
+          \     357:   },
+
+          \     358:   toggleRow: {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "components/workflows/shared/CopyHistoryPanel.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/CopyHistoryPanel.tsx"
+        line: 336
+        message: "File exceeds limit: 336 LOC (350 total lines) > 150 limit"
+        context: "     334:     alignItems: \"center\",
+
+          \     335:     justifyContent: \"center\",
+
+          \ --> 336:     marginStart: spacing.sm,
+
+          \     337:   },
+
+          \     338:   panelFooter: {
+
+          \     339:     paddingHorizontal: spacing.md,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "components/workflows/data/types.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/data/types.ts"
+        line: 323
+        message: "File exceeds limit: 323 LOC (416 total lines) > 150 limit"
+        context: "     321:   commands: 0.25, // 25%
+
+          \     322:   skills: 0.2, // 20%
+
+          \ --> 323:   gates: 0.25, // 25%
+
+          \     324: };
+
+          \     325:\ 
+
+          \     326: export interface ProgressData {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "components/workflows/views/FullFlowView.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/FullFlowView.tsx"
+        line: 316
+        message: "File exceeds limit: 316 LOC (326 total lines) > 150 limit"
+        context: "     314:     paddingHorizontal: spacing.sm,
+
+          \     315:     paddingVertical: spacing.xs,
+
+          \ --> 316:     borderRadius: radius.sm,
+
+          \     317:     borderWidth: 1,
+
+          \     318:     borderColor: colors.status.error,
+
+          \     319:   },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "app/index.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/app/index.tsx"
+        line: 310
+        message: "File exceeds limit: 310 LOC (334 total lines) > 150 limit"
+        context: "     308:   tab: {
+
+          \     309:     flex: 1,
+
+          \ --> 310:     alignItems: \"center\",
+
+          \     311:     paddingVertical: spacing.md,
+
+          \     312:     gap: spacing.xs,
+
+          \     313:   },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "components/workflows/views/ResponsiveView.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/ResponsiveView.tsx"
+        line: 306
+        message: "File exceeds limit: 306 LOC (314 total lines) > 150 limit"
+        context: "     304:     paddingHorizontal: spacing.md,
+
+          \     305:     borderBottomWidth: 1,
+
+          \ --> 306:     borderBottomColor: colors.border.subtle,
+
+          \     307:   },
+
+          \     308:   touchTargetCell: {
+
+          \     309:     fontSize: typography.size.sm,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "stores/kanbanStore.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/stores/kanbanStore.ts"
+        line: 291
+        message: "File exceeds limit: 291 LOC (440 total lines) > 150 limit"
+        context: "     289:    * @returns Filtered array of tasks
+
+          \     290:    */
+
+          \ --> 291:   getFilteredTasks: () => {
+
+          \     292:     const { tasks, filter } = get();
+
+          \     293:\ 
+
+          \     294:     // Defensive: ensure tasks is an array"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "components/workflows/shared/CategoryTabs.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/CategoryTabs.tsx"
+        line: 290
+        message: "File exceeds limit: 290 LOC (307 total lines) > 150 limit"
+        context: "     288:   },
+
+          \     289:   subViewTab: {
+
+          \ --> 290:     flexDirection: \"row-reverse\",
+
+          \     291:     alignItems: \"center\",
+
+          \     292:     gap: spacing.xs,
+
+          \     293:     paddingHorizontal: spacing.sm,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "components/kanban/Card.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/kanban/Card.tsx"
+        line: 280
+        message: "File exceeds limit: 280 LOC (299 total lines) > 150 limit"
+        context: "     278:   moreLabels: {
+
+          \     279:     color: colors.text.muted,
+
+          \ --> 280:     fontSize: typography.size.xs,
+
+          \     281:     alignSelf: \"center\",
+
+          \     282:   },
+
+          \     283:   footer: {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "utils/export.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/utils/export.ts"
+        line: 279
+        message: "File exceeds limit: 279 LOC (335 total lines) > 150 limit"
+        context: "     277:       case \"json\": {
+
+          \     278:         const content = exportToJson(data);
+
+          \ --> 279:         downloadFile(
+
+          \     280:           content,
+
+          \     281:           `vibecoder-export-${timestamp}.json`,
+
+          \     282:           \"application/json\","
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "components/workflows/shared/WorkflowsSearch.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/WorkflowsSearch.tsx"
+        line: 278
+        message: "File exceeds limit: 278 LOC (301 total lines) > 150 limit"
+        context: "     276:   },
+
+          \     277:   historyTitle: {
+
+          \ --> 278:     fontSize: typography.size.xs,
+
+          \     279:     color: colors.text.muted,
+
+          \     280:     fontWeight: typography.weight.medium,
+
+          \     281:   },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "stores/analyticsStore.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/stores/analyticsStore.ts"
+        line: 272
+        message: "File exceeds limit: 272 LOC (341 total lines) > 150 limit"
+        context: "     270:     score += Math.min(todayStats.tasksCompleted * 10, 40);
+
+          \     271:\ 
+
+          \ --> 272:     // Todos completed (up to 20 points)
+
+          \     273:     score += Math.min(todayStats.todosCompleted * 5, 20);
+
+          \     274:\ 
+
+          \     275:     // Pomodoro sessions (up to 30 points)"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "components/workflows/views/CategoriesView.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/CategoriesView.tsx"
+        line: 262
+        message: "File exceeds limit: 262 LOC (274 total lines) > 150 limit"
+        context: "     260:   categoryDetailNameEn: {
+
+          \     261:     fontSize: typography.size.sm,
+
+          \ --> 262:     color: colors.text.muted,
+
+          \     263:     fontFamily: Platform.OS === \"ios\" ? \"Menlo\" : \"monospace\",
+
+          \     264:   },
+
+          \     265:   categoryDetailCount: {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "stores/pomodoroStore.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/stores/pomodoroStore.ts"
+        line: 239
+        message: "File exceeds limit: 239 LOC (295 total lines) > 150 limit"
+        context: "     237:       const oscillator = audioContext.createOscillator();
+
+          \     238:       const gainNode = audioContext.createGain();
+
+          \ --> 239:\ 
+
+          \     240:       oscillator.connect(gainNode);
+
+          \     241:       gainNode.connect(audioContext.destination);
+
+          \     242: "
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "data/workflows/categories.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/categories.ts"
+        line: 236
+        message: "File exceeds limit: 236 LOC (247 total lines) > 150 limit"
+        context: "     234:     name: \"Flutter AI/ML\",
+
+          \     235:     nameHe: \"AI מובייל\",
+
+          \ --> 236:     icon: \"bulb-outline\",
+
+          \     237:     color: \"#EA80FC\",
+
+          \     238:     commandPatterns: [\"flutter-ai\", \"flutter ai-edge\", \"tflite\", \"mediapipe\"],
+
+          \     239:   },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "FAIL"
+      - file: "hooks/useKeyboardShortcuts.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/hooks/useKeyboardShortcuts.ts"
+        line: 225
+        message: "File exceeds limit: 225 LOC (272 total lines) > 150 limit"
+        context: "     223:   if (actions.undo) {
+
+          \     224:     shortcuts.push({
+
+          \ --> 225:       key: \"z\",
+
+          \     226:       modifiers: [\"cmd\"],
+
+          \     227:       action: actions.undo,
+
+          \     228:       description: \"Undo\","
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "components/premium/TemplateModal.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/TemplateModal.tsx"
+        line: 219
+        message: "File exceeds limit: 219 LOC (237 total lines) > 150 limit"
+        context: "     217:   },
+
+          \     218:   templateName: {
+
+          \ --> 219:     color: colors.text.primary,
+
+          \     220:     fontSize: typography.size.md,
+
+          \     221:     fontWeight: typography.weight.medium,
+
+          \     222:     textAlign: \"right\","
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "components/kanban/SearchBar.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/kanban/SearchBar.tsx"
+        line: 215
+        message: "File exceeds limit: 215 LOC (223 total lines) > 150 limit"
+        context: "     213:     borderRadius: radius.full,
+
+          \     214:   },
+
+          \ --> 215:   filterText: {
+
+          \     216:     color: colors.text.muted,
+
+          \     217:     fontSize: typography.size.xs,
+
+          \     218:     fontWeight: typography.weight.medium,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "components/workflows/shared/GlobalProgress.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/GlobalProgress.tsx"
+        line: 207
+        message: "File exceeds limit: 207 LOC (216 total lines) > 150 limit"
+        context: "     205:   categoryProgressBar: {
+
+          \     206:     height: 4,
+
+          \ --> 207:     backgroundColor: colors.bg.elevated,
+
+          \     208:     borderRadius: radius.full,
+
+          \     209:     overflow: \"hidden\",
+
+          \     210:   },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "data/workflows/use-cases.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/use-cases.ts"
+        line: 206
+        message: "File exceeds limit: 206 LOC (217 total lines) > 150 limit"
+        context: "     204:     commands: [
+
+          \     205:       \"/flutter perf profile\",
+
+          \ --> 206:       \"/flutter perf frames\",
+
+          \     207:       \"/flutter perf memory\",
+
+          \     208:       \"/flutter perf startup\",
+
+          \     209:       \"/flutter perf bundle\","
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "lib/database.types.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/lib/database.types.ts"
+        line: 205
+        message: "File exceeds limit: 205 LOC (214 total lines) > 150 limit"
+        context: "     203:     };
+
+          \     204:   };
+
+          \ --> 205: }
+
+          \     206:\ 
+
+          \     207: // Convenience types
+
+          \     208: export type Tables<T extends keyof Database[\"public\"][\"Tables\"]> ="
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "components/todo/TodoList.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/todo/TodoList.tsx"
+        line: 197
+        message: "File exceeds limit: 197 LOC (212 total lines) > 150 limit"
+        context: "     195:   },
+
+          \     196:   addButtonDisabled: {
+
+          \ --> 197:     backgroundColor: colors.bg.tertiary,
+
+          \     198:   },
+
+          \     199:   list: {
+
+          \     200:     flex: 1,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "components/premium/KeyboardShortcutsModal.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/KeyboardShortcutsModal.tsx"
+        line: 196
+        message: "File exceeds limit: 196 LOC (211 total lines) > 150 limit"
+        context: "     194:     fontSize: typography.size.sm,
+
+          \     195:     fontWeight: typography.weight.medium,
+
+          \ --> 196:     fontFamily: Platform.select({ ios: \"Menlo\", android: \"monospace\" }),
+
+          \     197:   },
+
+          \     198:   tip: {
+
+          \     199:     padding: spacing.md,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "components/ui/ConfirmDialog.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/ui/ConfirmDialog.tsx"
+        line: 195
+        message: "File exceeds limit: 195 LOC (206 total lines) > 150 limit"
+        context: "     193:   },
+
+          \     194:   dangerButton: {
+
+          \ --> 195:     backgroundColor: colors.priority.critical,
+
+          \     196:   },
+
+          \     197:   warningButton: {
+
+          \     198:     backgroundColor: colors.accent.warning,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "data/workflows/utils/index.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/utils/index.ts"
+        line: 195
+        message: "File exceeds limit: 195 LOC (277 total lines) > 150 limit"
+        context: "     193:     phase.commands.filter((cmd) => cmd.isQuickAction),
+
+          \     194:   );
+
+          \ --> 195: }
+
+          \     196:\ 
+
+          \     197: // קבלת כל פקודות Flutter
+
+          \     198: export function getAllFlutterCommands(): (Command & {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "components/ui/Button.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/ui/Button.tsx"
+        line: 194
+        message: "File exceeds limit: 194 LOC (204 total lines) > 150 limit"
+        context: "     192:     textAlign: \"right\",
+
+          \     193:     writingDirection: \"rtl\",
+
+          \ --> 194:   },
+
+          \     195:   text_lg: {
+
+          \     196:     fontSize: typography.size.lg,
+
+          \     197:     textAlign: \"right\","
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "stores/templateStore.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/stores/templateStore.ts"
+        line: 192
+        message: "File exceeds limit: 192 LOC (214 total lines) > 150 limit"
+        context: "     190:     // Only save custom templates (non-default)
+
+          \     191:     const customTemplates = templates.filter((t) => !t.isDefault);
+
+          \ --> 192:     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(customTemplates));
+
+          \     193:   } catch (error) {
+
+          \     194:     handleStorageError(error, \"saveTemplates\");
+
+          \     195:   }"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "components/workflows/views/PluginsView.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/views/PluginsView.tsx"
+        line: 184
+        message: "File exceeds limit: 184 LOC (190 total lines) > 150 limit"
+        context: "     182:     borderRadius: radius.sm,
+
+          \     183:     backgroundColor: colors.bg.tertiary,
+
+          \ --> 184:   },
+
+          \     185:   pluginMore: {
+
+          \     186:     fontSize: typography.size.xs,
+
+          \     187:     color: colors.text.muted,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "components/premium/pomodoro/pomodoroStyles.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/pomodoro/pomodoroStyles.ts"
+        line: 183
+        message: "File exceeds limit: 183 LOC (206 total lines) > 150 limit"
+        context: "     181:   compactIndicator: {
+
+          \     182:     width: 6,
+
+          \ --> 183:     height: 6,
+
+          \     184:     borderRadius: radius.full,
+
+          \     185:     backgroundColor: colors.text.muted,
+
+          \     186:   },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "components/kanban/edit-task/SubtasksList.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/kanban/edit-task/SubtasksList.tsx"
+        line: 176
+        message: "File exceeds limit: 176 LOC (183 total lines) > 150 limit"
+        context: "     174:     fontSize: typography.size.sm,
+
+          \     175:     textAlign: \"right\",
+
+          \ --> 176:     writingDirection: \"rtl\",
+
+          \     177:   },
+
+          \     178:   subtaskTextCompleted: {
+
+          \     179:     color: colors.text.muted,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "components/notes/NotesArea.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/notes/NotesArea.tsx"
+        line: 174
+        message: "File exceeds limit: 174 LOC (181 total lines) > 150 limit"
+        context: "     172:     fontSize: typography.size.xs,
+
+          \     173:     marginTop: spacing.xs,
+
+          \ --> 174:     textAlign: \"right\",
+
+          \     175:     writingDirection: \"rtl\",
+
+          \     176:   },
+
+          \     177:   editorContainer: {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "components/kanban/Column.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/kanban/Column.tsx"
+        line: 166
+        message: "File exceeds limit: 166 LOC (180 total lines) > 150 limit"
+        context: "     164:     writingDirection: \"rtl\",
+
+          \     165:   },
+
+          \ --> 166:   addButton: {
+
+          \     167:     padding: spacing.xs,
+
+          \     168:     backgroundColor: colors.bg.tertiary,
+
+          \     169:     borderRadius: radius.sm,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "utils/storage.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/utils/storage.ts"
+        line: 162
+        message: "File exceeds limit: 162 LOC (199 total lines) > 150 limit"
+        context: "     160:       return false;
+
+          \     161:     }
+
+          \ --> 162:   },
+
+          \     163:\ 
+
+          \     164:   // Workflow Progress
+
+          \     165:   async getWorkflowProgress(): Promise<string[] | null> {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "components/premium/command-palette/commandPaletteStyles.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/premium/command-palette/commandPaletteStyles.ts"
+        line: 159
+        message: "File exceeds limit: 159 LOC (166 total lines) > 150 limit"
+        context: "     157:     paddingHorizontal: spacing.sm,
+
+          \     158:     paddingVertical: 2,
+
+          \ --> 159:     borderRadius: radius.xs,
+
+          \     160:   },
+
+          \     161:   footerText: {
+
+          \     162:     color: colors.text.muted,"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "components/workflows/shared/PlatformToggle.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/workflows/shared/PlatformToggle.tsx"
+        line: 158
+        message: "File exceeds limit: 158 LOC (166 total lines) > 150 limit"
+        context: "     156:   },
+
+          \     157:   platformBadgeText: {
+
+          \ --> 158:     fontSize: typography.size.xs,
+
+          \     159:     color: colors.text.muted,
+
+          \     160:     fontWeight: typography.weight.medium,
+
+          \     161:   },"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "data/workflows/plugins.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/data/workflows/plugins.ts"
+        line: 157
+        message: "File exceeds limit: 157 LOC (163 total lines) > 150 limit"
+        context: "     155:       {
+
+          \     156:         id: \"fd-design\",
+
+          \ --> 157:         command: \"/frontend-design\",
+
+          \     158:         description: \"יצירת קומפוננט UI\",
+
+          \     159:       },
+
+          \     160:     ],"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "components/ui/Modal.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/components/ui/Modal.tsx"
+        line: 151
+        message: "File exceeds limit: 151 LOC (159 total lines) > 150 limit"
+        context: "     149:     fontWeight: typography.weight.semibold,
+
+          \     150:     textAlign: \"right\",
+
+          \ --> 151:     writingDirection: \"rtl\",
+
+          \     152:     flex: 1,
+
+          \     153:   },
+
+          \     154:   closeButton: {"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+    suggestions:
+      - "Split large files into smaller, focused modules"
+      - "Extract reusable logic into separate files"
+      - "Use composition over monolithic components"
+      - "Consider using barrel exports (index.ts) to organize"
+  - &a3
+    id: 23
+    name: "RLS_Policies"
+    cluster: "INTEGRITY"
+    status: "FAIL"
+    message: "RLS violations: 0 critical, 6 high"
+    priority: 1
+    effort: "quick"
+    duration_ms: 13
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Enable RLS: ALTER TABLE <table> ENABLE ROW LEVEL SECURITY"
+      - "Add policies with auth.uid(): CREATE POLICY ... USING (auth.uid() = user_id)"
+      - "Cover all CRUD operations: SELECT, INSERT, UPDATE, DELETE"
+  - &a4
+    id: 29
+    name: "Bundle_Size"
+    cluster: "PERFORMANCE"
+    status: "FAIL"
+    message: "JS bundle: 810.3KB gzipped exceeds 500KB limit (critical); No route-level code splitting detected; Missing
+      'sideEffects' field in package.json (add sideEffects: false for tree shaking)"
+    priority: 1
+    effort: "quick"
+    duration_ms: 250
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Use dynamic imports: import(\"./heavy-module\")"
+      - "Add \"sideEffects\": false to package.json"
+      - "Use PurgeCSS or Tailwind's purge for CSS"
+      - "Analyze bundle with @next/bundle-analyzer or source-map-explorer"
+    verify_command: "npm run build && npm run analyze"
+  - &a5
+    id: 30
+    name: "Lazy_Loading"
+    cluster: "PERFORMANCE"
+    status: "FAIL"
+    message: "Only 0 lazy loading usages found; 73 heavy components should use lazy loading"
+    priority: 1
+    effort: "quick"
+    duration_ms: 2220
+    apex_law: "RESPONSIVE"
+    why: "חוק #6: רספונסיבי - מובייל פירסט. מגע מינימום 44x44 פיקסל."
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "import dynamic from 'next/dynamic'"
+      - "const Component = dynamic(() => import(\"./Component\"), { loading: () => <Loading /> })"
+      - "Wrap lazy components with <Suspense fallback={...}>"
+      - "Add loading=\"lazy\" to below-fold images"
+    verify_command: "npm run build && npm run analyze"
+  - &a6
+    id: 34
+    name: "Core_Web_Vitals"
+    cluster: "PERFORMANCE"
+    status: "FAIL"
+    message: "0 high-severity CWV issues (LCP: 0, CLS: 1, INP: 5)"
+    priority: 1
+    effort: "quick"
+    duration_ms: 788
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "LCP: Add priority to above-fold images, use server components for data"
+      - "CLS: Add width/height to all images, reserve space for dynamic content"
+      - "INP: Use startTransition for non-urgent updates, memoize heavy computations"
+      - "Add CWV monitoring (web-vitals, @vercel/speed-insights)"
+    verify_command: "npm run build && npm run analyze"
+  - &a7
+    id: 35
+    name: "Memory_Leaks"
+    cluster: "PERFORMANCE"
+    status: "FAIL"
+    message: "4 potential memory leaks (timers: 1, listeners: 1, subscriptions: 0, fetch: 0, websocket: 0)"
+    priority: 1
+    effort: "quick"
+    duration_ms: 789
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Timers: const id = setInterval(...); return () => clearInterval(id);"
+      - "Listeners: el.addEventListener('event', handler); return () => el.removeEventListener('event', handler);"
+      - "Async: let mounted = true; async fn() { if(mounted) setState(...) }; return () => { mounted = false };"
+    verify_command: "npm run build && npm run analyze"
+  - &a8
+    id: 46
+    name: "CI_Pipeline"
+    cluster: "EVOLUTION"
+    status: "FAIL"
+    message: "No CI/CD pipeline found"
+    priority: 1
+    effort: "quick"
+    duration_ms: 9
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Create .github/workflows/ci.yml"
+      - "Add jobs: lint -> build -> test (in dependency order)"
+      - "Enable concurrency to cancel stale runs"
+  - &a9
+    id: 57
+    name: "Error_Boundaries"
+    cluster: "RESILIENCE"
+    status: "FAIL"
+    message: "No error.tsx or global-error.tsx found in app directory"
+    priority: 1
+    effort: "quick"
+    duration_ms: 24
+    fixable: true
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Create app/error.tsx for route error handling"
+      - "Create app/global-error.tsx for root error handling"
+      - "Include fallback UI with retry button"
+      - "error.tsx receives { error, reset } props - use them!"
+  - &a10
+    id: 59
+    name: "Graceful_Degradation"
+    cluster: "RESILIENCE"
+    status: "FAIL"
+    message: "Graceful degradation patterns missing or poorly implemented"
+    priority: 1
+    effort: "quick"
+    duration_ms: 23
+    fixable: true
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Create app/loading.tsx with skeleton/spinner component"
+      - "Create app/not-found.tsx with helpful 404 message and navigation"
+      - "Wrap async components with <Suspense fallback={<Loading />}>"
+      - "Add timeout handling for external requests with AbortController"
+  - &a11
+    id: 27
+    name: "Auth_Boundaries"
+    cluster: "INTEGRITY"
+    status: "WARN"
+    message: "Protected routes found but no middleware.ts"
+    priority: 1.2
+    effort: "quick"
+    duration_ms: 82
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Create middleware.ts for auth protection"
+      - "Use Next.js middleware to protect routes"
+  - &a12
+    id: 5
+    name: "Boundary_Check"
+    cluster: "FOUNDATION"
+    status: "WARN"
+    message: "11 client-side API usages need 'use client' or typeof guard (AST verified)"
+    priority: 1.3
+    effort: "quick"
+    duration_ms: 351
+    apex_law: "RTL_FIRST"
+    why: "חוק #5: RTL קודם - רק ms-/me-/ps-/pe-/start-/end-. אסור ml/mr/pl/pr/left/right."
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Add 'use client' at the top of components using React hooks"
+      - "Add 'use client' for files using browser APIs (localStorage, etc.)"
+      - "Or wrap browser API access in: if (typeof window !== 'undefined')"
+      - "Consider extracting client logic into separate components"
+  - &a13
+    id: 8
+    name: "File_Org"
+    cluster: "STRUCTURE"
+    status: "WARN"
+    message: "Found 2 organization issues (0 critical, 2 warnings)"
+    priority: 1.3
+    effort: "quick"
+    duration_ms: 34
+    depends_on:
+      - 14
+      - 18
+      - 19
+    violations:
+      - file: "lib/database.types.ts"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/lib/database.types.ts"
+        line: 1
+        message: "File name \"database.types\" doesn't follow naming convention (use kebab-case, PascalCase, or camelCase)"
+        context: " --> 1: // ============================================
+
+          \     2: // VIBECODER - Database Types (Auto-generated style)
+
+          \     3: // Run `supabase gen types typescript` to regenerate
+
+          \     4: // ============================================"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+      - file: "app/_layout.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/app/_layout.tsx"
+        line: 1
+        message: "File name \"_layout\" doesn't follow naming convention (use kebab-case, PascalCase, or camelCase)"
+        context: " --> 1: import React, { useEffect, useState, useCallback } from \"react\";
+
+          \     2: import { Stack } from \"expo-router\";
+
+          \     3: import { StatusBar } from \"expo-status-bar\";
+
+          \     4: import { GestureHandlerRootView } from \"react-native-gesture-handler\";"
+        fix_confidence: 0.7
+        auto_fixable: false
+        severity: "WARN"
+    suggestions:
+      - "Use PascalCase for component files (e.g., UserProfile.tsx)"
+      - "Use kebab-case for utility files (e.g., date-utils.ts)"
+      - "Keep directory nesting under 5 levels"
+      - "Organize all source code under src/ directory"
+  - &a14
+    id: 10
+    name: "Import_Order"
+    cluster: "STRUCTURE"
+    status: "WARN"
+    message: "1/5 files have import ordering issues"
+    priority: 1.3
+    effort: "quick"
+    duration_ms: 18
+    fixable: true
+    apex_law: "INFINITE_SCALE"
+    why: "חוק #2: סקייל אינסופי - Bundle מקסימום 100KB. חלוקת קוד הכרחית."
+    depends_on:
+      - 14
+      - 18
+      - 19
+    violations:
+      - file: "app/_layout.tsx"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/app/_layout.tsx"
+        line: 35
+        message: "Import \"@expo/vector-icons\" (external) should come before relative imports (line 34)"
+        context: "     33: } from \"../hooks/useKeyboardShortcuts\";
+
+          \     34: import { ScalePress } from \"../components/animated/ScalePress\";
+
+          \ --> 35: import { Ionicons } from \"@expo/vector-icons\";
+
+          \     36: import { useRouter } from \"expo-router\";
+
+          \     37: import { generateId } from \"../utils/generateId\";
+
+          \     38: import { registerServiceWorker } from \"../utils/registerServiceWorker\";"
+        fix_confidence: 0.95
+        auto_fixable: true
+        severity: "WARN"
+        why: "חוק #2: סקייל אינסופי - Bundle מקסימום 100KB. חלוקת קוד הכרחית."
+    suggestions:
+      - "Order imports: builtin -> external -> internal -> alias -> relative"
+      - "Group type imports together (at top or bottom)"
+      - "Use eslint-plugin-import for automatic sorting"
+      - "Run: npx eslint --fix --rule \"import/order: error\""
+  - &a15
+    id: 12
+    name: "Code_Splitting_Check"
+    cluster: "STRUCTURE"
+    status: "WARN"
+    message: "Dynamic imports: 0, Lazy components: 0, Routes: 0"
+    priority: 1.3
+    effort: "quick"
+    duration_ms: 683
+    apex_law: "INFINITE_SCALE"
+    why: "חוק #2: סקייל אינסופי - Bundle מקסימום 100KB. חלוקת קוד הכרחית."
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Use dynamic import() for code splitting heavy modules"
+      - "Use React.lazy() or next/dynamic for component-level splitting"
+  - &a16
+    id: 14
+    name: "Index_Clean"
+    cluster: "STRUCTURE"
+    status: "WARN"
+    message: "1 barrel files, 1 issues found (1 missing barrels)"
+    priority: 1.3
+    effort: "quick"
+    duration_ms: 69
+    apex_law: "ZERO_TRUST"
+    why: "חוק #1: אמון אפס - כל קלט חייב אימות עם Zod. אסור 'any'. Result<T,E> לטיפול בשגיאות."
+    blocks:
+      - 3
+      - 5
+      - 8
+      - 9
+      - 10
+      - 12
+      - 13
+      - 22
+      - 23
+      - 25
+      - 27
+      - 28
+      - 29
+      - 30
+      - 31
+      - 32
+      - 34
+      - 35
+      - 36
+      - 37
+      - 39
+      - 41
+      - 42
+      - 45
+      - 46
+      - 47
+      - 48
+      - 49
+      - 51
+      - 52
+      - 53
+      - 54
+      - 55
+      - 56
+      - 57
+      - 58
+      - 59
+      - 60
+      - 61
+      - 62
+      - 63
+      - 64
+      - 65
+      - 66
+      - 67
+      - 68
+      - 69
+      - 70
+    violations:
+      - file: "lib"
+        absolute_path: "/home/nadavcohen/Desktop/mangment/vibecoder/lib"
+        line: 1
+        message: "Directory could benefit from a barrel export (index.ts)"
+        fix_confidence: 0.95
+        auto_fixable: true
+        severity: "WARN"
+        why: "חוק #1: אמון אפס - כל קלט חייב אימות עם Zod. אסור 'any'. Result<T,E> לטיפול בשגיאות."
+    suggestions:
+      - "Use named exports in barrel files for better tree-shaking"
+      - "Avoid wildcard exports (export *) when possible"
+      - "Keep barrel files focused - split if too many exports"
+      - "Add index.ts to component/utility directories for cleaner imports"
+      - "Prefer explicit re-exports: export { Component } from \"./Component\""
+  - &a17
+    id: 18
+    name: "A11y_AAA"
+    cluster: "SENSATION"
+    status: "WARN"
+    message: "A11y: 6 issues found (AST verified)"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 2282
+    blocks:
+      - 3
+      - 5
+      - 8
+      - 9
+      - 10
+      - 12
+      - 13
+      - 22
+      - 23
+      - 25
+      - 27
+      - 28
+      - 29
+      - 30
+      - 31
+      - 32
+      - 34
+      - 35
+      - 36
+      - 37
+      - 39
+      - 41
+      - 42
+      - 45
+      - 46
+      - 47
+      - 48
+      - 49
+      - 51
+      - 52
+      - 53
+      - 54
+      - 55
+      - 56
+      - 57
+      - 58
+      - 59
+      - 60
+      - 61
+      - 62
+      - 63
+      - 64
+      - 65
+      - 66
+      - 67
+      - 68
+      - 69
+      - 70
+    suggestions:
+      - "Associate inputs with labels via id or aria-label"
+  - &a18
+    id: 19
+    name: "Speculative_UX"
+    cluster: "SENSATION"
+    status: "WARN"
+    message: "Speculative UX: parallel-load"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 168
+    blocks:
+      - 3
+      - 5
+      - 8
+      - 9
+      - 10
+      - 12
+      - 13
+      - 22
+      - 23
+      - 25
+      - 27
+      - 28
+      - 29
+      - 30
+      - 31
+      - 32
+      - 34
+      - 35
+      - 36
+      - 37
+      - 39
+      - 41
+      - 42
+      - 45
+      - 46
+      - 47
+      - 48
+      - 49
+      - 51
+      - 52
+      - 53
+      - 54
+      - 55
+      - 56
+      - 57
+      - 58
+      - 59
+      - 60
+      - 61
+      - 62
+      - 63
+      - 64
+      - 65
+      - 66
+      - 67
+      - 68
+      - 69
+      - 70
+    suggestions:
+      - "Use useOptimistic() for instant feedback on mutations"
+      - "Add prefetch on hover/focus for predictive loading"
+      - "Use Suspense boundaries for streaming SSR and code splitting"
+      - "Consider stale-while-revalidate for better perceived performance"
+  - &a19
+    id: 39
+    name: "HLTM_Sync"
+    cluster: "NEURAL"
+    status: "WARN"
+    message: "1 TODO/FIXME comments in code"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 132
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Move TODO/FIXME items to centralized todo file"
+      - "Use TodoWrite to track tasks during sessions"
+      - "Create GitHub issues for long-term items"
+  - &a20
+    id: 42
+    name: "Simulation"
+    cluster: "NEURAL"
+    status: "WARN"
+    message: "Limited simulation/preview capabilities"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 3
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Add --dry-run flag: if (dryRun) { console.log(\"Would:\", action); return; }"
+      - "Show diff preview: console.log(createPatch(original, modified))"
+      - "Create backups: fs.copyFile(file, `${file}.bak`) before modifications"
+      - "Initialize git for version-controlled rollback"
+  - &a21
+    id: 45
+    name: "PR_Template"
+    cluster: "EVOLUTION"
+    status: "WARN"
+    message: "No PR template found"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 8
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Create .github/pull_request_template.md"
+      - "Include: Summary, Changes, Test Plan, Checklist (5+ items)"
+  - &a22
+    id: 47
+    name: "Deploy_Checks"
+    cluster: "EVOLUTION"
+    status: "WARN"
+    message: "Vercel configured with issues"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 2
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "env.example has few documented variables (2)"
+  - &a23
+    id: 48
+    name: "Rollback_Ready"
+    cluster: "EVOLUTION"
+    status: "WARN"
+    message: "Insufficient rollback capability"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 15
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Create semantic versioning tags (v1.0.0, v1.1.0, v1.2.0)"
+      - "Add migration down scripts for each up migration"
+      - "Add npm script: \"rollback\": \"...\""
+      - "Use Vercel/Netlify for platform-level rollback"
+  - &a24
+    id: 49
+    name: "Version_Bump"
+    cluster: "EVOLUTION"
+    status: "WARN"
+    message: "v1.0.0"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 9
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "No CHANGELOG.md found"
+  - &a25
+    id: 51
+    name: "SBOM_Generation"
+    cluster: "SUPPLY_CHAIN"
+    status: "WARN"
+    message: "No SBOM generation configured"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 36
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Install @cyclonedx/cyclonedx-npm for CycloneDX format"
+      - "Or use @spdx/tools for SPDX format"
+      - "Add sbom script to package.json"
+      - "Generate SBOM in CI pipeline"
+  - &a26
+    id: 52
+    name: "Vuln_Scan"
+    cluster: "SUPPLY_CHAIN"
+    status: "WARN"
+    message: "npm audit failed: Command failed: npm audit --json"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 1821
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Ensure npm is installed and accessible"
+      - "Check if package-lock.json exists"
+      - "Run npm audit manually to diagnose"
+  - &a27
+    id: 53
+    name: "License_Compliance"
+    cluster: "SUPPLY_CHAIN"
+    status: "WARN"
+    message: "Could not run license-checker"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 2980
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Install license-checker: npm install -D license-checker"
+      - "Or run manually: npx license-checker --json --production"
+  - &a28
+    id: 55
+    name: "Typosquat_Guard"
+    cluster: "SUPPLY_CHAIN"
+    status: "WARN"
+    message: "9 potentially suspicious package(s) found (9 high, 0 medium risk)"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 21
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Verify suspicious packages are intentional"
+      - "Check npm registry for package authenticity"
+      - "Review package author and download counts"
+      - "Consider using npm-audit-resolver for package verification"
+  - &a29
+    id: 56
+    name: "Supply_Attestation"
+    cluster: "SUPPLY_CHAIN"
+    status: "WARN"
+    message: "No supply chain attestation configured"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 10
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Enable npm provenance: add { publishConfig: { provenance: true } } to package.json"
+      - "Configure SLSA L3 provenance: uses: slsa-framework/slsa-github-generator@v2"
+      - "Enable GPG commit signing: git config commit.gpgsign true"
+      - "Use Gitsign for keyless signing: https://github.com/sigstore/gitsign"
+      - "See SLSA levels: https://slsa.dev/spec/v1.0/levels"
+  - &a30
+    id: 58
+    name: "Offline_Detection"
+    cluster: "RESILIENCE"
+    status: "WARN"
+    message: "No offline detection found"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 33
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Create useOnlineStatus hook with navigator.onLine + event listeners"
+      - "Add visual indicator when user is offline"
+      - "Use serwist or next-pwa for PWA support with caching"
+      - "Configure service worker with cache strategies"
+  - &a31
+    id: 60
+    name: "Health_Endpoints"
+    cluster: "RESILIENCE"
+    status: "WARN"
+    message: "No health check endpoint found (server not running for live test)"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 23
+    fixable: true
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Create app/api/health/route.ts with GET handler"
+      - "Return { status: 'healthy', timestamp: Date.now(), checks: {...} }"
+      - "Include database connectivity check"
+      - "Include external service checks (Redis, APIs, etc.)"
+      - "Start dev server to enable live health check testing"
+  - &a32
+    id: 61
+    name: "Retry_Patterns"
+    cluster: "RESILIENCE"
+    status: "WARN"
+    message: "No retry patterns found for external calls"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 28
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Use p-retry for promise-based retries with backoff"
+      - "Configure retry in TanStack Query: { retry: 3, retryDelay: attemptIndex => ... }"
+      - "Use axios-retry for HTTP retries"
+      - "Consider cockatiel for comprehensive resilience patterns"
+  - &a33
+    id: 62
+    name: "Circuit_Breaker"
+    cluster: "RESILIENCE"
+    status: "WARN"
+    message: "No circuit breaker or rate limiting found"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 29
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Use @upstash/ratelimit for serverless rate limiting"
+      - "Use cockatiel for circuit breaker patterns"
+      - "Implement circuit breaker for external service calls"
+      - "Add rate limiting to protect against abuse"
+  - &a34
+    id: 63
+    name: "Data_Recovery"
+    cluster: "RESILIENCE"
+    status: "WARN"
+    message: "Data recovery and queue management patterns missing"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 86
+    fixable: true
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Use localStorage or Zustand persist for state recovery"
+      - "Add autosave for forms and editors"
+      - "Implement beforeunload warning for unsaved changes"
+      - "For background jobs, use BullMQ with dead letter queue"
+      - "Add backup/restore functionality for user data"
+  - &a35
+    id: 64
+    name: "Structured_Logging"
+    cluster: "OBSERVABILITY"
+    status: "WARN"
+    message: "No structured logging library installed"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 1
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Install pino: npm install pino"
+      - "Or winston: npm install winston"
+  - &a36
+    id: 65
+    name: "Error_Tracking"
+    cluster: "OBSERVABILITY"
+    status: "WARN"
+    message: "No error tracking library installed"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 1
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Install @sentry/nextjs for Next.js apps"
+      - "Install @sentry/react for React apps"
+  - &a37
+    id: 66
+    name: "Perf_Monitor"
+    cluster: "OBSERVABILITY"
+    status: "WARN"
+    message: "No performance monitoring detected"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 399
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Install @vercel/speed-insights for automatic Core Web Vitals"
+      - "Or use web-vitals: import { onCLS, onLCP, onINP } from 'web-vitals'"
+  - &a38
+    id: 67
+    name: "User_Analytics"
+    cluster: "OBSERVABILITY"
+    status: "WARN"
+    message: "Google Analytics partially configured: 0 events"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 136
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Add more track() calls for key user actions"
+      - "Add identify() to link events to users"
+  - &a39
+    id: 68
+    name: "Trace_Context"
+    cluster: "OBSERVABILITY"
+    status: "WARN"
+    message: "No tracing library installed"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 6
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Install @opentelemetry/sdk-trace-node"
+      - "Install @opentelemetry/api for trace API"
+  - &a40
+    id: 69
+    name: "Metrics_Export"
+    cluster: "OBSERVABILITY"
+    status: "WARN"
+    message: "No metrics library installed"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 1
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Install @opentelemetry/sdk-metrics"
+      - "Or prom-client for Prometheus metrics"
+  - &a41
+    id: 70
+    name: "Dashboard_Ready"
+    cluster: "OBSERVABILITY"
+    status: "WARN"
+    message: "No dashboard or alert configuration files found"
+    priority: 1.5
+    effort: "quick"
+    duration_ms: 6
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Create dashboards/*.json for Grafana dashboards"
+      - "Create alerts.yaml for alerting rules"
+      - "Export dashboards from your monitoring tool and commit to repo"
+  - id: 22
+    name: "Zod_Validation"
+    cluster: "INTEGRITY"
+    status: "SKIP"
+    message: "No API routes or server actions found"
+    priority: 2.2
+    effort: "quick"
+    duration_ms: 13
+    apex_law: "IMMORTALITY"
+    why: "חוק #3: קוד נצחי - מקסימום 150 שורות לקובץ, 30 שורות לפונקציה."
+    depends_on:
+      - 14
+      - 18
+      - 19
+  - id: 24
+    name: "Env_Validation"
+    cluster: "INTEGRITY"
+    status: "PASS"
+    message: "No hardcoded secrets detected, .env in .gitignore"
+    priority: 2.2
+    effort: "quick"
+    duration_ms: 19
+  - id: 25
+    name: "CSRF_Protection"
+    cluster: "INTEGRITY"
+    status: "SKIP"
+    message: "No server actions or API middleware found"
+    priority: 2.2
+    effort: "quick"
+    duration_ms: 463
+    depends_on:
+      - 14
+      - 18
+      - 19
+  - id: 26
+    name: "XSS_Prevention"
+    cluster: "INTEGRITY"
+    status: "PASS"
+    message: "No unsafe HTML rendering detected"
+    priority: 2.2
+    effort: "quick"
+    duration_ms: 618
+  - id: 28
+    name: "Rate_Limiting"
+    cluster: "INTEGRITY"
+    status: "SKIP"
+    message: "No API routes found"
+    priority: 2.2
+    effort: "quick"
+    duration_ms: 10
+    depends_on:
+      - 14
+      - 18
+      - 19
+  - id: 1
+    name: "Root_Sync"
+    cluster: "FOUNDATION"
+    status: "PASS"
+    message: "MASTER_COORDINATE.md valid (v23.0.0, semver OK)"
+    priority: 2.3
+    effort: "quick"
+    duration_ms: 0
+    apex_law: "ZERO_TRUST"
+    why: "חוק #1: אמון אפס - כל קלט חייב אימות עם Zod. אסור 'any'. Result<T,E> לטיפול בשגיאות."
+  - id: 2
+    name: "DNA_Alignment"
+    cluster: "FOUNDATION"
+    status: "PASS"
+    message: "Project DNA valid, structure OK"
+    priority: 2.3
+    effort: "quick"
+    duration_ms: 2
+    apex_law: "ZERO_TRUST"
+    why: "חוק #1: אמון אפס - כל קלט חייב אימות עם Zod. אסור 'any'. Result<T,E> לטיפול בשגיאות."
+  - id: 4
+    name: "Type_Purity"
+    cluster: "FOUNDATION"
+    status: "PASS"
+    message: "Zero type violations in 170 production files (0 allowed in context)"
+    priority: 2.3
+    effort: "quick"
+    duration_ms: 834
+  - id: 6
+    name: "Law_Enforcement"
+    cluster: "FOUNDATION"
+    status: "PASS"
+    message: "Clean code: 5 console logs, 1 TODOs, 0 RTL/Responsive violations (AST verified)"
+    priority: 2.3
+    effort: "quick"
+    duration_ms: 954
+    apex_law: "RTL_FIRST"
+    why: "חוק #5: RTL קודם - רק ms-/me-/ps-/pe-/start-/end-. אסור ml/mr/pl/pr/left/right."
+  - id: 7
+    name: "Truth_Anchor"
+    cluster: "FOUNDATION"
+    status: "PASS"
+    message: "Config OK: 2 required, 3 optional valid"
+    priority: 2.3
+    effort: "quick"
+    duration_ms: 12
+    apex_law: "RTL_FIRST"
+    why: "חוק #5: RTL קודם - רק ms-/me-/ps-/pe-/start-/end-. אסור ml/mr/pl/pr/left/right."
+  - id: 11
+    name: "No_Circular"
+    cluster: "STRUCTURE"
+    status: "PASS"
+    message: "No circular dependencies detected (madge verified)"
+    priority: 2.3
+    effort: "quick"
+    duration_ms: 68964
+    apex_law: "INFINITE_SCALE"
+    why: "חוק #2: סקייל אינסופי - Bundle מקסימום 100KB. חלוקת קוד הכרחית."
+  - id: 13
+    name: "Server_Actions_Organization"
+    cluster: "STRUCTURE"
+    status: "SKIP"
+    message: "No server actions found in project"
+    priority: 2.3
+    effort: "quick"
+    duration_ms: 75
+    depends_on:
+      - 14
+      - 18
+      - 19
+  - id: 15
+    name: "FPS_Lock"
+    cluster: "SENSATION"
+    status: "PASS"
+    message: "Animation patterns OK (6 performant animations, transform)"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 206
+    apex_law: "ZERO_TRUST"
+    why: "חוק #1: אמון אפס - כל קלט חייב אימות עם Zod. אסור 'any'. Result<T,E> לטיפול בשגיאות."
+  - id: 16
+    name: "Input_Latency"
+    cluster: "SENSATION"
+    status: "PASS"
+    message: "UX patterns: skeleton, debounce (3 loading, 0 optimistic)"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 136
+    apex_law: "ZERO_TRUST"
+    why: "חוק #1: אמון אפס - כל קלט חייב אימות עם Zod. אסור 'any'. Result<T,E> לטיפול בשגיאות."
+    suggestions:
+      - "Consider useOptimistic() for instant feedback on mutations"
+      - "Use useTransition() for non-blocking state updates"
+  - id: 17
+    name: "Logical_RTL"
+    cluster: "SENSATION"
+    status: "PASS"
+    message: "RTL-safe: No directional properties found in 176 files"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 1848
+  - id: 20
+    name: "Haptic_Ready"
+    cluster: "SENSATION"
+    status: "PASS"
+    message: "Touch UX: safe-area, haptics, responsive, long-press (0 proper targets)"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 127
+    apex_law: "IMMORTALITY"
+    why: "חוק #3: קוד נצחי - מקסימום 150 שורות לקובץ, 30 שורות לפונקציה."
+    suggestions:
+      - "Ensure touch targets are at least 44x44px (min-h-11 min-w-11)"
+      - "Add tap-highlight-transparent for custom touch feedback"
+  - id: 21
+    name: "Fluid_Motion"
+    cluster: "SENSATION"
+    status: "PASS"
+    message: "Animation patterns: spring"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 192
+    apex_law: "IMMORTALITY"
+    why: "חוק #3: קוד נצחי - מקסימום 150 שורות לקובץ, 30 שורות לפונקציה."
+    suggestions:
+      - "Add prefers-reduced-motion support for accessibility (motion-reduce:)"
+      - "Use custom cubic-bezier easing for polished animations"
+  - id: 31
+    name: "Image_Optimization"
+    cluster: "PERFORMANCE"
+    status: "SKIP"
+    message: "No images found in components, CSS, or HTML"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 117
+    apex_law: "RESPONSIVE"
+    why: "חוק #6: רספונסיבי - מובייל פירסט. מגע מינימום 44x44 פיקסל."
+    depends_on:
+      - 14
+      - 18
+      - 19
+    verify_command: "npm run build && npm run analyze"
+  - id: 32
+    name: "Font_Loading"
+    cluster: "PERFORMANCE"
+    status: "SKIP"
+    message: "No custom font loading detected (using system fonts)"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 77
+    apex_law: "RESPONSIVE"
+    why: "חוק #6: רספונסיבי - מובייל פירסט. מגע מינימום 44x44 פיקסל."
+    depends_on:
+      - 14
+      - 18
+      - 19
+    verify_command: "npm run build && npm run analyze"
+  - id: 33
+    name: "Cache_Headers"
+    cluster: "PERFORMANCE"
+    status: "PASS"
+    message: "2 cache rules, CDN: Vercel, Vercel Edge Config"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 9
+    verify_command: "npm run build && npm run analyze"
+  - id: 36
+    name: "Agent_Isolation"
+    cluster: "NEURAL"
+    status: "SKIP"
+    message: "No Task tool calls detected"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 84
+    depends_on:
+      - 14
+      - 18
+      - 19
+  - id: 37
+    name: "MCP_Discovery"
+    cluster: "NEURAL"
+    status: "SKIP"
+    message: "No MCP servers configured"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 6
+    depends_on:
+      - 14
+      - 18
+      - 19
+  - id: 38
+    name: "Context_Fork"
+    cluster: "NEURAL"
+    status: "PASS"
+    message: "~13,699 tokens across 6 files"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 44
+  - id: 40
+    name: "Shadow_Audit"
+    cluster: "NEURAL"
+    status: "PASS"
+    message: "1 minor side effect issues (acceptable)"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 57
+  - id: 41
+    name: "Token_FinOps"
+    cluster: "NEURAL"
+    status: "SKIP"
+    message: "No AI dependencies or environment configuration detected"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 7
+    depends_on:
+      - 14
+      - 18
+      - 19
+  - id: 43
+    name: "Commit_Format"
+    cluster: "EVOLUTION"
+    status: "PASS"
+    message: "86% conventional (6/7)"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 8
+  - id: 44
+    name: "Branch_Strategy"
+    cluster: "EVOLUTION"
+    status: "PASS"
+    message: "100% branches follow conventions"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 9
+  - id: 50
+    name: "Lock_Integrity"
+    cluster: "SUPPLY_CHAIN"
+    status: "PASS"
+    message: "Lock file verified: package-lock.json (31 deps synced, integrity hashes present)"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 14
+  - id: 54
+    name: "Dep_Freshness"
+    cluster: "SUPPLY_CHAIN"
+    status: "SKIP"
+    message: "Dependency freshness check skipped (npm outdated unavailable)"
+    priority: 2.5
+    effort: "quick"
+    duration_ms: 8064
+    depends_on:
+      - 14
+      - 18
+      - 19
+    suggestions:
+      - "Run npm outdated manually when network is available"
+      - "Configure renovate.json or dependabot.yml"
+failed_gates:
+  - *a1
+  - *a2
+  - *a3
+  - *a4
+  - *a5
+  - *a6
+  - *a7
+  - *a8
+  - *a9
+  - *a10
+warned_gates:
+  - *a11
+  - *a12
+  - *a13
+  - *a14
+  - *a15
+  - *a16
+  - *a17
+  - *a18
+  - *a19
+  - *a20
+  - *a21
+  - *a22
+  - *a23
+  - *a24
+  - *a25
+  - *a26
+  - *a27
+  - *a28
+  - *a29
+  - *a30
+  - *a31
+  - *a32
+  - *a33
+  - *a34
+  - *a35
+  - *a36
+  - *a37
+  - *a38
+  - *a39
+  - *a40
+  - *a41

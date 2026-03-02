@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Platform } from "react-native";
+import { View, Text, StyleSheet, Platform, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { colors, spacing, radius, typography } from "../../../theme";
 import { ScalePress, FadeIn } from "../../animated";
@@ -44,202 +44,214 @@ export function PhasesView({
   // Project Flows Selection (no flow selected)
   if (!selectedFlowId) {
     return (
-      <FadeIn delay={50} direction="up">
-        {/* Hero Section */}
-        <View style={styles.flowHeroSection}>
-          <View style={styles.flowHeroContent}>
-            <View style={styles.flowHeroIconContainer}>
-              <Ionicons
-                name="map-outline"
-                size={40}
-                color={colors.accent.primary}
-              />
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.contentContainer}
+        showsVerticalScrollIndicator={false}
+      >
+        <FadeIn delay={50} direction="up">
+          {/* Hero Section */}
+          <View style={styles.flowHeroSection}>
+            <View style={styles.flowHeroContent}>
+              <View style={styles.flowHeroIconContainer}>
+                <Ionicons
+                  name="map-outline"
+                  size={40}
+                  color={colors.accent.primary}
+                />
+              </View>
+              <Text style={styles.flowHeroTitle}>מדריך התחלה מהירה</Text>
+              <Text style={styles.flowHeroSubtitle}>
+                בחר את סוג הפרויקט שלך וקבל מדריך מפורט צעד-אחר-צעד
+              </Text>
             </View>
-            <Text style={styles.flowHeroTitle}>מדריך התחלה מהירה</Text>
-            <Text style={styles.flowHeroSubtitle}>
-              בחר את סוג הפרויקט שלך וקבל מדריך מפורט צעד-אחר-צעד
-            </Text>
           </View>
-        </View>
 
-        {/* Flow Selection Cards */}
-        <View style={styles.flowCardsContainer}>
-          {projectFlows.map((flow, index) => {
-            const requiredSteps = flow.steps.filter((s) => s.isRequired).length;
-            const optionalSteps = flow.steps.length - requiredSteps;
-            const progress = getFlowProgress(flow);
+          {/* Flow Selection Cards */}
+          <View style={styles.flowCardsContainer}>
+            {projectFlows.map((flow, index) => {
+              const requiredSteps = flow.steps.filter(
+                (s) => s.isRequired,
+              ).length;
+              const optionalSteps = flow.steps.length - requiredSteps;
+              const progress = getFlowProgress(flow);
 
-            return (
-              <FadeIn key={flow.id} delay={150 + index * 100} direction="up">
-                <ScalePress
-                  onPress={() => onSelectFlow(flow.id)}
-                  style={styles.flowCardPremium}
-                  haptic="medium"
-                  scale={0.98}
-                >
-                  {/* Card Header with Gradient Effect */}
-                  <View
-                    style={[
-                      styles.flowCardHeader,
-                      { backgroundColor: `${flow.color}15` },
-                    ]}
+              return (
+                <FadeIn key={flow.id} delay={150 + index * 100} direction="up">
+                  <ScalePress
+                    onPress={() => onSelectFlow(flow.id)}
+                    style={styles.flowCardPremium}
+                    haptic="medium"
+                    scale={0.98}
                   >
+                    {/* Card Header with Gradient Effect */}
                     <View
                       style={[
-                        styles.flowCardIconLarge,
-                        { backgroundColor: `${flow.color}25` },
+                        styles.flowCardHeader,
+                        { backgroundColor: `${flow.color}15` },
                       ]}
                     >
-                      <Ionicons
-                        name={flow.icon as keyof typeof Ionicons.glyphMap}
-                        size={36}
-                        color={flow.color}
-                      />
-                    </View>
-                    <View style={styles.flowCardBadgeContainer}>
                       <View
                         style={[
-                          styles.flowCardBadge,
+                          styles.flowCardIconLarge,
+                          { backgroundColor: `${flow.color}25` },
+                        ]}
+                      >
+                        <Ionicons
+                          name={flow.icon as keyof typeof Ionicons.glyphMap}
+                          size={36}
+                          color={flow.color}
+                        />
+                      </View>
+                      <View style={styles.flowCardBadgeContainer}>
+                        <View
+                          style={[
+                            styles.flowCardBadge,
+                            { backgroundColor: flow.color },
+                          ]}
+                        >
+                          <Text style={styles.flowCardBadgeText}>
+                            {flow.id === "new-project"
+                              ? "מומלץ למתחילים"
+                              : "למפתחים מנוסים"}
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+
+                    {/* Card Content */}
+                    <View style={styles.flowCardBody}>
+                      <Text style={styles.flowCardTitle}>{flow.nameHe}</Text>
+                      <Text style={styles.flowCardDescription}>
+                        {flow.description}
+                      </Text>
+
+                      {/* Stats Row */}
+                      <View style={styles.flowCardStats}>
+                        <View style={styles.flowCardStat}>
+                          <Ionicons
+                            name="time-outline"
+                            size={18}
+                            color={flow.color}
+                          />
+                          <Text style={styles.flowCardStatValue}>
+                            {flow.estimatedTime}
+                          </Text>
+                        </View>
+                        <View style={styles.flowCardStatDivider} />
+                        <View style={styles.flowCardStat}>
+                          <Ionicons
+                            name="checkmark-circle-outline"
+                            size={18}
+                            color={colors.accent.success}
+                          />
+                          <Text style={styles.flowCardStatValue}>
+                            {requiredSteps} שלבי חובה
+                          </Text>
+                        </View>
+                        <View style={styles.flowCardStatDivider} />
+                        <View style={styles.flowCardStat}>
+                          <Ionicons
+                            name="options-outline"
+                            size={18}
+                            color={colors.text.muted}
+                          />
+                          <Text style={styles.flowCardStatValue}>
+                            {optionalSteps} אופציונלי
+                          </Text>
+                        </View>
+                      </View>
+
+                      {/* Progress Bar */}
+                      {progress.completed > 0 && (
+                        <View style={styles.flowCardProgress}>
+                          <View style={styles.flowCardProgressHeader}>
+                            <Text style={styles.flowCardProgressText}>
+                              התקדמות: {progress.completed}/{progress.total}
+                            </Text>
+                            <Text
+                              style={[
+                                styles.flowCardProgressPercent,
+                                {
+                                  color:
+                                    progress.percent === 100
+                                      ? colors.accent.success
+                                      : flow.color,
+                                },
+                              ]}
+                            >
+                              {progress.percent}%
+                            </Text>
+                          </View>
+                          <View style={styles.flowCardProgressBar}>
+                            <View
+                              style={[
+                                styles.flowCardProgressFill,
+                                {
+                                  width: `${progress.percent}%`,
+                                  backgroundColor:
+                                    progress.percent === 100
+                                      ? colors.accent.success
+                                      : flow.color,
+                                },
+                              ]}
+                            />
+                          </View>
+                        </View>
+                      )}
+
+                      {/* Preview of first 3 steps */}
+                      <View style={styles.flowCardPreview}>
+                        <Text style={styles.flowCardPreviewTitle}>השלבים:</Text>
+                        {flow.steps.slice(0, 3).map((step, i) => (
+                          <View key={i} style={styles.flowCardPreviewStep}>
+                            <View
+                              style={[
+                                styles.flowCardPreviewDot,
+                                { backgroundColor: flow.color },
+                              ]}
+                            />
+                            <Text style={styles.flowCardPreviewText}>
+                              {step.titleHe}
+                            </Text>
+                            {step.isRequired && (
+                              <View style={styles.flowCardPreviewRequired}>
+                                <Text
+                                  style={styles.flowCardPreviewRequiredText}
+                                >
+                                  חובה
+                                </Text>
+                              </View>
+                            )}
+                          </View>
+                        ))}
+                        {flow.steps.length > 3 && (
+                          <Text style={styles.flowCardPreviewMore}>
+                            +{flow.steps.length - 3} שלבים נוספים...
+                          </Text>
+                        )}
+                      </View>
+
+                      {/* CTA Button */}
+                      <View
+                        style={[
+                          styles.flowCardCTA,
                           { backgroundColor: flow.color },
                         ]}
                       >
-                        <Text style={styles.flowCardBadgeText}>
-                          {flow.id === "new-project"
-                            ? "מומלץ למתחילים"
-                            : "למפתחים מנוסים"}
+                        <Text style={styles.flowCardCTAText}>
+                          התחל את המדריך
                         </Text>
+                        <Ionicons name="arrow-back" size={18} color="#fff" />
                       </View>
                     </View>
-                  </View>
-
-                  {/* Card Content */}
-                  <View style={styles.flowCardBody}>
-                    <Text style={styles.flowCardTitle}>{flow.nameHe}</Text>
-                    <Text style={styles.flowCardDescription}>
-                      {flow.description}
-                    </Text>
-
-                    {/* Stats Row */}
-                    <View style={styles.flowCardStats}>
-                      <View style={styles.flowCardStat}>
-                        <Ionicons
-                          name="time-outline"
-                          size={18}
-                          color={flow.color}
-                        />
-                        <Text style={styles.flowCardStatValue}>
-                          {flow.estimatedTime}
-                        </Text>
-                      </View>
-                      <View style={styles.flowCardStatDivider} />
-                      <View style={styles.flowCardStat}>
-                        <Ionicons
-                          name="checkmark-circle-outline"
-                          size={18}
-                          color={colors.accent.success}
-                        />
-                        <Text style={styles.flowCardStatValue}>
-                          {requiredSteps} שלבי חובה
-                        </Text>
-                      </View>
-                      <View style={styles.flowCardStatDivider} />
-                      <View style={styles.flowCardStat}>
-                        <Ionicons
-                          name="options-outline"
-                          size={18}
-                          color={colors.text.muted}
-                        />
-                        <Text style={styles.flowCardStatValue}>
-                          {optionalSteps} אופציונלי
-                        </Text>
-                      </View>
-                    </View>
-
-                    {/* Progress Bar */}
-                    {progress.completed > 0 && (
-                      <View style={styles.flowCardProgress}>
-                        <View style={styles.flowCardProgressHeader}>
-                          <Text style={styles.flowCardProgressText}>
-                            התקדמות: {progress.completed}/{progress.total}
-                          </Text>
-                          <Text
-                            style={[
-                              styles.flowCardProgressPercent,
-                              {
-                                color:
-                                  progress.percent === 100
-                                    ? colors.accent.success
-                                    : flow.color,
-                              },
-                            ]}
-                          >
-                            {progress.percent}%
-                          </Text>
-                        </View>
-                        <View style={styles.flowCardProgressBar}>
-                          <View
-                            style={[
-                              styles.flowCardProgressFill,
-                              {
-                                width: `${progress.percent}%`,
-                                backgroundColor:
-                                  progress.percent === 100
-                                    ? colors.accent.success
-                                    : flow.color,
-                              },
-                            ]}
-                          />
-                        </View>
-                      </View>
-                    )}
-
-                    {/* Preview of first 3 steps */}
-                    <View style={styles.flowCardPreview}>
-                      <Text style={styles.flowCardPreviewTitle}>השלבים:</Text>
-                      {flow.steps.slice(0, 3).map((step, i) => (
-                        <View key={i} style={styles.flowCardPreviewStep}>
-                          <View
-                            style={[
-                              styles.flowCardPreviewDot,
-                              { backgroundColor: flow.color },
-                            ]}
-                          />
-                          <Text style={styles.flowCardPreviewText}>
-                            {step.titleHe}
-                          </Text>
-                          {step.isRequired && (
-                            <View style={styles.flowCardPreviewRequired}>
-                              <Text style={styles.flowCardPreviewRequiredText}>
-                                חובה
-                              </Text>
-                            </View>
-                          )}
-                        </View>
-                      ))}
-                      {flow.steps.length > 3 && (
-                        <Text style={styles.flowCardPreviewMore}>
-                          +{flow.steps.length - 3} שלבים נוספים...
-                        </Text>
-                      )}
-                    </View>
-
-                    {/* CTA Button */}
-                    <View
-                      style={[
-                        styles.flowCardCTA,
-                        { backgroundColor: flow.color },
-                      ]}
-                    >
-                      <Text style={styles.flowCardCTAText}>התחל את המדריך</Text>
-                      <Ionicons name="arrow-back" size={18} color="#fff" />
-                    </View>
-                  </View>
-                </ScalePress>
-              </FadeIn>
-            );
-          })}
-        </View>
-      </FadeIn>
+                  </ScalePress>
+                </FadeIn>
+              );
+            })}
+          </View>
+        </FadeIn>
+      </ScrollView>
     );
   }
 
@@ -250,326 +262,343 @@ export function PhasesView({
   const requiredSteps = flow.steps.filter((s) => s.isRequired).length;
 
   return (
-    <FadeIn delay={50} direction="up">
-      <View style={styles.flowDetailContainer}>
-        {/* Premium Header */}
-        <View
-          style={[
-            styles.flowDetailHero,
-            { backgroundColor: `${flow.color}10` },
-          ]}
-        >
-          <ScalePress
-            onPress={() => onSelectFlow(null)}
-            style={styles.flowDetailBack}
-            haptic="light"
+    <ScrollView
+      style={styles.scrollView}
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <FadeIn delay={50} direction="up">
+        <View style={styles.flowDetailContainer}>
+          {/* Premium Header */}
+          <View
+            style={[
+              styles.flowDetailHero,
+              { backgroundColor: `${flow.color}10` },
+            ]}
           >
-            <Ionicons
-              name="arrow-forward"
-              size={20}
-              color={colors.text.secondary}
-            />
-            <Text style={styles.flowDetailBackText}>חזרה</Text>
-          </ScalePress>
-
-          <View style={styles.flowDetailHeroContent}>
-            <View
-              style={[
-                styles.flowDetailIconLarge,
-                { backgroundColor: `${flow.color}20` },
-              ]}
+            <ScalePress
+              onPress={() => onSelectFlow(null)}
+              style={styles.flowDetailBack}
+              haptic="light"
             >
               <Ionicons
-                name={flow.icon as keyof typeof Ionicons.glyphMap}
-                size={48}
-                color={flow.color}
+                name="arrow-forward"
+                size={20}
+                color={colors.text.secondary}
               />
-            </View>
-            <Text style={styles.flowDetailTitle}>{flow.nameHe}</Text>
-            <Text style={styles.flowDetailSubtitle}>{flow.description}</Text>
+              <Text style={styles.flowDetailBackText}>חזרה</Text>
+            </ScalePress>
 
-            {/* Progress Bar */}
-            <View style={styles.flowProgressContainer}>
-              <View style={styles.flowProgressBar}>
-                <View
-                  style={[
-                    styles.flowProgressFill,
-                    {
-                      backgroundColor: flow.color,
-                      width: "0%",
-                    },
-                  ]}
+            <View style={styles.flowDetailHeroContent}>
+              <View
+                style={[
+                  styles.flowDetailIconLarge,
+                  { backgroundColor: `${flow.color}20` },
+                ]}
+              >
+                <Ionicons
+                  name={flow.icon as keyof typeof Ionicons.glyphMap}
+                  size={48}
+                  color={flow.color}
                 />
               </View>
-              <View style={styles.flowProgressStats}>
-                <View style={styles.flowProgressStat}>
-                  <Ionicons
-                    name="time-outline"
-                    size={16}
-                    color={colors.text.muted}
+              <Text style={styles.flowDetailTitle}>{flow.nameHe}</Text>
+              <Text style={styles.flowDetailSubtitle}>{flow.description}</Text>
+
+              {/* Progress Bar */}
+              <View style={styles.flowProgressContainer}>
+                <View style={styles.flowProgressBar}>
+                  <View
+                    style={[
+                      styles.flowProgressFill,
+                      {
+                        backgroundColor: flow.color,
+                        width: "0%",
+                      },
+                    ]}
                   />
-                  <Text style={styles.flowProgressStatText}>
-                    {flow.estimatedTime}
-                  </Text>
                 </View>
-                <View style={styles.flowProgressStat}>
-                  <Ionicons
-                    name="list-outline"
-                    size={16}
-                    color={colors.text.muted}
-                  />
-                  <Text style={styles.flowProgressStatText}>
-                    {flow.steps.length} שלבים ({requiredSteps} חובה)
-                  </Text>
+                <View style={styles.flowProgressStats}>
+                  <View style={styles.flowProgressStat}>
+                    <Ionicons
+                      name="time-outline"
+                      size={16}
+                      color={colors.text.muted}
+                    />
+                    <Text style={styles.flowProgressStatText}>
+                      {flow.estimatedTime}
+                    </Text>
+                  </View>
+                  <View style={styles.flowProgressStat}>
+                    <Ionicons
+                      name="list-outline"
+                      size={16}
+                      color={colors.text.muted}
+                    />
+                    <Text style={styles.flowProgressStatText}>
+                      {flow.steps.length} שלבים ({requiredSteps} חובה)
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
           </View>
-        </View>
 
-        {/* Steps Timeline */}
-        <View style={styles.flowStepsTimeline}>
-          {flow.steps.map((step, stepIndex) => {
-            const phase = phases.find((p) => p.id === step.phase);
-            const phaseColor = phase?.color || flow.color;
+          {/* Steps Timeline */}
+          <View style={styles.flowStepsTimeline}>
+            {flow.steps.map((step, stepIndex) => {
+              const phase = phases.find((p) => p.id === step.phase);
+              const phaseColor = phase?.color || flow.color;
 
-            return (
-              <FadeIn
-                key={step.stepNumber}
-                delay={100 + stepIndex * 75}
-                direction="up"
-              >
-                <View style={styles.flowStepPremium}>
-                  {/* Timeline connector with checkbox */}
-                  <View style={styles.flowStepTimelineLeft}>
-                    <ScalePress
-                      onPress={() =>
-                        toggleStepComplete(flow.id, step.stepNumber)
-                      }
-                      hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-                      haptic="light"
-                      style={[
-                        styles.flowStepCircle,
-                        {
-                          backgroundColor: isStepCompleted(
-                            flow.id,
-                            step.stepNumber,
-                          )
-                            ? colors.accent.success
-                            : step.isRequired
-                              ? phaseColor
-                              : colors.bg.tertiary,
-                          borderColor: isStepCompleted(flow.id, step.stepNumber)
-                            ? colors.accent.success
-                            : phaseColor,
-                        },
-                      ]}
-                    >
-                      {isStepCompleted(flow.id, step.stepNumber) ? (
-                        <Ionicons name="checkmark" size={16} color="#fff" />
-                      ) : (
-                        <Text
-                          style={[
-                            styles.flowStepCircleText,
-                            {
-                              color: step.isRequired
-                                ? "#fff"
-                                : colors.text.muted,
-                            },
-                          ]}
-                        >
-                          {step.stepNumber}
-                        </Text>
-                      )}
-                    </ScalePress>
-                    {stepIndex < flow.steps.length - 1 && (
-                      <View
+              return (
+                <FadeIn
+                  key={step.stepNumber}
+                  delay={100 + stepIndex * 75}
+                  direction="up"
+                >
+                  <View style={styles.flowStepPremium}>
+                    {/* Timeline connector with checkbox */}
+                    <View style={styles.flowStepTimelineLeft}>
+                      <ScalePress
+                        onPress={() =>
+                          toggleStepComplete(flow.id, step.stepNumber)
+                        }
+                        hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+                        haptic="light"
                         style={[
-                          styles.flowStepConnector,
-                          { backgroundColor: `${phaseColor}40` },
-                        ]}
-                      />
-                    )}
-                  </View>
-
-                  {/* Step Card */}
-                  <View
-                    style={[
-                      styles.flowStepCard,
-                      {
-                        borderStartColor: phaseColor,
-                        borderStartWidth: 3,
-                      },
-                    ]}
-                  >
-                    {/* Card Header */}
-                    <View style={styles.flowStepCardHeader}>
-                      <View style={styles.flowStepCardTitleRow}>
-                        {phase && (
-                          <View
-                            style={[
-                              styles.flowStepPhaseIcon,
-                              { backgroundColor: `${phaseColor}20` },
-                            ]}
-                          >
-                            <Ionicons
-                              name={
-                                phase.icon as keyof typeof Ionicons.glyphMap
-                              }
-                              size={16}
-                              color={phaseColor}
-                            />
-                          </View>
-                        )}
-                        <View style={styles.flowStepTitleContainer}>
-                          <Text style={styles.flowStepCardTitle}>
-                            {step.titleHe}
-                          </Text>
-                          {phase && (
-                            <Text
-                              style={[
-                                styles.flowStepPhaseLabel,
-                                { color: phaseColor },
-                              ]}
-                            >
-                              Phase {phase.number}: {phase.name}
-                            </Text>
-                          )}
-                        </View>
-                      </View>
-                      <View
-                        style={[
-                          styles.flowStepStatusBadge,
+                          styles.flowStepCircle,
                           {
-                            backgroundColor: step.isRequired
-                              ? colors.status.errorBg
-                              : colors.bg.tertiary,
+                            backgroundColor: isStepCompleted(
+                              flow.id,
+                              step.stepNumber,
+                            )
+                              ? colors.accent.success
+                              : step.isRequired
+                                ? phaseColor
+                                : colors.bg.tertiary,
+                            borderColor: isStepCompleted(
+                              flow.id,
+                              step.stepNumber,
+                            )
+                              ? colors.accent.success
+                              : phaseColor,
                           },
                         ]}
                       >
-                        <Text
+                        {isStepCompleted(flow.id, step.stepNumber) ? (
+                          <Ionicons name="checkmark" size={16} color="#fff" />
+                        ) : (
+                          <Text
+                            style={[
+                              styles.flowStepCircleText,
+                              {
+                                color: step.isRequired
+                                  ? "#fff"
+                                  : colors.text.muted,
+                              },
+                            ]}
+                          >
+                            {step.stepNumber}
+                          </Text>
+                        )}
+                      </ScalePress>
+                      {stepIndex < flow.steps.length - 1 && (
+                        <View
                           style={[
-                            styles.flowStepStatusText,
+                            styles.flowStepConnector,
+                            { backgroundColor: `${phaseColor}40` },
+                          ]}
+                        />
+                      )}
+                    </View>
+
+                    {/* Step Card */}
+                    <View
+                      style={[
+                        styles.flowStepCard,
+                        {
+                          borderStartColor: phaseColor,
+                          borderStartWidth: 3,
+                        },
+                      ]}
+                    >
+                      {/* Card Header */}
+                      <View style={styles.flowStepCardHeader}>
+                        <View style={styles.flowStepCardTitleRow}>
+                          {phase && (
+                            <View
+                              style={[
+                                styles.flowStepPhaseIcon,
+                                { backgroundColor: `${phaseColor}20` },
+                              ]}
+                            >
+                              <Ionicons
+                                name={
+                                  phase.icon as keyof typeof Ionicons.glyphMap
+                                }
+                                size={16}
+                                color={phaseColor}
+                              />
+                            </View>
+                          )}
+                          <View style={styles.flowStepTitleContainer}>
+                            <Text style={styles.flowStepCardTitle}>
+                              {step.titleHe}
+                            </Text>
+                            {phase && (
+                              <Text
+                                style={[
+                                  styles.flowStepPhaseLabel,
+                                  { color: phaseColor },
+                                ]}
+                              >
+                                Phase {phase.number}: {phase.name}
+                              </Text>
+                            )}
+                          </View>
+                        </View>
+                        <View
+                          style={[
+                            styles.flowStepStatusBadge,
                             {
-                              color: step.isRequired
-                                ? colors.status.error
-                                : colors.text.muted,
+                              backgroundColor: step.isRequired
+                                ? colors.status.errorBg
+                                : colors.bg.tertiary,
                             },
                           ]}
                         >
-                          {step.isRequired ? "חובה" : "אופציונלי"}
-                        </Text>
-                      </View>
-                    </View>
-
-                    {/* Description */}
-                    <Text style={styles.flowStepCardDescription}>
-                      {step.description}
-                    </Text>
-
-                    {/* Commands Section */}
-                    <View style={styles.flowStepCommandsSection}>
-                      <Text style={styles.flowStepCommandsLabel}>
-                        פקודות להרצה:
-                      </Text>
-                      <View style={styles.flowStepCommandsList}>
-                        {step.commands.map((cmd, cmdIndex) => (
-                          <ScalePress
-                            key={cmdIndex}
-                            onPress={() => handleCopyCommand(cmd)}
+                          <Text
                             style={[
-                              styles.flowStepCommandPill,
-                              { backgroundColor: `${phaseColor}15` },
+                              styles.flowStepStatusText,
+                              {
+                                color: step.isRequired
+                                  ? colors.status.error
+                                  : colors.text.muted,
+                              },
                             ]}
-                            haptic="medium"
                           >
-                            <Text
-                              style={[
-                                styles.flowStepCommandPillText,
-                                { color: phaseColor },
-                              ]}
-                            >
-                              {cmd}
-                            </Text>
-                            <View
-                              style={[
-                                styles.flowStepCopyIcon,
-                                { backgroundColor: phaseColor },
-                              ]}
-                            >
-                              <Ionicons name="copy" size={10} color="#fff" />
-                            </View>
-                          </ScalePress>
-                        ))}
-                      </View>
-                    </View>
-
-                    {/* Tips */}
-                    {step.tips && step.tips.length > 0 && (
-                      <View style={styles.flowStepTipsSection}>
-                        <View style={styles.flowStepTipsHeader}>
-                          <Ionicons
-                            name="bulb"
-                            size={16}
-                            color={colors.accent.warning}
-                          />
-                          <Text style={styles.flowStepTipsLabel}>
-                            טיפים חשובים
+                            {step.isRequired ? "חובה" : "אופציונלי"}
                           </Text>
                         </View>
-                        {step.tips.map((tip, tipIndex) => (
-                          <View key={tipIndex} style={styles.flowStepTipRow}>
-                            <View style={styles.flowStepTipBullet} />
-                            <Text style={styles.flowStepTipContent}>{tip}</Text>
-                          </View>
-                        ))}
                       </View>
-                    )}
 
-                    {/* Warning */}
-                    {step.warning && (
-                      <View style={styles.flowStepWarningSection}>
-                        <Ionicons
-                          name="alert-circle"
-                          size={18}
-                          color={colors.status.error}
-                        />
-                        <Text style={styles.flowStepWarningContent}>
-                          {step.warning}
+                      {/* Description */}
+                      <Text style={styles.flowStepCardDescription}>
+                        {step.description}
+                      </Text>
+
+                      {/* Commands Section */}
+                      <View style={styles.flowStepCommandsSection}>
+                        <Text style={styles.flowStepCommandsLabel}>
+                          פקודות להרצה:
                         </Text>
+                        <View style={styles.flowStepCommandsList}>
+                          {step.commands.map((cmd, cmdIndex) => (
+                            <ScalePress
+                              key={cmdIndex}
+                              onPress={() => handleCopyCommand(cmd)}
+                              style={[
+                                styles.flowStepCommandPill,
+                                { backgroundColor: `${phaseColor}15` },
+                              ]}
+                              haptic="medium"
+                            >
+                              <Text
+                                style={[
+                                  styles.flowStepCommandPillText,
+                                  { color: phaseColor },
+                                ]}
+                              >
+                                {cmd}
+                              </Text>
+                              <View
+                                style={[
+                                  styles.flowStepCopyIcon,
+                                  { backgroundColor: phaseColor },
+                                ]}
+                              >
+                                <Ionicons name="copy" size={10} color="#fff" />
+                              </View>
+                            </ScalePress>
+                          ))}
+                        </View>
                       </View>
-                    )}
-                  </View>
-                </View>
-              </FadeIn>
-            );
-          })}
-        </View>
 
-        {/* Bottom CTA */}
-        <View style={styles.flowBottomCTA}>
-          <Text style={styles.flowBottomCTAText}>
-            סיימת? חזור לבחירת סוג פרויקט או המשך לעבודה עם הפקודות
-          </Text>
-          <ScalePress
-            onPress={() => onSelectFlow(null)}
-            style={[
-              styles.flowBottomCTAButton,
-              { backgroundColor: flow.color },
-            ]}
-            haptic="medium"
-          >
-            <Text style={styles.flowBottomCTAButtonText}>
-              חזרה לתפריט הראשי
+                      {/* Tips */}
+                      {step.tips && step.tips.length > 0 && (
+                        <View style={styles.flowStepTipsSection}>
+                          <View style={styles.flowStepTipsHeader}>
+                            <Ionicons
+                              name="bulb"
+                              size={16}
+                              color={colors.accent.warning}
+                            />
+                            <Text style={styles.flowStepTipsLabel}>
+                              טיפים חשובים
+                            </Text>
+                          </View>
+                          {step.tips.map((tip, tipIndex) => (
+                            <View key={tipIndex} style={styles.flowStepTipRow}>
+                              <View style={styles.flowStepTipBullet} />
+                              <Text style={styles.flowStepTipContent}>
+                                {tip}
+                              </Text>
+                            </View>
+                          ))}
+                        </View>
+                      )}
+
+                      {/* Warning */}
+                      {step.warning && (
+                        <View style={styles.flowStepWarningSection}>
+                          <Ionicons
+                            name="alert-circle"
+                            size={18}
+                            color={colors.status.error}
+                          />
+                          <Text style={styles.flowStepWarningContent}>
+                            {step.warning}
+                          </Text>
+                        </View>
+                      )}
+                    </View>
+                  </View>
+                </FadeIn>
+              );
+            })}
+          </View>
+
+          {/* Bottom CTA */}
+          <View style={styles.flowBottomCTA}>
+            <Text style={styles.flowBottomCTAText}>
+              סיימת? חזור לבחירת סוג פרויקט או המשך לעבודה עם הפקודות
             </Text>
-          </ScalePress>
+            <ScalePress
+              onPress={() => onSelectFlow(null)}
+              style={[
+                styles.flowBottomCTAButton,
+                { backgroundColor: flow.color },
+              ]}
+              haptic="medium"
+            >
+              <Text style={styles.flowBottomCTAButtonText}>
+                חזרה לתפריט הראשי
+              </Text>
+            </ScalePress>
+          </View>
         </View>
-      </View>
-    </FadeIn>
+      </FadeIn>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  contentContainer: {
+    paddingBottom: spacing.xxl,
+  },
   // Hero Section
   flowHeroSection: {
     marginHorizontal: spacing.md,

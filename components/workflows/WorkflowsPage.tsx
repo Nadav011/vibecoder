@@ -1,14 +1,28 @@
 // ================================
-// WORKFLOWS PAGE - Modular Version
+// WORKFLOWS PAGE - Enhanced UI Version
 // ================================
-// This component has been refactored from 5,300+ lines to ~300 lines
-// by extracting logic to hooks and UI to separate view components
+// Features:
+// - Grouped category tabs (4 categories instead of 9 tabs)
+// - Global progress tracking
+// - Copy history panel (FAB)
+// - Breadcrumb navigation
+// - Beginner mode toggle
+// - Search with results count and history
+// - APEX-UI compliant (spring animations, WCAG AAA, RTL)
 
 import React from "react";
-import { View, StyleSheet, ScrollView, Platform } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Platform,
+  Switch,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
-import { colors, spacing } from "../../theme";
+import { Ionicons } from "@expo/vector-icons";
+import { colors, spacing, typography } from "../../theme";
 import { haptics } from "../../utils/haptics";
 import {
   PHASES,
@@ -30,7 +44,10 @@ import {
   WorkflowsHeader,
   WorkflowsSearch,
   PlatformToggle,
-  ViewModeTabs,
+  CategoryTabs,
+  Breadcrumb,
+  GlobalProgress,
+  CopyHistoryPanel,
 } from "./shared";
 import {
   FullFlowView,
@@ -75,6 +92,18 @@ export function WorkflowsPage() {
     getFlowProgress,
     handleCopy,
     copyUseCaseCommands,
+    // NEW: Enhanced features
+    recentCopies,
+    clearRecentCopies,
+    isBeginnerMode,
+    setIsBeginnerMode,
+    searchHistory,
+    isProgressExpanded,
+    setIsProgressExpanded,
+    categoryProgress,
+    totalProgress,
+    breadcrumbItems,
+    navigateBreadcrumb,
   } = useWorkflowsState();
 
   // Copy command to clipboard
@@ -96,9 +125,29 @@ export function WorkflowsPage() {
           contentContainerStyle={styles.contentContainer}
           showsVerticalScrollIndicator={false}
         >
-          {allSearchResults.map((cmd) => (
-            <CommandCard key={cmd.id} command={cmd} onCopy={onCopyCommand} />
-          ))}
+          {allSearchResults.length === 0 ? (
+            <View style={styles.emptyState}>
+              <Ionicons
+                name="search-outline"
+                size={48}
+                color={colors.text.muted}
+              />
+              <Text style={styles.emptyStateTitle}>לא נמצאו תוצאות</Text>
+              <Text style={styles.emptyStateText}>
+                נסה לחפש מילה אחרת או בדוק את האיות
+              </Text>
+            </View>
+          ) : (
+            allSearchResults.map((cmd) => (
+              <CommandCard
+                key={cmd.id}
+                command={cmd}
+                onCopy={onCopyCommand}
+                isBeginnerMode={isBeginnerMode}
+                searchQuery={searchQuery}
+              />
+            ))
+          )}
         </ScrollView>
       );
     }
@@ -125,6 +174,8 @@ export function WorkflowsPage() {
             onCopyCommand={onCopyCommand}
             getCommandsByCategory={getCommandsByCategory}
             allCategories={filteredCategories}
+            isBeginnerMode={isBeginnerMode}
+            searchQuery={searchQuery}
           />
         );
 
@@ -203,8 +254,41 @@ export function WorkflowsPage() {
         commandCount={TOTAL_COMMANDS}
       />
 
-      {/* Search */}
-      <WorkflowsSearch value={searchQuery} onChangeText={setSearchQuery} />
+      {/* Search with enhanced features */}
+      <WorkflowsSearch
+        value={searchQuery}
+        onChangeText={setSearchQuery}
+        resultsCount={searchQuery.trim() ? allSearchResults.length : undefined}
+        searchHistory={searchHistory}
+      />
+
+      {/* Beginner Mode Toggle - only when not searching */}
+      {!searchQuery && (
+        <View style={styles.toggleRow}>
+          <View style={styles.toggleContent}>
+            <Ionicons
+              name="bulb-outline"
+              size={16}
+              color={isBeginnerMode ? colors.accent.warning : colors.text.muted}
+            />
+            <Text style={styles.toggleLabel}>מצב מתחילים</Text>
+          </View>
+          <Switch
+            value={isBeginnerMode}
+            onValueChange={(value) => {
+              setIsBeginnerMode(value);
+              haptics.selection();
+            }}
+            trackColor={{
+              false: colors.bg.tertiary,
+              true: colors.accent.warningGlow,
+            }}
+            thumbColor={
+              isBeginnerMode ? colors.accent.warning : colors.text.muted
+            }
+          />
+        </View>
+      )}
 
       {/* Platform Filter Toggle - only when not searching */}
       {!searchQuery && (
@@ -219,16 +303,39 @@ export function WorkflowsPage() {
         />
       )}
 
-      {/* View Mode Tabs - only when not searching */}
+      {/* Global Progress - only when not searching */}
+      {!searchQuery && totalProgress.total > 0 && (
+        <GlobalProgress
+          categories={categoryProgress}
+          totalCompleted={totalProgress.completed}
+          totalItems={totalProgress.total}
+          isExpanded={isProgressExpanded}
+          onToggleExpand={() => setIsProgressExpanded(!isProgressExpanded)}
+        />
+      )}
+
+      {/* Category Tabs (grouped) - only when not searching */}
       {!searchQuery && (
-        <ViewModeTabs
+        <CategoryTabs
           activeMode={viewMode}
           onModeChange={(mode) => setViewMode(mode as ViewMode)}
         />
       )}
 
+      {/* Breadcrumb - only when in sub-views */}
+      {!searchQuery && breadcrumbItems.length > 2 && (
+        <Breadcrumb items={breadcrumbItems} onNavigate={navigateBreadcrumb} />
+      )}
+
       {/* Main Content */}
       <View style={styles.mainContent}>{renderContent()}</View>
+
+      {/* Copy History FAB - always visible if there's history */}
+      <CopyHistoryPanel
+        recentCopies={recentCopies}
+        onCopyAgain={onCopyCommand}
+        onClear={clearRecentCopies}
+      />
     </SafeAreaView>
   );
 }
@@ -247,5 +354,45 @@ const styles = StyleSheet.create({
   },
   mainContent: {
     flex: 1,
+  },
+  toggleRow: {
+    flexDirection: "row-reverse",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.xs,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border.subtle,
+  },
+  toggleContent: {
+    flexDirection: "row-reverse",
+    alignItems: "center",
+    gap: spacing.sm,
+  },
+  toggleLabel: {
+    fontSize: typography.size.sm,
+    color: colors.text.secondary,
+    textAlign: "right",
+    writingDirection: "rtl",
+  },
+  emptyState: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: spacing.xxl,
+    gap: spacing.md,
+  },
+  emptyStateTitle: {
+    fontSize: typography.size.lg,
+    fontWeight: typography.weight.semibold,
+    color: colors.text.primary,
+    textAlign: "center",
+    writingDirection: "rtl",
+  },
+  emptyStateText: {
+    fontSize: typography.size.md,
+    color: colors.text.secondary,
+    textAlign: "center",
+    writingDirection: "rtl",
   },
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Platform } from "react-native";
+import { View, Text, StyleSheet, Platform, ScrollView } from "react-native";
 import { colors, spacing, radius, typography } from "../../../theme";
 import { FadeIn, ScalePress } from "../../animated";
 import { haptics } from "../../../utils/haptics";
@@ -23,61 +23,76 @@ export function HardStopsView({
   };
 
   return (
-    <View style={styles.section}>
-      <Text style={styles.sectionTitle}>Hard Stops</Text>
-      <Text style={styles.sectionSubtitle}>תנאי מעבר קריטיים - אסור לדלג!</Text>
+    <ScrollView
+      style={styles.scrollView}
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Hard Stops</Text>
+        <Text style={styles.sectionSubtitle}>
+          תנאי מעבר קריטיים - אסור לדלג!
+        </Text>
 
-      <View style={styles.hardStopsTable}>
-        {/* Header */}
-        <View style={styles.hardStopHeader}>
-          <Text style={[styles.hardStopHeaderText, { flex: 1.5 }]}>אחרי</Text>
-          <Text style={[styles.hardStopHeaderText, { flex: 1 }]}>בדיקה</Text>
-          <Text style={[styles.hardStopHeaderText, { flex: 1 }]}>תנאי</Text>
-          <Text style={[styles.hardStopHeaderText, { flex: 1.5 }]}>
-            אם נכשל
-          </Text>
-        </View>
+        <View style={styles.hardStopsTable}>
+          {/* Header */}
+          <View style={styles.hardStopHeader}>
+            <Text style={[styles.hardStopHeaderText, { flex: 1.5 }]}>אחרי</Text>
+            <Text style={[styles.hardStopHeaderText, { flex: 1 }]}>בדיקה</Text>
+            <Text style={[styles.hardStopHeaderText, { flex: 1 }]}>תנאי</Text>
+            <Text style={[styles.hardStopHeaderText, { flex: 1.5 }]}>
+              אם נכשל
+            </Text>
+          </View>
 
-        {/* Rows */}
-        {hardStops.map((stop, index) => (
-          <FadeIn key={index} delay={100 + index * 30} direction="up">
-            <View style={styles.hardStopRow}>
-              <ScalePress
-                onPress={() => copyToClipboard(stop.after)}
-                style={[styles.hardStopCellView, { flex: 1.5 }]}
-                haptic="light"
-              >
-                <Text style={styles.hardStopCommand}>{stop.after}</Text>
-              </ScalePress>
-              <View style={[styles.hardStopCellView, { flex: 1 }]}>
-                <Text style={styles.hardStopCellText}>{stop.check}</Text>
-              </View>
-              <View style={[styles.hardStopCellView, { flex: 1 }]}>
-                <Text style={styles.hardStopCellText}>{stop.condition}</Text>
-              </View>
-              <ScalePress
-                onPress={() => copyToClipboard(stop.ifFailed)}
-                style={[styles.hardStopCellView, { flex: 1.5 }]}
-                haptic="light"
-              >
-                <Text
-                  style={[
-                    styles.hardStopCommand,
-                    stop.ifFailed === "DO NOT COMMIT" && styles.hardStopDanger,
-                  ]}
+          {/* Rows */}
+          {hardStops.map((stop, index) => (
+            <FadeIn key={index} delay={100 + index * 30} direction="up">
+              <View style={styles.hardStopRow}>
+                <ScalePress
+                  onPress={() => copyToClipboard(stop.after)}
+                  style={[styles.hardStopCellView, { flex: 1.5 }]}
+                  haptic="light"
                 >
-                  {stop.ifFailed}
-                </Text>
-              </ScalePress>
-            </View>
-          </FadeIn>
-        ))}
+                  <Text style={styles.hardStopCommand}>{stop.after}</Text>
+                </ScalePress>
+                <View style={[styles.hardStopCellView, { flex: 1 }]}>
+                  <Text style={styles.hardStopCellText}>{stop.check}</Text>
+                </View>
+                <View style={[styles.hardStopCellView, { flex: 1 }]}>
+                  <Text style={styles.hardStopCellText}>{stop.condition}</Text>
+                </View>
+                <ScalePress
+                  onPress={() => copyToClipboard(stop.ifFailed)}
+                  style={[styles.hardStopCellView, { flex: 1.5 }]}
+                  haptic="light"
+                >
+                  <Text
+                    style={[
+                      styles.hardStopCommand,
+                      stop.ifFailed === "DO NOT COMMIT" &&
+                        styles.hardStopDanger,
+                    ]}
+                  >
+                    {stop.ifFailed}
+                  </Text>
+                </ScalePress>
+              </View>
+            </FadeIn>
+          ))}
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  contentContainer: {
+    paddingBottom: spacing.xxl,
+  },
   section: {
     paddingHorizontal: spacing.md,
     gap: spacing.md,

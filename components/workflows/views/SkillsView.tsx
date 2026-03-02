@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Platform } from "react-native";
+import { View, Text, StyleSheet, Platform, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { colors, spacing, radius, typography } from "../../../theme";
 import { FadeIn, ScalePress } from "../../animated";
@@ -30,183 +30,205 @@ export function SkillsView({
   };
 
   return (
-    <View style={styles.section}>
-      <Text style={styles.sectionTitle}>{skills.length} Skills</Text>
-      <Text style={styles.sectionSubtitle}>
-        כל הסקילים (Web + Flutter) - לחץ לפירוט מלא
-      </Text>
+    <ScrollView
+      style={styles.scrollView}
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>{skills.length} Skills</Text>
+        <Text style={styles.sectionSubtitle}>
+          כל הסקילים (Web + Flutter) - לחץ לפירוט מלא
+        </Text>
 
-      <View style={styles.skillsGrid}>
-        {skills.map((skill, index) => {
-          const phase = phases.find(
-            (p) => p.skill.toUpperCase() === skill.name.toUpperCase(),
-          );
-          const phaseColor = phase?.color || colors.accent.primary;
-          const isExpanded = expandedSkillName === skill.name;
+        <View style={styles.skillsGrid}>
+          {skills.map((skill, index) => {
+            const phase = phases.find(
+              (p) => p.skill.toUpperCase() === skill.name.toUpperCase(),
+            );
+            const phaseColor = phase?.color || colors.accent.primary;
+            const isExpanded = expandedSkillName === skill.name;
 
-          return (
-            <FadeIn key={skill.name} delay={100 + index * 50} direction="up">
-              <View
-                style={[
-                  styles.skillCard,
-                  isExpanded && styles.skillCardExpanded,
-                  isExpanded && { borderColor: phaseColor },
-                ]}
-              >
-                {/* Skill Header - Clickable */}
-                <ScalePress
-                  onPress={() => {
-                    haptics.light();
-                    onExpandSkill(isExpanded ? null : skill.name);
-                  }}
-                  style={styles.skillHeaderClickable}
-                  haptic="light"
+            return (
+              <FadeIn key={skill.name} delay={100 + index * 50} direction="up">
+                <View
+                  style={[
+                    styles.skillCard,
+                    isExpanded && styles.skillCardExpanded,
+                    isExpanded && { borderColor: phaseColor },
+                  ]}
                 >
-                  <View style={styles.skillHeader}>
-                    <View
-                      style={[
-                        styles.skillNumber,
-                        { backgroundColor: `${phaseColor}20` },
-                      ]}
-                    >
-                      <Text
-                        style={[styles.skillNumberText, { color: phaseColor }]}
+                  {/* Skill Header - Clickable */}
+                  <ScalePress
+                    onPress={() => {
+                      haptics.light();
+                      onExpandSkill(isExpanded ? null : skill.name);
+                    }}
+                    style={styles.skillHeaderClickable}
+                    haptic="light"
+                  >
+                    <View style={styles.skillHeader}>
+                      <View
+                        style={[
+                          styles.skillNumber,
+                          { backgroundColor: `${phaseColor}20` },
+                        ]}
                       >
-                        {skill.number}
-                      </Text>
-                    </View>
-                    <View style={styles.skillInfo}>
-                      <Text style={styles.skillName}>{skill.name}</Text>
-                      <Text style={styles.skillRole}>{skill.role}</Text>
-                    </View>
-                    <Ionicons
-                      name={isExpanded ? "chevron-up" : "chevron-down"}
-                      size={20}
-                      color={colors.text.muted}
-                    />
-                  </View>
-                </ScalePress>
-
-                <View style={styles.skillPhase}>
-                  <Text style={styles.skillPhaseLabel}>Phase</Text>
-                  <Text style={[styles.skillPhaseValue, { color: phaseColor }]}>
-                    {skill.phase}
-                  </Text>
-                </View>
-
-                {/* Key Commands (always visible) */}
-                <View style={styles.skillCommands}>
-                  {skill.keyCommands.map((cmd, i) => (
-                    <ScalePress
-                      key={i}
-                      onPress={() => copyToClipboard(cmd)}
-                      style={styles.skillCommandBadge}
-                      haptic="light"
-                    >
-                      <Text style={styles.skillCommandText}>{cmd}</Text>
-                    </ScalePress>
-                  ))}
-                </View>
-
-                {/* Expanded: All Commands with Descriptions */}
-                {isExpanded && phase && (
-                  <View style={styles.skillExpandedContent}>
-                    <View style={styles.skillExpandedDivider} />
-                    <Text
-                      style={[styles.skillExpandedTitle, { color: phaseColor }]}
-                    >
-                      כל הפקודות ({phase.commands.length})
-                    </Text>
-                    {phase.description && (
-                      <Text style={styles.skillExpandedDescription}>
-                        {phase.description}
-                      </Text>
-                    )}
-                    <View style={styles.skillExpandedCommands}>
-                      {phase.commands.map((cmd) => (
-                        <ScalePress
-                          key={cmd.id}
-                          onPress={() => {
-                            const fullCommand = cmd.params
-                              ? `${cmd.command} ${cmd.params}`
-                              : cmd.command;
-                            copyToClipboard(fullCommand);
-                          }}
-                          style={styles.skillExpandedCommandCard}
-                          haptic="light"
+                        <Text
+                          style={[
+                            styles.skillNumberText,
+                            { color: phaseColor },
+                          ]}
                         >
-                          <View style={styles.skillExpandedCommandHeader}>
+                          {skill.number}
+                        </Text>
+                      </View>
+                      <View style={styles.skillInfo}>
+                        <Text style={styles.skillName}>{skill.name}</Text>
+                        <Text style={styles.skillRole}>{skill.role}</Text>
+                      </View>
+                      <Ionicons
+                        name={isExpanded ? "chevron-up" : "chevron-down"}
+                        size={20}
+                        color={colors.text.muted}
+                      />
+                    </View>
+                  </ScalePress>
+
+                  <View style={styles.skillPhase}>
+                    <Text style={styles.skillPhaseLabel}>Phase</Text>
+                    <Text
+                      style={[styles.skillPhaseValue, { color: phaseColor }]}
+                    >
+                      {skill.phase}
+                    </Text>
+                  </View>
+
+                  {/* Key Commands (always visible) */}
+                  <View style={styles.skillCommands}>
+                    {skill.keyCommands.map((cmd, i) => (
+                      <ScalePress
+                        key={i}
+                        onPress={() => copyToClipboard(cmd)}
+                        style={styles.skillCommandBadge}
+                        haptic="light"
+                      >
+                        <Text style={styles.skillCommandText}>{cmd}</Text>
+                      </ScalePress>
+                    ))}
+                  </View>
+
+                  {/* Expanded: All Commands with Descriptions */}
+                  {isExpanded && phase && (
+                    <View style={styles.skillExpandedContent}>
+                      <View style={styles.skillExpandedDivider} />
+                      <Text
+                        style={[
+                          styles.skillExpandedTitle,
+                          { color: phaseColor },
+                        ]}
+                      >
+                        כל הפקודות ({phase.commands.length})
+                      </Text>
+                      {phase.description && (
+                        <Text style={styles.skillExpandedDescription}>
+                          {phase.description}
+                        </Text>
+                      )}
+                      <View style={styles.skillExpandedCommands}>
+                        {phase.commands.map((cmd) => (
+                          <ScalePress
+                            key={cmd.id}
+                            onPress={() => {
+                              const fullCommand = cmd.params
+                                ? `${cmd.command} ${cmd.params}`
+                                : cmd.command;
+                              copyToClipboard(fullCommand);
+                            }}
+                            style={styles.skillExpandedCommandCard}
+                            haptic="light"
+                          >
+                            <View style={styles.skillExpandedCommandHeader}>
+                              <Text
+                                style={[
+                                  styles.skillExpandedCommandText,
+                                  { color: phaseColor },
+                                ]}
+                              >
+                                {cmd.command}
+                              </Text>
+                              {cmd.params && (
+                                <Text style={styles.skillExpandedCommandParams}>
+                                  {cmd.params}
+                                </Text>
+                              )}
+                              {cmd.isQuickAction && (
+                                <View style={styles.quickActionBadge}>
+                                  <Ionicons
+                                    name="flash"
+                                    size={10}
+                                    color={colors.accent.warning}
+                                  />
+                                </View>
+                              )}
+                            </View>
                             <Text
-                              style={[
-                                styles.skillExpandedCommandText,
-                                { color: phaseColor },
-                              ]}
+                              style={styles.skillExpandedCommandDesc}
+                              numberOfLines={2}
                             >
-                              {cmd.command}
+                              {cmd.description}
                             </Text>
-                            {cmd.params && (
-                              <Text style={styles.skillExpandedCommandParams}>
-                                {cmd.params}
+                            {cmd.output && (
+                              <Text style={styles.skillExpandedCommandOutput}>
+                                {cmd.output}
                               </Text>
                             )}
-                            {cmd.isQuickAction && (
-                              <View style={styles.quickActionBadge}>
-                                <Ionicons
-                                  name="flash"
-                                  size={10}
-                                  color={colors.accent.warning}
-                                />
-                              </View>
-                            )}
-                          </View>
-                          <Text
-                            style={styles.skillExpandedCommandDesc}
-                            numberOfLines={2}
-                          >
-                            {cmd.description}
-                          </Text>
-                          {cmd.output && (
-                            <Text style={styles.skillExpandedCommandOutput}>
-                              {cmd.output}
-                            </Text>
-                          )}
-                        </ScalePress>
-                      ))}
-                    </View>
-
-                    {/* Hard Stops for this phase */}
-                    {phase.hardStops && phase.hardStops.length > 0 && (
-                      <View style={styles.skillHardStops}>
-                        <Text style={styles.skillHardStopsTitle}>
-                          Hard Stops
-                        </Text>
-                        {phase.hardStops.map((stop, stopIndex) => (
-                          <View
-                            key={stopIndex}
-                            style={styles.skillHardStopItem}
-                          >
-                            <Ionicons
-                              name="warning"
-                              size={14}
-                              color={colors.accent.warning}
-                            />
-                            <Text style={styles.skillHardStopText}>{stop}</Text>
-                          </View>
+                          </ScalePress>
                         ))}
                       </View>
-                    )}
-                  </View>
-                )}
-              </View>
-            </FadeIn>
-          );
-        })}
+
+                      {/* Hard Stops for this phase */}
+                      {phase.hardStops && phase.hardStops.length > 0 && (
+                        <View style={styles.skillHardStops}>
+                          <Text style={styles.skillHardStopsTitle}>
+                            Hard Stops
+                          </Text>
+                          {phase.hardStops.map((stop, stopIndex) => (
+                            <View
+                              key={stopIndex}
+                              style={styles.skillHardStopItem}
+                            >
+                              <Ionicons
+                                name="warning"
+                                size={14}
+                                color={colors.accent.warning}
+                              />
+                              <Text style={styles.skillHardStopText}>
+                                {stop}
+                              </Text>
+                            </View>
+                          ))}
+                        </View>
+                      )}
+                    </View>
+                  )}
+                </View>
+              </FadeIn>
+            );
+          })}
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  contentContainer: {
+    paddingBottom: spacing.xxl,
+  },
   section: {
     paddingHorizontal: spacing.md,
     gap: spacing.md,

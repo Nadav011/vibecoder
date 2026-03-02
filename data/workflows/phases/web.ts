@@ -22,6 +22,7 @@ export const WEB_PHASES: Phase[] = [
         description: "רצף אתחול מלא (5 שלבים)",
         output: "Session Report",
         isQuickAction: true,
+        beginnerTip: "זו הפקודה הכי חשובה! הרץ אותה תמיד בתחילת עבודה עם Claude Code. היא מאתחלת את כל הסקילים ומוודאת ש-Claude מבין את הפרויקט שלך.",
       },
       {
         id: "boot-status",
@@ -80,6 +81,7 @@ export const WEB_PHASES: Phase[] = [
         description: "סריקה מלאה של הפרויקט",
         output: "AI_CONTEXT.md",
         isQuickAction: true,
+        beginnerTip: "הפקודה סורקת את כל הפרויקט ויוצרת קובץ AI_CONTEXT.md שמסביר ל-Claude את המבנה. הרץ אותה בפעם הראשונה שאתה פותח פרויקט קיים.",
       },
       {
         id: "map",
@@ -133,6 +135,7 @@ export const WEB_PHASES: Phase[] = [
         command: "/init new",
         params: "[project-name]",
         description: "יצירת פרויקט חדש מלא (כל 5 השלבים)",
+        beginnerTip: "משתמשים בפקודה זו כדי ליצור פרויקט חדש מאפס. היא יוצרת את כל התשתית, מבנה הקבצים, והקונפיגורציות הנדרשות.",
       },
       {
         id: "init-phase",
@@ -231,6 +234,7 @@ export const WEB_PHASES: Phase[] = [
         command: "/tpa component",
         params: '"[description]"',
         description: "יצירת קומפוננט React עם PPR",
+        beginnerTip: "יוצר קומפוננט React מושלם עם TypeScript, props מוגדרים, וסטיילים. תאר מה הקומפוננט צריך לעשות ו-Claude יכתוב את הקוד.",
       },
       {
         id: "tpa-hook",
@@ -367,6 +371,7 @@ export const WEB_PHASES: Phase[] = [
         description: "קיצור ל-/cld fix --all",
         shortcut: "/cld fix --all",
         isQuickAction: true,
+        beginnerTip: "הפקודה הכי שימושית לתיקון שגיאות! מתקנת אוטומטית שגיאות TypeScript, בעיות לינטינג, ובעיות נפוצות אחרות בקוד.",
       },
       {
         id: "god",
@@ -477,6 +482,7 @@ export const WEB_PHASES: Phase[] = [
         params: "[page-name]",
         description: "דף שלם עם layout + components",
         timeEstimate: "90s",
+        beginnerTip: "יוצר דף שלם עם כל הקומפוננטות הנדרשות. לדוגמה: /ui page dashboard יצור דף Dashboard עם layout, ניווט, וקומפוננטות.",
       },
       {
         id: "ui-component",
@@ -484,6 +490,7 @@ export const WEB_PHASES: Phase[] = [
         params: '"[description]"',
         description: "קומפוננט בודד",
         timeEstimate: "30s",
+        beginnerTip: "יוצר קומפוננט UI יחיד לפי תיאור. לדוגמה: /ui component \"כרטיס מוצר עם תמונה ומחיר\" יצור את הקומפוננט המבוקש.",
       },
       {
         id: "ui-layout",
@@ -640,6 +647,7 @@ export const WEB_PHASES: Phase[] = [
         description: "התקנת קומפוננטה בודדת לפרויקט",
         output: "Component Code",
         isQuickAction: true,
+        beginnerTip: "מעתיק קומפוננטה מוכנה לפרויקט שלך. לדוגמה: /components install DataTable יוסיף טבלה מוכנה עם סינון ומיון.",
       },
       {
         id: "components-install-multiple",
@@ -763,6 +771,7 @@ export const WEB_PHASES: Phase[] = [
         command: "/qa run",
         description: "כל הטסטים (Unit+Integration+E2E)",
         requirement: "100%",
+        beginnerTip: "מריץ את כל הטסטים בפרויקט - unit tests, integration tests, ו-E2E tests. תמיד הרץ לפני commit כדי לוודא שהכל עובד.",
       },
       {
         id: "qa-unit",
@@ -835,6 +844,7 @@ export const WEB_PHASES: Phase[] = [
         command: "/test",
         description: "קיצור ל-/qa run",
         shortcut: "/qa run",
+        beginnerTip: "קיצור נוח להרצת כל הטסטים. פשוט כתוב /test ו-Claude יריץ את כל הבדיקות ויראה לך את התוצאות.",
       },
       {
         id: "unit",
@@ -920,6 +930,7 @@ export const WEB_PHASES: Phase[] = [
         command: "/verify-app",
         description: "אימות E2E בדפדפן",
         isQuickAction: true,
+        beginnerTip: "פותח דפדפן ובודק שהאפליקציה עובדת כמו שצריך. Claude יבדוק כל flow חשוב ויתקן בעיות אם יש.",
       },
       {
         id: "verify-app-flow",
@@ -1108,6 +1119,7 @@ export const WEB_PHASES: Phase[] = [
         description: "commit עם OMEGA flow",
         requirement: "Audited",
         isQuickAction: true,
+        beginnerTip: "עושה commit מאובטח - קודם בודק את הקוד, ואז שומר. השתמש ב: /git commit \"תיאור השינוי\" לדוגמה: /git commit \"הוספת כפתור התחברות\"",
       },
       {
         id: "git-push",
@@ -1166,6 +1178,7 @@ export const WEB_PHASES: Phase[] = [
         params: '"[message]"',
         description: "קיצור ל-/git commit",
         shortcut: "/git commit",
+        beginnerTip: "קיצור ל-/git commit - פשוט כתוב /commit \"תיאור השינוי\" והפקודה תבצע את הכל בשבילך.",
       },
       {
         id: "push",

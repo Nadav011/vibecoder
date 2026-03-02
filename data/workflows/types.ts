@@ -14,6 +14,8 @@ export interface Command {
   requirement?: string;
   timeEstimate?: string;
   isAutonomous?: boolean;
+  /** Beginner-friendly explanation of the command */
+  beginnerTip?: string;
 }
 
 export interface Phase {

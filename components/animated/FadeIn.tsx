@@ -2,28 +2,28 @@ import React, { useEffect } from "react";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
-  withTiming,
+  withSpring,
   withDelay,
-  Easing,
 } from "react-native-reanimated";
 import { ViewStyle } from "react-native";
+import { SPRING_CONFIG } from "../../theme";
 
 interface FadeInProps {
   children: React.ReactNode;
   delay?: number;
-  duration?: number;
   direction?: "up" | "down" | "left" | "right" | "none";
   distance?: number;
   style?: ViewStyle;
+  springConfig?: keyof typeof SPRING_CONFIG;
 }
 
 export function FadeIn({
   children,
   delay = 0,
-  duration = 400,
   direction = "up",
   distance = 20,
   style,
+  springConfig = "default",
 }: FadeInProps) {
   const opacity = useSharedValue(0);
   const translateY = useSharedValue(
@@ -33,29 +33,14 @@ export function FadeIn({
     direction === "left" ? distance : direction === "right" ? -distance : 0,
   );
 
+  const config = SPRING_CONFIG[springConfig];
+
   useEffect(() => {
-    opacity.value = withDelay(
-      delay,
-      withTiming(1, {
-        duration,
-        easing: Easing.out(Easing.cubic),
-      }),
-    );
-    translateY.value = withDelay(
-      delay,
-      withTiming(0, {
-        duration,
-        easing: Easing.out(Easing.cubic),
-      }),
-    );
-    translateX.value = withDelay(
-      delay,
-      withTiming(0, {
-        duration,
-        easing: Easing.out(Easing.cubic),
-      }),
-    );
-  }, []);
+    opacity.value = withDelay(delay, withSpring(1, config));
+    translateY.value = withDelay(delay, withSpring(0, config));
+    translateX.value = withDelay(delay, withSpring(0, config));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [delay, config]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,

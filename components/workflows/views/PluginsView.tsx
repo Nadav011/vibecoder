@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Platform } from "react-native";
+import { View, Text, StyleSheet, Platform, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { colors, spacing, radius, typography } from "../../../theme";
 import { FadeIn, ScalePress } from "../../animated";
@@ -28,76 +28,92 @@ export function PluginsView({
   };
 
   return (
-    <View style={styles.section}>
-      <Text style={styles.sectionTitle}>{plugins.length} פלאגינים</Text>
-      <Text style={styles.sectionSubtitle}>
-        תוספים לשיפור העבודה עם Claude Code
-      </Text>
+    <ScrollView
+      style={styles.scrollView}
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>{plugins.length} פלאגינים</Text>
+        <Text style={styles.sectionSubtitle}>
+          תוספים לשיפור העבודה עם Claude Code
+        </Text>
 
-      <View style={styles.pluginsGrid}>
-        {plugins.map((plugin, index) => (
-          <FadeIn key={plugin.id} delay={100 + index * 50} direction="up">
-            <View style={styles.pluginCard}>
-              <View style={styles.pluginHeader}>
-                <Ionicons
-                  name="extension-puzzle"
-                  size={24}
-                  color={colors.accent.primary}
-                />
-                <Text style={styles.pluginName}>{plugin.name}</Text>
+        <View style={styles.pluginsGrid}>
+          {plugins.map((plugin, index) => (
+            <FadeIn key={plugin.id} delay={100 + index * 50} direction="up">
+              <View style={styles.pluginCard}>
+                <View style={styles.pluginHeader}>
+                  <Ionicons
+                    name="extension-puzzle"
+                    size={24}
+                    color={colors.accent.primary}
+                  />
+                  <Text style={styles.pluginName}>{plugin.name}</Text>
+                </View>
+                <Text style={styles.pluginDescription}>
+                  {plugin.description}
+                </Text>
+                <View style={styles.pluginCommands}>
+                  {(expandedPluginId === plugin.id
+                    ? plugin.commands
+                    : plugin.commands.slice(0, 3)
+                  ).map((cmd) => (
+                    <ScalePress
+                      key={cmd.id}
+                      onPress={() => copyToClipboard(cmd.command)}
+                      style={styles.pluginCommandBadge}
+                      haptic="light"
+                    >
+                      <Text style={styles.pluginCommandText}>
+                        {cmd.command}
+                      </Text>
+                    </ScalePress>
+                  ))}
+                  {plugin.commands.length > 3 && (
+                    <ScalePress
+                      onPress={() => {
+                        haptics.light();
+                        onExpandPlugin(
+                          expandedPluginId === plugin.id ? null : plugin.id,
+                        );
+                      }}
+                      style={styles.pluginMoreButton}
+                      haptic="light"
+                    >
+                      <Text style={styles.pluginMore}>
+                        {expandedPluginId === plugin.id
+                          ? "הסתר"
+                          : `+${plugin.commands.length - 3} עוד`}
+                      </Text>
+                      <Ionicons
+                        name={
+                          expandedPluginId === plugin.id
+                            ? "chevron-up"
+                            : "chevron-down"
+                        }
+                        size={12}
+                        color={colors.text.muted}
+                      />
+                    </ScalePress>
+                  )}
+                </View>
               </View>
-              <Text style={styles.pluginDescription}>{plugin.description}</Text>
-              <View style={styles.pluginCommands}>
-                {(expandedPluginId === plugin.id
-                  ? plugin.commands
-                  : plugin.commands.slice(0, 3)
-                ).map((cmd) => (
-                  <ScalePress
-                    key={cmd.id}
-                    onPress={() => copyToClipboard(cmd.command)}
-                    style={styles.pluginCommandBadge}
-                    haptic="light"
-                  >
-                    <Text style={styles.pluginCommandText}>{cmd.command}</Text>
-                  </ScalePress>
-                ))}
-                {plugin.commands.length > 3 && (
-                  <ScalePress
-                    onPress={() => {
-                      haptics.light();
-                      onExpandPlugin(
-                        expandedPluginId === plugin.id ? null : plugin.id,
-                      );
-                    }}
-                    style={styles.pluginMoreButton}
-                    haptic="light"
-                  >
-                    <Text style={styles.pluginMore}>
-                      {expandedPluginId === plugin.id
-                        ? "הסתר"
-                        : `+${plugin.commands.length - 3} עוד`}
-                    </Text>
-                    <Ionicons
-                      name={
-                        expandedPluginId === plugin.id
-                          ? "chevron-up"
-                          : "chevron-down"
-                      }
-                      size={12}
-                      color={colors.text.muted}
-                    />
-                  </ScalePress>
-                )}
-              </View>
-            </View>
-          </FadeIn>
-        ))}
+            </FadeIn>
+          ))}
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  contentContainer: {
+    paddingBottom: spacing.xxl,
+  },
   section: {
     paddingHorizontal: spacing.md,
     gap: spacing.md,
