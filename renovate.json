@@ -1,0 +1,45 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "schedule": [
+    "before 6am on Monday"
+  ],
+  "prCreation": "not-pending",
+  "automerge": false,
+  "labels": [
+    "dependencies"
+  ],
+  "packageRules": [
+    {
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true
+    },
+    {
+      "groupName": "Expo ecosystem",
+      "matchPackagePatterns": [
+        "^expo",
+        "^@expo"
+      ]
+    },
+    {
+      "groupName": "React Native ecosystem",
+      "matchPackagePatterns": [
+        "^react-native",
+        "^@react-native"
+      ]
+    },
+    {
+      "groupName": "Supabase",
+      "matchPackagePatterns": [
+        "^@supabase"
+      ]
+    }
+  ],
+  "minimumReleaseAge": "3 days"
+}
