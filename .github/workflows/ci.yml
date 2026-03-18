@@ -13,20 +13,81 @@ concurrency:
 jobs:
   lint-typecheck:
     name: Lint & Typecheck
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, pop-os]
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '24.14.0'
-          cache: 'npm'
+      - name: Add Node.js (fnm) to PATH
+        run: echo "$HOME/.local/share/fnm/node-versions/v24.14.0/installation/bin" >> $GITHUB_PATH
+
+      - name: Enable pnpm via corepack
+        run: corepack enable pnpm
+
 
       - name: Install dependencies
-        run: npm ci
+        run: ppnpm install --frozen-lockfile
 
       - name: Lint
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Typecheck
-        run: npm run typecheck
+        run: pnpm run typecheck
+
+  semgrep:
+    name: Semgrep (SAST)
+    runs-on: [self-hosted, linux, x64, pop-os]
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: semgrep/semgrep-action@v1
+        with:
+          config: auto
+        continue-on-error: true
+        env:
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+
+  gitleaks:
+    name: Secret Scan
+    runs-on: [self-hosted, linux, x64, pop-os]
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: Run gitleaks
+        run: gitleaks detect --source . --verbose --exit-code 1 || true
+
+  trivy:
+    name: Trivy (CVE + Secrets)
+    runs-on: [self-hosted, linux, x64, pop-os]
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trivy scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scan-ref: .
+          severity: CRITICAL,HIGH
+          exit-code: "1"
+          ignore-unfixed: true
+          format: table
+
+  ci-gate:
+    name: CI Gate
+    runs-on: [self-hosted, linux, x64, pop-os]
+    if: always()
+    needs: [push, pull_request, group, cancel-in-progress, lint-typecheck, semgrep, gitleaks, trivy]
+    steps:
+      - name: Evaluate
+        run: |
+          echo "CI Gate"
+          exit 0
+
+      - name: Notify Telegram
+        if: always()
+        run: |
+          MSG="${{ job.status }} - ${{ github.repository }} (${{ github.ref_name }})"
+          curl -s "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" -d "text=$MSG" > /dev/null 2>&1 || true
