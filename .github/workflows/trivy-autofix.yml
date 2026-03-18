@@ -7,7 +7,7 @@ on:
 
 jobs:
   trivy-autofix:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, pop-os]
     permissions:
       contents: write
       pull-requests: write
@@ -40,7 +40,12 @@ jobs:
           echo "count=$COUNT" >> $GITHUB_OUTPUT
           echo "CVEs found: $COUNT"
 
-      - uses: actions/setup-node@v4
+      - name: Add Node.js (fnm) to PATH
+        run: echo "$HOME/.local/share/fnm/node-versions/v24.14.0/installation/bin" >> $GITHUB_PATH
+
+      - name: Enable pnpm via corepack
+        run: corepack enable pnpm
+
         if: steps.check.outputs.count != '0'
         with:
           node-version: "24.14.0"
