@@ -5,17 +5,19 @@ on:
   workflow_dispatch:
 jobs:
   cleanup:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, pop-os]
     permissions:
       contents: write
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '24.14.0'
-          cache: 'npm'
-      - run: npm ci
+      - name: Add Node.js (fnm) to PATH
+        run: echo "$HOME/.local/share/fnm/node-versions/v24.14.0/installation/bin" >> $GITHUB_PATH
+
+      - name: Enable pnpm via corepack
+        run: corepack enable pnpm
+
+      - run: ppnpm install --frozen-lockfile
       - name: Knip unused file PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -33,7 +35,7 @@ jobs:
           BRANCH="chore/remove-unused-$(date +%Y%m%d-%H%M)"
           git checkout -b "$BRANCH"
           rm "$FILE"
-          npm run typecheck 2>/dev/null || { git checkout master; exit 0; }
+          pnpm run typecheck 2>/dev/null || { git checkout master; exit 0; }
           git add -A && git commit -m "chore: remove unused $FILE"
           git push origin "$BRANCH"
           gh pr create --title "chore: remove unused $(basename $FILE)" --body "Detected by Knip" --base master --head "$BRANCH"
