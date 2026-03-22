@@ -5,7 +5,12 @@
   "framework": null,
   "installCommand": "npm install",
   "devCommand": "npx expo start --web",
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -42,5 +47,6 @@
         }
       ]
     }
-  ]
+  ],
+  "ignoreCommand": "[ \"$VERCEL_ENV\" = \"preview\" ] && exit 0 || exit 1"
 }
