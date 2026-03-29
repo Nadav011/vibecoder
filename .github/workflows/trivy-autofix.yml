@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Trivy vulnerability scan
-        uses: aquasecurity/trivy-action@v0.30.0
+        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # v0.35.0
         with:
           scan-type: fs
           scan-ref: .
@@ -44,10 +44,6 @@ jobs:
         if: steps.check.outputs.count != '0'
         run: echo "$HOME/.local/share/fnm/node-versions/v24.14.0/installation/bin" >> $GITHUB_PATH
 
-      - name: Enable pnpm via corepack
-        if: steps.check.outputs.count != '0'
-        run: corepack enable pnpm
-
       - name: Auto-fix CVEs via npm overrides
         if: steps.check.outputs.count != '0'
         run: |
@@ -70,6 +66,10 @@ jobs:
               json.dump(pkg, f, indent=2, ensure_ascii=False)
               f.write(chr(10))
           "
+
+      - name: Install dependencies after override patch
+        if: steps.check.outputs.count != '0'
+        run: npm install --package-lock-only
 
       - name: Create Pull Request
         if: steps.check.outputs.count != '0'
