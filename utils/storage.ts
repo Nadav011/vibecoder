@@ -27,7 +27,10 @@ export function setStorageErrorHandler(callback: StorageErrorCallback): void {
  */
 export function handleStorageError(error: unknown, operation: string): void {
   const err = error instanceof Error ? error : new Error(String(error));
-  console.error(`[Storage] ${operation} failed:`, err.message);
+  console.error("[Storage] operation failed", {
+    operation,
+    message: err.message,
+  });
 
   if (onStorageError) {
     onStorageError(err, operation);

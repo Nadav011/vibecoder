@@ -315,7 +315,7 @@ export default function RootLayout() {
             return { name, success: true };
           } catch (error) {
             if (__DEV__) {
-              console.warn(`[Store] ${name} initialization failed:`, error);
+              console.warn("[Store] initialization failed", { name, error });
             }
             return { name, success: false, error };
           }
