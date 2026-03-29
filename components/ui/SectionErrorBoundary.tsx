@@ -29,11 +29,11 @@ export class SectionErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error(
-      `[SectionErrorBoundary] Error in ${this.props.sectionName}:`,
+    console.error("[SectionErrorBoundary] error captured", {
+      sectionName: this.props.sectionName,
       error,
       errorInfo,
-    );
+    });
   }
 
   handleRetry = () => {
