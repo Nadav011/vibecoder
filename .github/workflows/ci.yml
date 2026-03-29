@@ -17,21 +17,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Add Node.js (fnm) to PATH
-        run: echo "$HOME/.local/share/fnm/node-versions/v24.14.0/installation/bin" >> $GITHUB_PATH
-
-      - name: Enable pnpm via corepack
-        run: corepack enable pnpm
-
-
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm ci
 
       - name: Lint
-        run: pnpm run lint
+        run: npm run lint
 
       - name: Typecheck
-        run: pnpm run typecheck
+        run: npm run typecheck
 
   semgrep:
     name: Semgrep (SAST)
@@ -65,7 +58,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Trivy scan
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # v0.35.0
         with:
           scan-type: fs
           scan-ref: .
