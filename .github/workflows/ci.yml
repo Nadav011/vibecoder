@@ -17,6 +17,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Add Node.js (fnm) to PATH
+        run: echo "$HOME/.local/share/fnm/node-versions/v24.14.0/installation/bin" >> $GITHUB_PATH
+
       - name: Install dependencies
         run: npm ci
 
