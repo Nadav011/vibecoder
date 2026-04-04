@@ -17,7 +17,7 @@ jobs:
       - name: Enable pnpm via corepack
         run: corepack enable pnpm
 
-      - run: ppnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
       - name: Knip unused file PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
